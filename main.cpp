@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include <iostream> //!da togliere
 
 #include <QApplication>
 
