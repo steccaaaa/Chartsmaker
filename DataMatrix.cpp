@@ -1,54 +1,69 @@
 #include "DataMatrix.h"
+#include <vector>
+#include <iostream>
 
-void DataMatrix::deleteRow(unsigned int k)
+using std::vector;
+
+DataMatrix::DataMatrix(vector<vector<double>> *_data, vector<std::string> *_rowLabel, vector<std::string> *_columnLabel) //Costructor for DataMatrix
 {
-    double *newData = new double[(rowNumber - 1) * columnNumber]; //new empty array with one less row allocated in the heap
+    //vector<vector<double>> *data = new vector<vector<double>>; //our DataMatrix is a vector of vectors
+    /*for (unsigned int i = 0; i < _data->size(); i++)           //to insert values in the vector
+        data[i] = _data[i];*/
+    vector<vector<double>> *data = _data;
+    vector<std::string> *rowLabel = _rowLabel;
+    vector<std::string> *columnLabel = _columnLabel;
+}
 
-    for (unsigned int i = 0; i < columnNumber; ++i) //to scan the matrix
+void DataMatrix::addRow(vector<double> *v, unsigned int position) //adds a row in the chosen poition
+{
+    data->insert(data->begin() + position, *v);
+}
+
+void DataMatrix::deleteRow(unsigned int position) //deletes the row in the chosen position
+{
+    if (position < data->size())
+        data->erase(data->begin() + position);
+}
+
+void DataMatrix::addColumn(vector<double> *v, unsigned int position) //adds a column in the chosen position
+{
+    for (int i = 0; i <= data->size(); ++i)
     {
-        for (unsigned int j = 0; j < rowNumber; ++j)
-        {
-            if (j != k) //if my row selector is not equal to the row the user wants to delete i have to copy data on the new array
-            {
-                newData[] = data[]; //fills the nwe array with old the data besides the ones in the index k row
-            }
-        }
+        data->insert(data[i].begin() + position, v[i]);
     }
-    delete[] data;  //delete the content of the old array
-    data = newData; //now the data pointer points to the new array created in the function without a row
-    rowNumber--;    //decrement rowNumber
 }
 
-// 1 2 3 4 5 6 7 8 9 10 11 12
-
-// 00 01 02 03
-// 10 11 12 13
-// 20 21 22 23
-
-void DataMatrix::deleteColumn(unsigned int h)
+//! copiata di brutto non credo funzioni
+void DataMatrix::deleteColumn(unsigned int position) //deletes the column in the chosen position
 {
-    double *newData = new double[rowNumber * (columnNumber - 1)]; //new empty array without a column in the heap
-
-    for (unsigned int i = 0; i < rowNumber; ++i) //scan the array/matrix
+    /*for (vector<double> row : *data)
+        if (position < row.size())
+            row.erase(row.begin() + position);
+    */
+    for (int i = 0; i <= data->size(); ++i)
     {
-        for (unsigned int j = 0; j < columnNumber; ++j)
-        {
-            //fills new array with the old data without the deleted column
-            if (j < h)
-                newData[i * j] = data[i * j];
-            else if (j > h)
-                newData[i * (j - 1)] = data[i * j];
-        }
+        data->erase(data[i].begin() + position);
     }
-    delete[] data;  //deletes old array
-    data = newData; //replaces the data address with the newer one
-    columnNumber--; //decrement columnNumber
 }
 
-DataMatrix DataMatrix::addRow(double *a, unsigned int k)
+std::vector<std::vector<double>> DataMatrix::getData() //to get the data
 {
+    return *data;
 }
 
-DataMatrix DataMatrix::addColumn(double *a, unsigned int h)
+DataMatrix::~DataMatrix() //deep destrucion of the vector
 {
+    /*for (int i = 0; i < data->size(); ++i)
+    {
+        data[i].clear();
+        data[i].shrink_to_fit();
+    }
+    data->clear();
+    data->shrink_to_fit();*/
+    /*
+    for (std::vector<DataMatrix*>::iterator i = data->begin(), end = data->end(); i != end; ++i)
+    {
+        delete (*i);
+    }*/
+    std::cout << "delete";
 }

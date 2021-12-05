@@ -1,3 +1,8 @@
+MOC_DIR     = build/moc
+OBJECTS_DIR = build/obj
+UI_DIR      = build/ui
+RCC_DIR     = build/
+
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
