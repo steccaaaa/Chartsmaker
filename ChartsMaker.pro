@@ -15,10 +15,12 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    DataMatrix.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    DataMatrix.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
