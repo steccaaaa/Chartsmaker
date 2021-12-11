@@ -1,11 +1,11 @@
-#include <QApplication>
+//#include <QApplication>
 #include "DataMatrix.h"
 #include <vector>
 #include <iostream>
 
-/*void print(std::vector<std::vector<double>> *vec) //! debug
+void print(std::vector<std::vector<double>> vec) //! debug
 {
-    for (int i = 0; i < vec->size(); i++)
+    for (int i = 0; i < vec.size(); i++)
     {
         for (int j = 0; j < vec[i].size(); j++)
         {
@@ -13,7 +13,7 @@
         }
         std::cout << std::endl;
     }
-}*/
+}
 
 int main(int argc, char *argv[])
 {
@@ -26,4 +26,5 @@ int main(int argc, char *argv[])
     DataMatrix x(mat, mats, mats);
     std::vector<double> mario{1, 3, 7};
     x.addRow(mario, 2);
+    //mat[0][0] = 2;
 }
