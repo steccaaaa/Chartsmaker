@@ -36,7 +36,6 @@ QChart RoundChart::draw(QChart chart)
             m_font.setBold(true);
             m_font.setItalic(true);
             series->slices().at(i)->setLabelFont(m_font);
-                         
         }
         else if(i == 1)
         {
@@ -47,7 +46,6 @@ QChart RoundChart::draw(QChart chart)
             m_font.setBold(true);
             m_font.setItalic(true);
             series->slices().at(i)->setLabelFont(m_font);
-                         
         }
         else if(i == 2){
             seres->slices().at(i)->setColor(Qt::black);
@@ -57,7 +55,6 @@ QChart RoundChart::draw(QChart chart)
             m_font.setBold(true);
             m_font.setItalic(true);
             series->slices().at(i)->setLabelFont(m_font);
-                         
         }
         else(i == 3)
         {
