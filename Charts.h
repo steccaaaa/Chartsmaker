@@ -3,7 +3,10 @@
 
 #include "DataMatrix.h"
 #include "DataMatrix.cpp"
-#include <QChart>
+#include <QtCharts/QChart>
+#include <QtCharts/Chartview>
+#include <QtCharts/QPieSeries>
+#include <QtCharts/QPieSlice>
 
 class Chart
 {
@@ -37,6 +40,8 @@ public:
 
 class Roundchart : public Chart //for rounded shaped charts
 {
+private:
+    QPieSeries *series;
 public:
     /**
      * @brief Draws rounded shaped charts 
