@@ -66,7 +66,8 @@ QChart RoundChart::draw(QChart chart)
             m_font.setItalic(true);
             series->slices().at(i)->setLabelFont(m_font);      
         }
-    }       
+    }    
+    chart->SetTitle();
 }
 
 QChart PieChart::draw(QChart chart)
@@ -79,10 +80,11 @@ QChart PieChart::draw(QChart chart)
 
 QChart DonutChart::draw(QChart chart)
 {
-    //getdata
-    //chart = this->roundchart::Draw
-    //ci metto il buco con funzione
-    //grafica??
+    series->setHoleSize(0,35);
+    slice->setExploded(true);
+    //voglio che erediti il resto dalla drawroundchart
+    chart->setAnimationOptions(QChart::SeriesAnimation);
+    chart->setTheme(QChart::ChartThemeBlueIcy);
 }
 
 QChart LineChart::draw(QChart chart)
