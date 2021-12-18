@@ -73,19 +73,18 @@ QChart RoundChart::draw(QChart chart)
 
 QChart PieChart::draw(QChart chart)
 {
-    //getdata
-    //chart = this->roundchart::Draw
-    //ritorno
-    //grafica???
+    //è una roundchart senza buco quindi usa la draw di roundchart
 }
 
 QChart DonutChart::draw(QChart chart)
 {
     series->setHoleSize(0,35);
     slice->setExploded(true);
-    //voglio che erediti il resto dalla drawroundchart
+    //voglio che erediti il resto dalla drawroundchart ma con queste modifiche
     chart->setAnimationOptions(QChart::SeriesAnimation);
     chart->setTheme(QChart::ChartThemeBlueIcy);
+    
+    //DONUTCHART VIEWWWWWW
 }
 
 QChart BarChart::draw(QChart chart)
@@ -114,7 +113,21 @@ QChart BarChart::draw(QChart chart)
         
 QChart LineChart::draw(QChart chart)
 {
-    
+    QLineSeries *series = new QLineSeries();
+    series->append(//val 1 dalla datam, val 2 dalla datam)
+    //per ogni valore
+    QChart = new QChart();
+    chart->legend()->setVisible(true);
+    chart->addSeries(series);
+    chart->createDefaultAxes();
+    chart->setTitle("This is your line chart");
+    chart->setAnimationOption(QChart::AllAnimations);
+    QCategoryAxes *axes() = new QCategoryAxis();
+    axes->append(//val1, val2);
+    //per tutti i valori 
+    chart->setAxes(axes, series);
+        
+    //LINECHART VIEWWWW    
 }
         
 
