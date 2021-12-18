@@ -3,12 +3,15 @@
 
 #include "DataMatrix.h"
 #include "DataMatrix.cpp"
+#include <QApplication>
+#include <QtWidget/QMainWindow>
 #include <QtCharts/QChart>
 #include <QtCharts/Chartview>
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
 #include <QCharts/QBarSet>
 #include <QCharts/QBarSeries>
+#include <QtCharts/QLegend
 
 class Chart
 {
