@@ -68,7 +68,9 @@ QChart RoundChart::draw(QChart chart)
         }
     }    
     chart->SetTitle();
-    //ROUNDCHART VIEWWWW
+    
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing)
 }
 
 QChart PieChart::draw(QChart chart)
@@ -108,7 +110,12 @@ QChart BarChart::draw(QChart chart)
     chart->legend()->setVisible(true);
     chart->legend()->setAllignment(Qt::AllignTop);
     
-   //BARCHART VIEWWWWWW
+    QChartView *chartView = QChartView(chart);
+    chartView->setRenderHint(QPainter::AntiAliasing);
+    QPalette pale = qApp->palette();
+    pale.setColor(QPalette::Window, QRbg(0x000000));
+    pale.setColor(Qpalette::WindowText, QRbg(0x404040));
+    qApp->setPalette(pale);
 }
         
 QChart LineChart::draw(QChart chart)
@@ -127,7 +134,8 @@ QChart LineChart::draw(QChart chart)
     //per tutti i valori 
     chart->setAxes(axes, series);
         
-    //LINECHART VIEWWWW    
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing)
 }
         
 
