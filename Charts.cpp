@@ -68,6 +68,7 @@ QChart RoundChart::draw(QChart chart)
         }
     }    
     chart->SetTitle();
+    //ROUNDCHART VIEWWWW
 }
 
 QChart PieChart::draw(QChart chart)
@@ -87,8 +88,33 @@ QChart DonutChart::draw(QChart chart)
     chart->setTheme(QChart::ChartThemeBlueIcy);
 }
 
+QChart BarChart::draw(QChart chart)
+{
+    QBarSet *set0 = new QBarSet(//lable);
+    //tante quante barre abbiamo
+    *set0 << //dato << //dato << //dato //...;
+    QBarSeries *series = new QBarSeries();
+    series->append(set0);
+    //per tutti i ser che abbiamo
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("this is the chart");
+    chart->setAnimationOptions(QChart::SeriesAnimation);
+    QStirngList categories;
+    categories << //prima lable << //seconda lable << //ecc...;
+    QBarCategoryAxes *axes = QBarCategoryAxes();
+    axes->append(categories);
+    chart->createDefaultAxes();
+    chat->setAxes(axes, series);
+    chart->legend()->setVisible(true);
+    chart->legend()->setAllignment(Qt::AllignTop);
+    
+   //BARCHART VIEWWWWWW
+}
+        
 QChart LineChart::draw(QChart chart)
 {
+    
 }
         
 
