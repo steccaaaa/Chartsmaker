@@ -11,7 +11,10 @@
 #include <QtCharts/QPieSlice>
 #include <QCharts/QBarSet>
 #include <QCharts/QBarSeries>
-#include <QtCharts/QLegend
+#include <QtCharts/QLegend>
+#include <QtCharts/QBarCategoryAxis>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QCategoryAxis>
 
 class Chart
 {
