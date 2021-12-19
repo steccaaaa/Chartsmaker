@@ -115,13 +115,7 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
     }
     data->clear();
     data->shrink_to_fit();
-    /*
-    data->clear();
-    data->shrink_to_fit();*/
+    delete data;
 
-    /*for (std::vector<DataMatrix *>::iterator i = data->begin(), end = data->end(); i != end; ++i)
-    {
-        delete (*i);
-    }*/
-    std::cout << "delete DataMatrix";
+    std::cout << "delete DataMatrix \n"; //!debug
 }
