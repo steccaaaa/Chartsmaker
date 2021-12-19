@@ -108,13 +108,13 @@ std::vector<std::string> *DataMatrix::getColumnLabel()
 
 DataMatrix::~DataMatrix() // deep destrucion of the vector
 {
-    /*for (int i = 0; i < data->size(); ++i)
+    for (int i = 0; i < data->size(); ++i)
     {
         data[i].clear();
         data[i].shrink_to_fit();
     }
     data->clear();
-    data->shrink_to_fit();*/
+    data->shrink_to_fit();
     /*
     data->clear();
     data->shrink_to_fit();*/
@@ -123,5 +123,5 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
     {
         delete (*i);
     }*/
-    std::cout << "delete";
+    std::cout << "delete DataMatrix";
 }
