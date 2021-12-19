@@ -117,5 +117,13 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
     data->shrink_to_fit();
     delete data;
 
+    rowLabel->clear();
+    rowLabel->shrink_to_fit();
+    delete rowLabel;
+
+    columnLabel->clear();
+    columnLabel->shrink_to_fit();
+    delete rowLabel;
+
     std::cout << "delete DataMatrix \n"; //!debug
 }
