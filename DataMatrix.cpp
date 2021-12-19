@@ -123,7 +123,7 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
 
     columnLabel->clear();
     columnLabel->shrink_to_fit();
-    delete rowLabel;
+    delete columnLabel;
 
     std::cout << "delete DataMatrix \n"; //!debug
 }
