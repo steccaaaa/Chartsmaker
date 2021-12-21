@@ -58,13 +58,18 @@ DataMatrix::DataMatrix(DataMatrix &_table) : data(_table.getData()), rowLabel(_t
 
 void DataMatrix::addRow(vector<double> &v, unsigned int position, string label) // adds a row in the chosen poition
 {
-    //data
+    if (data->size() < position)
+    {
+        std::cerr << "invalid position to add a row\n";
+        return;
+    }
+    //*data
     //print(data); //! debug
     //std::cout << "adding a row \n";
     data->insert(data->begin() + position, v);
     //print(data); //! debug
 
-    //label
+    //*label
     //print(rowLabel);
     rowLabel->insert(rowLabel->begin() + position, label);
     //print(rowLabel);
@@ -72,25 +77,43 @@ void DataMatrix::addRow(vector<double> &v, unsigned int position, string label) 
 
 void DataMatrix::deleteRow(unsigned int position) // deletes the row in the chosen position
 {
-    if (position < data->size())
-        data->erase(data->begin() + position);
-    if (position < rowLabel->size())
-        rowLabel->erase(rowLabel->begin() + position);
+    if (data[0].size() < position)
+    {
+        std::cerr << "invalid position to delete a row\n";
+        return;
+    }
+    data->erase(data->begin() + position);
+    rowLabel->erase(rowLabel->begin() + position);
     print(data);
 }
 
+//* fino a qui tutto funzionante
 void DataMatrix::addColumn(vector<double> &v, unsigned int position, string label) // adds a column in the chosen position
 {
+    if (data[0].size() < position)
+    {
+        std::cerr << "invalid position to add a column\n";
+        return;
+    }
+    //* data
+    /*data[0].insert(data[0].begin() + position, 5.0); //! da errore
     for (int i = 0; i < data->size(); ++i)
     {
-        //data->insert(data[i].begin() + position, v[i]);
-        //data[i].insert(position, v[i]);
-    }
+        (data[i]).insert(data[i].begin() + position, v[i]); //! da errore
+    }*/
+
+    //* label
+    columnLabel->insert(columnLabel->begin() + position, label);
 }
 
 //! copiata di brutto non credo funzioni
 void DataMatrix::deleteColumn(unsigned int position) // deletes the column in the chosen position
 {
+    if (data[0].size() < position)
+    {
+        std::cerr << "invalid position to delete a column\n";
+        return;
+    }
     /*for (vector<double> row : *data)
         if (position < row.size())
             row.erase(row.begin() + position);
