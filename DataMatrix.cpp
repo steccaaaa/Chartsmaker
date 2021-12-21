@@ -47,11 +47,11 @@ DataMatrix::DataMatrix(vector<vector<double>> &_data, vector<string> &_rowLabel,
     data = new auto(_data);
     print(data);
     rowLabel = new auto(_rowLabel);
-    std::cout << "printing rowLabel \n";
-    print(rowLabel);
+    //std::cout << "printing rowLabel \n";
+    //print(rowLabel);
     columnLabel = new auto(_columnLabel);
-    std::cout << "printing columnLabel \n";
-    print(columnLabel);
+    //std::cout << "printing columnLabel \n";
+    //print(columnLabel);
 }
 
 DataMatrix::DataMatrix(DataMatrix &_table) : data(_table.getData()), rowLabel(_table.getRowLabel()), columnLabel(_table.getColumnLabel()) {}
@@ -59,22 +59,23 @@ DataMatrix::DataMatrix(DataMatrix &_table) : data(_table.getData()), rowLabel(_t
 void DataMatrix::addRow(vector<double> &v, unsigned int position, string label) // adds a row in the chosen poition
 {
     //data
-    print(data); //! debug
-    std::cout << "adding a row \n";
+    //print(data); //! debug
+    //std::cout << "adding a row \n";
     data->insert(data->begin() + position, v);
-    print(data); //! debug
+    //print(data); //! debug
 
     //label
-    print(rowLabel);
+    //print(rowLabel);
     rowLabel->insert(rowLabel->begin() + position, label);
-    print(rowLabel);
+    //print(rowLabel);
 }
 
 void DataMatrix::deleteRow(unsigned int position) // deletes the row in the chosen position
 {
     if (position < data->size())
         data->erase(data->begin() + position);
-    std::cout << "deleting row";
+    if (position < rowLabel->size())
+        rowLabel->erase(rowLabel->begin() + position);
     print(data);
 }
 
