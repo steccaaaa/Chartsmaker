@@ -67,7 +67,7 @@ void DataMatrix::addRow(vector<double> &v, unsigned int position, string label) 
     //print(data); //! debug
     //std::cout << "adding a row \n";
     data->insert(data->begin() + position, v);
-    //print(data); //! debug
+    print(data); //! debug
 
     //*label
     //print(rowLabel);
@@ -84,10 +84,9 @@ void DataMatrix::deleteRow(unsigned int position) // deletes the row in the chos
     }
     data->erase(data->begin() + position);
     rowLabel->erase(rowLabel->begin() + position);
-    print(data);
+    print(data); //!debug
 }
 
-//* fino a qui tutto funzionante
 void DataMatrix::addColumn(vector<double> &v, unsigned int position, string label) // adds a column in the chosen position
 {
     if (data[0].size() < position)
@@ -96,17 +95,16 @@ void DataMatrix::addColumn(vector<double> &v, unsigned int position, string labe
         return;
     }
     //* data
-    /*data[0].insert(data[0].begin() + position, 5.0); //! da errore
-    for (int i = 0; i < data->size(); ++i)
-    {
-        (data[i]).insert(data[i].begin() + position, v[i]); //! da errore
-    }*/
+    // non mi piacciono neanche un po' gli iterators
+    for (vector<vector<double>>::iterator it = data->begin(); it != data->end(); ++it)
+        it->insert(it->begin() + position, v[it - data->begin()]);
 
     //* label
     columnLabel->insert(columnLabel->begin() + position, label);
+
+    print(data); //! debug
 }
 
-//! copiata di brutto non credo funzioni
 void DataMatrix::deleteColumn(unsigned int position) // deletes the column in the chosen position
 {
     if (data[0].size() < position)
@@ -114,31 +112,27 @@ void DataMatrix::deleteColumn(unsigned int position) // deletes the column in th
         std::cerr << "invalid position to delete a column\n";
         return;
     }
-    /*for (vector<double> row : *data)
-        if (position < row.size())
-            row.erase(row.begin() + position);
-    */
-    for (int i = 0; i <= data->size(); ++i)
-    {
-        data->erase(data[i].begin() + position);
-    }
+
+    //* data
+    // non mi piacciono neanche un po' gli iterators parte 2
+    for (vector<vector<double>>::iterator it = data->begin(); it != data->end(); ++it)
+        it->erase(it->begin() + position);
+
+    //* labels
+    columnLabel->erase(columnLabel->begin() + position);
+
+    print(data); //! debug
 }
 
 //* GETTERS
-std::vector<std::vector<double>> *DataMatrix::getData() // to get the data
-{
-    return data;
-}
 
-std::vector<string> *DataMatrix::getRowLabel()
-{
-    return rowLabel;
-}
+std::vector<std::vector<double>> *DataMatrix::getData() { return data; }
 
-std::vector<string> *DataMatrix::getColumnLabel()
-{
-    return columnLabel;
-}
+std::vector<string> *DataMatrix::getRowLabel() { return rowLabel; }
+
+std::vector<string> *DataMatrix::getColumnLabel() { return columnLabel; }
+
+//* OPERATORS
 
 DataMatrix::~DataMatrix() // deep destrucion of the vector
 {
