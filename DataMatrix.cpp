@@ -1,6 +1,7 @@
 #include "DataMatrix.h"
 #include <vector>
 #include <iostream>
+using std::string;
 using std::vector;
 
 void print(std::vector<std::vector<double>> &vec) //! debug
@@ -24,7 +25,7 @@ void print(std::vector<std::vector<double>> *vec) //! debug
     print(*vec); // usa l'altro print e magicamente va tutto
 }
 
-void print(vector<std::string> &label)
+void print(vector<string> &label)
 {
     for (int i = 0; i < label.size(); i++)
     {
@@ -33,12 +34,12 @@ void print(vector<std::string> &label)
     std::cout << std::endl;
 }
 
-void print(vector<std::string> *label)
+void print(vector<string> *label)
 {
     print(*label);
 }
 
-DataMatrix::DataMatrix(vector<vector<double>> &_data, vector<std::string> &_rowLabel, vector<std::string> &_columnLabel) // Costructor for DataMatrix
+DataMatrix::DataMatrix(vector<vector<double>> &_data, vector<string> &_rowLabel, vector<string> &_columnLabel) // Costructor for DataMatrix
 {
     data = new auto(_data);
     print(data);
@@ -52,7 +53,7 @@ DataMatrix::DataMatrix(vector<vector<double>> &_data, vector<std::string> &_rowL
 
 DataMatrix::DataMatrix(DataMatrix &_table) : data(_table.getData()), rowLabel(_table.getRowLabel()), columnLabel(_table.getColumnLabel()) {}
 
-void DataMatrix::addRow(vector<double> &v, unsigned int position) // adds a row in the chosen poition
+void DataMatrix::addRow(vector<double> &v, unsigned int position, string label) // adds a row in the chosen poition
 {
     print(data); //! debug
     std::cout << "adding a row \n";
@@ -68,7 +69,7 @@ void DataMatrix::deleteRow(unsigned int position) // deletes the row in the chos
     print(data);
 }
 
-void DataMatrix::addColumn(vector<double> &v, unsigned int position) // adds a column in the chosen position
+void DataMatrix::addColumn(vector<double> &v, unsigned int position, string label) // adds a column in the chosen position
 {
     for (int i = 0; i < data->size(); ++i)
     {
@@ -96,12 +97,12 @@ std::vector<std::vector<double>> *DataMatrix::getData() // to get the data
     return data;
 }
 
-std::vector<std::string> *DataMatrix::getRowLabel()
+std::vector<string> *DataMatrix::getRowLabel()
 {
     return rowLabel;
 }
 
-std::vector<std::string> *DataMatrix::getColumnLabel()
+std::vector<string> *DataMatrix::getColumnLabel()
 {
     return columnLabel;
 }
