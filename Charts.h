@@ -35,7 +35,7 @@ public:
      * 
      * @return returns chart table
      */
-    Datamatrix getData();
+    DataMatrix getData();
 
     /**
      * @brief 
@@ -44,12 +44,13 @@ public:
      * @return returns a new chart with the characteristics chosen by the user 
      */
     virtual QChart draw(QChart chart) = 0;
-}
+};
 
 class Roundchart : public Chart //for rounded shaped charts
 {
 private:
     QPieSeries *series;
+
 public:
     /**
      * @brief Draws rounded shaped charts 
@@ -58,7 +59,7 @@ public:
      * @return QChart
      */
     virtual QChart draw(QChart chart);
-}
+};
 
 class PieChart : public RoundChar //similar to a DonutChart but without the hole
 {
@@ -70,7 +71,7 @@ public:
      * @return QChart 
      */
     virtual QChart draw(QChart chart);
-}
+};
 
 class DonutChart : public RoundChart //similar to a PieChart but with a hole
 {
@@ -82,7 +83,7 @@ public:
      * @return QChart 
      */
     virtual QChart draw(QChart chart);
-}
+};
 
 class LineChart : public Chart
 {
@@ -94,7 +95,7 @@ public:
      * @return QChart 
      */
     virtual QChart draw(QChart chart);
-}
+};
 
 class BarChart : public Chart
 {
@@ -106,7 +107,7 @@ public:
      * @return QChart 
      */
     virtual QChart draw(QChart chart);
-}
+};
 
 //DA AGGIUNGERE un TIPo DI GRAFICOOOOOOOOOOOOO
 
