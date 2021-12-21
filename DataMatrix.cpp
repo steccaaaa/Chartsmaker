@@ -29,7 +29,10 @@ void print(vector<string> &label)
 {
     for (int i = 0; i < label.size(); i++)
     {
-        std::cout << label[i] << " ";
+        if (label[i] == "")
+            std::cout << "❌ "; //! forse è meglio non usare emoji
+        else
+            std::cout << label[i] << " ";
     }
     std::cout << std::endl;
 }
@@ -55,10 +58,16 @@ DataMatrix::DataMatrix(DataMatrix &_table) : data(_table.getData()), rowLabel(_t
 
 void DataMatrix::addRow(vector<double> &v, unsigned int position, string label) // adds a row in the chosen poition
 {
+    //data
     print(data); //! debug
     std::cout << "adding a row \n";
     data->insert(data->begin() + position, v);
     print(data); //! debug
+
+    //label
+    print(rowLabel);
+    rowLabel->insert(rowLabel->begin() + position, label);
+    print(rowLabel);
 }
 
 void DataMatrix::deleteRow(unsigned int position) // deletes the row in the chosen position
