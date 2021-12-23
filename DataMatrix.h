@@ -2,6 +2,9 @@
 #define DATAMATRIX_H
 #include <vector>
 #include <string>
+#include <QJsonObject>
+#include <QObject>
+#include <QString>
 
 class DataMatrix
 {
@@ -86,6 +89,20 @@ public:
      * @return std::vector<std::string>*
      */
     std::vector<std::string> *getColumnLabel();
+
+    /**
+     * @brief reads from file
+     * 
+     * @param json 
+     */
+    void read(/*const QJsonObject &json*/);
+
+    /**
+     * @brief write to file
+     * 
+     * @param json 
+     */
+    void write(/*QJsonObject &json*/) const;
 };
 
 #endif

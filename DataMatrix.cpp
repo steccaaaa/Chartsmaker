@@ -1,14 +1,17 @@
 #include "DataMatrix.h"
 #include <vector>
 #include <iostream>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonParseError>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QJsonArray>
 using std::string;
 using std::vector;
 
-void print(std::vector<std::vector<double>> &vec) //! debug
+void print(vector<vector<double>> const &vec) //! debug
 {
-
-    ////std::cout << "printing data &\n";
-    ////std::cout << vec.size() << "\n";
     for (int i = 0; i < vec.size(); i++)
     {
         for (int j = 0; j < vec[i].size(); j++)
@@ -19,13 +22,12 @@ void print(std::vector<std::vector<double>> &vec) //! debug
     }
 }
 
-void print(std::vector<std::vector<double>> *vec) //! debug
+void print(vector<vector<double>> const *vec) //! debug
 {
-    std::cout << "printing data *\n";
     print(*vec); // usa l'altro print e magicamente va tutto
 }
 
-void print(vector<string> &label)
+void print(vector<string> const &label)
 {
     for (int i = 0; i < label.size(); i++)
     {
@@ -37,7 +39,7 @@ void print(vector<string> &label)
     std::cout << std::endl;
 }
 
-void print(vector<string> *label)
+void print(vector<string> const *label)
 {
     print(*label);
 }
@@ -45,7 +47,7 @@ void print(vector<string> *label)
 DataMatrix::DataMatrix(vector<vector<double>> &_data, vector<string> &_rowLabel, vector<string> &_columnLabel) // Costructor for DataMatrix
 {
     data = new auto(_data);
-    print(data);
+    print(data); //! debug
     rowLabel = new auto(_rowLabel);
     //std::cout << "printing rowLabel \n";
     //print(rowLabel);
@@ -153,5 +155,66 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
     columnLabel->shrink_to_fit();
     delete columnLabel;
 
-    std::cout << "delete DataMatrix \n"; //!debug
+    std::cout << "deleted DataMatrix \n"; //!debug
+}
+
+//* PARSE
+
+void DataMatrix::read()
+{
+    QFile file("inputfile.json");
+    //QFile file("/home/stecca/Chartmaker/inputfile.json");
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    //std::cout << file.readAll().toStdString();
+    QString val = file.readAll();
+    QJsonParseError *err = new QJsonParseError();
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(val.toUtf8(), err);
+    qWarning() << err->errorString() << err->offset;
+    file.close();
+
+    std::cout << "empty: " << jsonDocument.isEmpty() << "\n"
+              << "object: " << jsonDocument.isObject() << "\n"
+              << "null: " << jsonDocument.isNull();
+    QJsonObject object = jsonDocument.object();
+
+    QJsonArray row = object.value("rowLabel").toArray();
+    std::cout << "\n\nsize: " << row.size() << "\n\n";
+
+    /*
+    QString val;
+    QFile file;
+    file.setFileName("inputfile2.json");
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    val = file.readAll();
+    file.close();
+    qWarning() << val;
+    QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
+    QJsonObject sett2 = d.object();
+    QJsonValue value = sett2.value(QString("appName"));
+    qWarning() << value;
+    QJsonObject item = value.toObject();
+    qWarning() << ("QJsonObject of description: ") << item;
+
+    // in case of string value get value and convert into string
+    qWarning() << ("QJsonObject[appName] of description: ") << item["description"];
+    QJsonValue subobj = item["description"];
+    qWarning() << subobj.toString();
+
+    // in case of array get array and convert into string
+    qWarning() << ("QJsonObject[appName] of value: ") << item["imp"];
+    QJsonArray test = item["imp"].toArray();
+    qWarning() << test[1].toString();
+    */
+
+    /*for (int i = 0; i < row.size(); ++i)
+        std::cout << row[i].toInt() << "a";*/
+    /*for (auto it = row.begin(); it != row.end(); ++it)
+        std::cout << it;*/
+    /*foreach (const QJsonValue & v, row)
+        qDebug() << v.toObject().value("ID").toInt();*/
+}
+
+void DataMatrix::write() const
+{
+    std::cout << " ";
 }

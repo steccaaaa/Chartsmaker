@@ -8,134 +8,156 @@ Chart::Chart(DataMatrix _table) //constructor for Charts objects
     table = _table;
 }
 
-DataMatrix Chart::getData()
+/*DataMatrix Chart::getData()
 {
     for (int i = 0; i <= ; ++i)
     {
     }
-}
-
-QChart RoundChart::draw(QChart chart)
-{
-    series = new QPieseries();
-    series = append( //lable; data from matrix con getters);
-    series = append( //lable; data from matrix con getters);
-    series = append( //lable; data from matrix con getters);
-    QPieSlice *slice = new QPieSlice();
-    slice->setLabel("label")
-    slice->setValue(//...)
-    series->append(std::move(slice));
-    for(int i = 0; i < series->count(); ++i){
-        series->slices.at(i)->setLabelVisible(true);
-        if(i == 0)
-        {
-            seres->slices().at(i)->setColor(Qt::black);
-            series->slices().at(i)->setLabelPosition(QPieSLice::LabelInsideNormal);
-            QFont m_font = series->slices().at(i)->labelfont();
-            m_font.setPointSize(12);
-            m_font.setBold(true);
-            m_font.setItalic(true);
-            series->slices().at(i)->setLabelFont(m_font);
-        }
-        else if(i == 1)
-        {
-           seres->slices().at(i)->setColor(Qt::black);
-           series->slices().at(i)->setLabelPosition(QPieSlice::LabelInsideOrizontal);
-            QFont m_font = series->slices().at(i)->labelfont();
-            m_font.setPointSize(12);
-            m_font.setBold(true);
-            m_font.setItalic(true);
-            series->slices().at(i)->setLabelFont(m_font);
-        }
-        else if(i == 2){
-            seres->slices().at(i)->setColor(Qt::black);
-            series->slices().at(i)->setLabelPosition(QPieSlice::LabelInsideTangential);
-            QFont m_font = series->slices().at(i)->labelfont();
-            m_font.setPointSize(12);
-            m_font.setBold(true);
-            m_font.setItalic(true);
-            series->slices().at(i)->setLabelFont(m_font);
-        }
-        else(i == 3)
-        {
-            seres->slices().at(i)->setColor(Qt::black);
-            series->slices().at(i)->setLabelPosition(QPieSlice::LabelOutside);
-            QFont m_font = series->slices().at(i)->labelfont();
-            m_font.setPointSize(12);
-            m_font.setBold(true);
-            m_font.setItalic(true);
-            series->slices().at(i)->setLabelFont(m_font);      
-        }
-    }    
-    chart->SetTitle();
-    
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing)
-}
+}*/
 
 QChart PieChart::draw(QChart chart)
 {
-    //è una roundchart senza buco quindi usa la draw di roundchart
+    QApplication a(argc, argv);
+
+    QPieSeries *series = new QPieSeries();
+    series->append("Pippo", 2); //da mettere i valori di datamatrix
+    series->append("Pluto", 5);
+    series->append("Paperino", 4);
+    series->append("Minnie", 4);
+
+    QPieSlice *slice = series->slices().at(1);
+    slice->setLabelVisible(true);
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("This is your PieChart");
+    chart->legend()->setVisible(true);
+    slice->setPen(QPen(Qt::black, 2));
+    slice->setLabelPosition(QPieSlice::LabelOutside);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    QMainWindow window;
+    window.setCentralWidget(chartView);
+    window.resize(400, 300);
+    window.show();
 }
 
 QChart DonutChart::draw(QChart chart)
 {
-    series->setHoleSize(0,35);
+    QApplication a(argc, argv);
+
+    series->setHoleSize(0, 35);
     slice->setExploded(true);
     //voglio che erediti il resto dalla drawroundchart ma con queste modifiche
-    chart->setAnimationOptions(QChart::SeriesAnimation);
-    chart->setTheme(QChart::ChartThemeBlueIcy);
-    
-    //DONUTCHART VIEWWWWWW
+    Piechart::draw();
 }
 
 QChart BarChart::draw(QChart chart)
 {
-    QBarSet *set0 = new QBarSet(//lable);
-    //tante quante barre abbiamo
-    *set0 << //dato << //dato << //dato //...;
+    QApplication a(argc, argv);
+
+    QBarSet *set0 = new QBarSet("Pippo");
+    QBarSet *set1 = new QBarSet("Pluto");
+    QBarSet *set2 = new QBarSet("Paperino");
+    QBarSet *set3 = new QBarSet("Minnie");
+
+    *set0 << 4 << 10 << 0 << 3 << 23 << 12;
+    *set1 << 5 << 20 << 7 << 8 << 20 << 2;
+    *set2 << 5 << 0 << 9 << 23 << 23 << 0;
+    *set3 << 8 << 20 << 6 << 5 << 4 << 15;
+
     QBarSeries *series = new QBarSeries();
     series->append(set0);
-    //per tutti i ser che abbiamo
+    series->append(set1);
+    series->append(set2);
+    series->append(set3);
+
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("this is the chart");
+    chart->setTitle("This is your BarChart");
     chart->setAnimationOptions(QChart::SeriesAnimation);
-    QStirngList categories;
-    categories << //prima lable << //seconda lable << //ecc...;
-    QBarCategoryAxes *axes = QBarCategoryAxes();
-    axes->append(categories);
+
+    QStringList categories;
+    categories << "Gennaio"
+               << "Febbraio"
+               << "Marzo"
+               << "Aprile"
+               << "Maggio"
+               << "Giugno";
+    QBarCategoryAxis *axis = new QBarCategoryAxis();
+    axis->append(categories);
     chart->createDefaultAxes();
-    chat->setAxes(axes, series);
+    chat->setAxisX(axeis, series);
     chart->legend()->setVisible(true);
     chart->legend()->setAllignment(Qt::AllignTop);
-    
+
     QChartView *chartView = QChartView(chart);
     chartView->setRenderHint(QPainter::AntiAliasing);
     QPalette pale = qApp->palette();
     pale.setColor(QPalette::Window, QRbg(0x000000));
     pale.setColor(Qpalette::WindowText, QRbg(0x404040));
     qApp->setPalette(pale);
+
+    QMainWindow window;
+    window.setCentralWidget(chartView);
+    window.resize(400, 300);
+    window.show();
 }
-        
+
 QChart LineChart::draw(QChart chart)
 {
+    QApplication a(argc, argv);
+
     QLineSeries *series = new QLineSeries();
-    series->append(//val 1 dalla datam, val 2 dalla datam)
-    //per ogni valore
-    QChart = new QChart();
-    chart->legend()->setVisible(true);
+    series->append(0, 6);
+    series->append(8, 6);
+    series->append(9, 6);
+    series->append(0, 2);
+    *series << QPointF(7, 4) << QPointF(4, 3) << QPointF(8, 3) << QPointF(9, 2) << QPointF(1, 0);
+
+    QChart *chart = new QChart();
     chart->addSeries(series);
     chart->createDefaultAxes();
+    chart->legend()->setVisible(true);
+    chart->legend()->setAlignment(Qt::AlignBottom);
     chart->setTitle("This is your line chart");
     chart->setAnimationOption(QChart::AllAnimations);
-    QCategoryAxes *axes() = new QCategoryAxis();
-    axes->append(//val1, val2);
-    //per tutti i valori 
-    chart->setAxes(axes, series);
-        
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing)
-}
-        
 
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    QMainWindow window;
+    window.setCentralWidget(chartView);
+    window.resize(400, 300);
+    window.show()
+}
+
+QChart SplineChart::draw(QChart chart)
+{
+    QApplication a(argc, argv);
+
+    QSplineSeries *series = new QSplineSeries();
+    series->setName("Spline");
+    series->append(0, 6);
+    series->append(8, 6);
+    series->append(9, 6);
+    series->append(0, 2);
+    *series << QPointF(7, 4) << QPointF(4, 3) << QPointF(8, 3) << QPointF(9, 2) << QPointF(1, 0);
+
+    QChart *chart = new QChart();
+    chart->legend()->setVisible(true);
+    chart->addSeries(series);
+    chart->setTitle("This is your spline chart");
+    chart->createDefaultAxes();
+    chart->axes(Qt::Vertical).first->setRange(0, 5);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    QMainWindow window;
+    window.setCentralWidget(chartView);
+    window.resize(400, 300);
+    window.show();
+}
