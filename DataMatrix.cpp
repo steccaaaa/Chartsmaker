@@ -227,7 +227,49 @@ void DataMatrix::read()
     print(data);
 }
 
+//TODO: è in ordine alfabetico e la matrice è inguardabile
 void DataMatrix::write() const
 {
-    std::cout << " ";
+    QFile file("1.json");
+    if (!file.open(QIODevice::ReadWrite))
+    {
+        qDebug() << "File open error";
+    }
+    else
+    {
+        qDebug() << "JSONTest2 File open!";
+    }
+
+    // Clear the original content in the file
+    file.resize(0);
+
+    // Add a value using QJsonArray and write to the file
+    QJsonObject recordObject;
+
+    QJsonArray _rowLabel;
+    for (unsigned int i = 0; i < rowLabel->size(); i++)
+        _rowLabel.push_back(QString::fromStdString(rowLabel->at(i)));
+
+    QJsonArray _columnLabel;
+    for (unsigned int i = 0; i < columnLabel->size(); i++)
+        _columnLabel.push_back(QString::fromStdString(columnLabel->at(i)));
+
+    QJsonArray _data;
+    QJsonArray dataRow;
+    for (unsigned int i = 0; i < data->size(); i++) //questo fa la tabella
+    {
+        for (unsigned int j = 0; j < data->at(i).size(); j++) //questo crea una riga
+            dataRow.push_back(data->at(i).at(j));
+        _data.push_back(dataRow); //butta la riga nell'array
+        while (dataRow.count())   //resetta la riga perché poi viene riutilizzata
+            dataRow.pop_back();
+    }
+
+    recordObject.insert("data", _data);
+    recordObject.insert("rowLabel", _rowLabel);
+    recordObject.insert("columnLabel", _columnLabel);
+    QJsonDocument doc(recordObject);
+    file.write(doc.toJson());
+    file.close();
+    qDebug() << "Write to file";
 }
