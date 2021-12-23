@@ -163,29 +163,32 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
 void DataMatrix::read()
 {
     QFile file("inputfile.json");
-    //QFile file("/home/stecca/Chartmaker/inputfile.json");
     file.open(QIODevice::ReadOnly | QIODevice::Text);
-    //std::cout << file.readAll().toStdString();
     QString val = file.readAll();
-    QJsonParseError *err = new QJsonParseError();
-    QJsonDocument jsonDocument = QJsonDocument::fromJson(val.toUtf8(), err);
-    qWarning() << err->errorString() << err->offset;
     file.close();
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(val.toUtf8());
 
     std::cout << "empty: " << jsonDocument.isEmpty() << "\n"
               << "object: " << jsonDocument.isObject() << "\n"
-              << "null: " << jsonDocument.isNull();
+              << "null: " << jsonDocument.isNull() << "\n";
     QJsonObject object = jsonDocument.object();
 
-    QJsonArray row = object.value("rowLabel").toArray();
-    std::cout << "\n\nsize: " << row.size() << "\n\n";
+    QJsonArray _row = object.value("rowLabel").toArray();
+    QJsonArray _column = object.value("columnLabel").toArray();
+    QJsonArray _data = object.value("data").toArray();
 
-    for (int i = 0; i < row.size(); ++i)
-        std::cout << row[i].toInt() << "a";
-    /*for (auto it = row.begin(); it != row.end(); ++it)
-        std::cout << it;*/
-    /*foreach (const QJsonValue & v, row)
-        qDebug() << v.toObject().value("ID").toInt();*/
+    for (int i = 0; i < _row.size(); ++i)
+        rowLabel->at(i) = _row[i].toString().toStdString();
+    for (int i = 0; i < _column.size(); ++i)
+        columnLabel->at(i) = _column[i].toString().toStdString();
+    for (int i = 0; i < _data.size(); ++i)
+    {
+        for (int j = 0; j < _data.at(i).toArray().size(); ++j)
+            data->at(i).at(j) = _data.at(i).toArray().at(j).toDouble();
+    }
+    print(rowLabel);
+    print(columnLabel);
+    print(data);
 }
 
 void DataMatrix::write() const
