@@ -162,30 +162,66 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
 
 void DataMatrix::read()
 {
+    //apre il file
     QFile file("inputfile.json");
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QString val = file.readAll();
     file.close();
     QJsonDocument jsonDocument = QJsonDocument::fromJson(val.toUtf8());
-
-    std::cout << "empty: " << jsonDocument.isEmpty() << "\n"
-              << "object: " << jsonDocument.isObject() << "\n"
-              << "null: " << jsonDocument.isNull() << "\n";
+    //! debug
+    std::cout
+        << "empty: " << jsonDocument.isEmpty() << "\n"
+        << "object: " << jsonDocument.isObject() << "\n"
+        << "null: " << jsonDocument.isNull() << "\n";
     QJsonObject object = jsonDocument.object();
 
     QJsonArray _row = object.value("rowLabel").toArray();
     QJsonArray _column = object.value("columnLabel").toArray();
     QJsonArray _data = object.value("data").toArray();
 
+    //controlli per non distruggere tutto
+    if (_data.size() == 0)
+    {
+        std::cerr << "data can't be empty";
+        return;
+    }
+    if (_row.size() != _data.size())
+    {
+        std::cerr << "rowLabel size is different from data rows\n";
+        return;
+    }
+    if (_column.size() != _data[0].toArray().size())
+    {
+        std::cerr << "columnLabel size is different from data rows\n";
+        return;
+    }
+
+    //nel caso sia valido si cancella tutto quello che c'era prima
+    for (long unsigned int i = 0; i < data->size(); ++i)
+    {
+        data[i].clear();
+        data[i].shrink_to_fit();
+    }
+    data->clear();
+    rowLabel->clear();
+    columnLabel->clear();
+
+    //si riempie datamatrix
     for (int i = 0; i < _row.size(); ++i)
-        rowLabel->at(i) = _row[i].toString().toStdString();
+        rowLabel->push_back(_row[i].toString().toStdString());
     for (int i = 0; i < _column.size(); ++i)
-        columnLabel->at(i) = _column[i].toString().toStdString();
+        columnLabel->push_back(_column[i].toString().toStdString());
+
+    data->resize(_data.size());
     for (int i = 0; i < _data.size(); ++i)
     {
-        for (int j = 0; j < _data.at(i).toArray().size(); ++j)
-            data->at(i).at(j) = _data.at(i).toArray().at(j).toDouble();
+        for (int j = 0; j < _data[i].toArray().size(); ++j)
+            data->at(i).push_back(_data[i].toArray()[j].toDouble());
     }
+    //per non sprecare memoria
+    data->shrink_to_fit();
+    rowLabel->shrink_to_fit();
+    columnLabel->shrink_to_fit();
     print(rowLabel);
     print(columnLabel);
     print(data);
