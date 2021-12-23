@@ -12,9 +12,9 @@ using std::vector;
 
 void print(vector<vector<double>> const &vec) //! debug
 {
-    for (int i = 0; i < vec.size(); i++)
+    for (long unsigned int i = 0; i < vec.size(); i++)
     {
-        for (int j = 0; j < vec[i].size(); j++)
+        for (long unsigned int j = 0; j < vec[i].size(); j++)
         {
             std::cout << vec[i][j] << " ";
         }
@@ -29,7 +29,7 @@ void print(vector<vector<double>> const *vec) //! debug
 
 void print(vector<string> const &label)
 {
-    for (int i = 0; i < label.size(); i++)
+    for (long unsigned int i = 0; i < label.size(); i++)
     {
         if (label[i] == "")
             std::cout << "❌ "; //! forse è meglio non usare emoji
@@ -138,7 +138,7 @@ std::vector<string> *DataMatrix::getColumnLabel() { return columnLabel; }
 
 DataMatrix::~DataMatrix() // deep destrucion of the vector
 {
-    for (int i = 0; i < data->size(); ++i)
+    for (long unsigned int i = 0; i < data->size(); ++i)
     {
         data[i].clear();
         data[i].shrink_to_fit();
@@ -180,34 +180,8 @@ void DataMatrix::read()
     QJsonArray row = object.value("rowLabel").toArray();
     std::cout << "\n\nsize: " << row.size() << "\n\n";
 
-    /*
-    QString val;
-    QFile file;
-    file.setFileName("inputfile2.json");
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-    val = file.readAll();
-    file.close();
-    qWarning() << val;
-    QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
-    QJsonObject sett2 = d.object();
-    QJsonValue value = sett2.value(QString("appName"));
-    qWarning() << value;
-    QJsonObject item = value.toObject();
-    qWarning() << ("QJsonObject of description: ") << item;
-
-    // in case of string value get value and convert into string
-    qWarning() << ("QJsonObject[appName] of description: ") << item["description"];
-    QJsonValue subobj = item["description"];
-    qWarning() << subobj.toString();
-
-    // in case of array get array and convert into string
-    qWarning() << ("QJsonObject[appName] of value: ") << item["imp"];
-    QJsonArray test = item["imp"].toArray();
-    qWarning() << test[1].toString();
-    */
-
-    /*for (int i = 0; i < row.size(); ++i)
-        std::cout << row[i].toInt() << "a";*/
+    for (int i = 0; i < row.size(); ++i)
+        std::cout << row[i].toInt() << "a";
     /*for (auto it = row.begin(); it != row.end(); ++it)
         std::cout << it;*/
     /*foreach (const QJsonValue & v, row)
