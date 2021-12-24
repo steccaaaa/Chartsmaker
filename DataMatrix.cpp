@@ -12,9 +12,9 @@ using std::vector;
 
 void print(vector<vector<double>> const &vec) //! debug
 {
-    for (int i = 0; i < vec.size(); i++)
+    for (long unsigned int i = 0; i < vec.size(); i++)
     {
-        for (int j = 0; j < vec[i].size(); j++)
+        for (long unsigned int j = 0; j < vec[i].size(); j++)
         {
             std::cout << vec[i][j] << " ";
         }
@@ -29,7 +29,7 @@ void print(vector<vector<double>> const *vec) //! debug
 
 void print(vector<string> const &label)
 {
-    for (int i = 0; i < label.size(); i++)
+    for (long unsigned int i = 0; i < label.size(); i++)
     {
         if (label[i] == "")
             std::cout << "❌ "; //! forse è meglio non usare emoji
@@ -138,7 +138,7 @@ std::vector<string> *DataMatrix::getColumnLabel() { return columnLabel; }
 
 DataMatrix::~DataMatrix() // deep destrucion of the vector
 {
-    for (int i = 0; i < data->size(); ++i)
+    for (long unsigned int i = 0; i < data->size(); ++i)
     {
         data[i].clear();
         data[i].shrink_to_fit();
@@ -162,59 +162,114 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
 
 void DataMatrix::read()
 {
+    //apre il file
     QFile file("inputfile.json");
-    //QFile file("/home/stecca/Chartmaker/inputfile.json");
     file.open(QIODevice::ReadOnly | QIODevice::Text);
-    //std::cout << file.readAll().toStdString();
     QString val = file.readAll();
-    QJsonParseError *err = new QJsonParseError();
-    QJsonDocument jsonDocument = QJsonDocument::fromJson(val.toUtf8(), err);
-    qWarning() << err->errorString() << err->offset;
     file.close();
-
-    std::cout << "empty: " << jsonDocument.isEmpty() << "\n"
-              << "object: " << jsonDocument.isObject() << "\n"
-              << "null: " << jsonDocument.isNull();
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(val.toUtf8());
+    //! debug
+    std::cout
+        << "empty: " << jsonDocument.isEmpty() << "\n"
+        << "object: " << jsonDocument.isObject() << "\n"
+        << "null: " << jsonDocument.isNull() << "\n";
     QJsonObject object = jsonDocument.object();
 
-    QJsonArray row = object.value("rowLabel").toArray();
-    std::cout << "\n\nsize: " << row.size() << "\n\n";
+    QJsonArray _row = object.value("rowLabel").toArray();
+    QJsonArray _column = object.value("columnLabel").toArray();
+    QJsonArray _data = object.value("data").toArray();
 
-    /*
-    QString val;
-    QFile file;
-    file.setFileName("inputfile2.json");
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-    val = file.readAll();
-    file.close();
-    qWarning() << val;
-    QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
-    QJsonObject sett2 = d.object();
-    QJsonValue value = sett2.value(QString("appName"));
-    qWarning() << value;
-    QJsonObject item = value.toObject();
-    qWarning() << ("QJsonObject of description: ") << item;
+    //controlli per non distruggere tutto
+    if (_data.size() == 0)
+    {
+        std::cerr << "data can't be empty";
+        return;
+    }
+    if (_row.size() != _data.size())
+    {
+        std::cerr << "rowLabel size is different from data rows\n";
+        return;
+    }
+    if (_column.size() != _data[0].toArray().size())
+    {
+        std::cerr << "columnLabel size is different from data rows\n";
+        return;
+    }
 
-    // in case of string value get value and convert into string
-    qWarning() << ("QJsonObject[appName] of description: ") << item["description"];
-    QJsonValue subobj = item["description"];
-    qWarning() << subobj.toString();
+    //nel caso sia valido si cancella tutto quello che c'era prima
+    for (long unsigned int i = 0; i < data->size(); ++i)
+    {
+        data[i].clear();
+        data[i].shrink_to_fit();
+    }
+    data->clear();
+    rowLabel->clear();
+    columnLabel->clear();
 
-    // in case of array get array and convert into string
-    qWarning() << ("QJsonObject[appName] of value: ") << item["imp"];
-    QJsonArray test = item["imp"].toArray();
-    qWarning() << test[1].toString();
-    */
+    //si riempie datamatrix
+    for (int i = 0; i < _row.size(); ++i)
+        rowLabel->push_back(_row[i].toString().toStdString());
+    for (int i = 0; i < _column.size(); ++i)
+        columnLabel->push_back(_column[i].toString().toStdString());
 
-    /*for (int i = 0; i < row.size(); ++i)
-        std::cout << row[i].toInt() << "a";*/
-    /*for (auto it = row.begin(); it != row.end(); ++it)
-        std::cout << it;*/
-    /*foreach (const QJsonValue & v, row)
-        qDebug() << v.toObject().value("ID").toInt();*/
+    data->resize(_data.size());
+    for (int i = 0; i < _data.size(); ++i)
+    {
+        for (int j = 0; j < _data[i].toArray().size(); ++j)
+            data->at(i).push_back(_data[i].toArray()[j].toDouble());
+    }
+    //per non sprecare memoria
+    data->shrink_to_fit();
+    rowLabel->shrink_to_fit();
+    columnLabel->shrink_to_fit();
+    print(rowLabel);
+    print(columnLabel);
+    print(data);
 }
 
+//TODO: è in ordine alfabetico e la matrice è inguardabile
 void DataMatrix::write() const
 {
-    std::cout << " ";
+    QFile file("1.json");
+    if (!file.open(QIODevice::ReadWrite))
+    {
+        qDebug() << "File open error";
+    }
+    else
+    {
+        qDebug() << "JSONTest2 File open!";
+    }
+
+    // Clear the original content in the file
+    file.resize(0);
+
+    // Add a value using QJsonArray and write to the file
+    QJsonObject recordObject;
+
+    QJsonArray _rowLabel;
+    for (unsigned int i = 0; i < rowLabel->size(); i++)
+        _rowLabel.push_back(QString::fromStdString(rowLabel->at(i)));
+
+    QJsonArray _columnLabel;
+    for (unsigned int i = 0; i < columnLabel->size(); i++)
+        _columnLabel.push_back(QString::fromStdString(columnLabel->at(i)));
+
+    QJsonArray _data;
+    QJsonArray dataRow;
+    for (unsigned int i = 0; i < data->size(); i++) //questo fa la tabella
+    {
+        for (unsigned int j = 0; j < data->at(i).size(); j++) //questo crea una riga
+            dataRow.push_back(data->at(i).at(j));
+        _data.push_back(dataRow); //butta la riga nell'array
+        while (dataRow.count())   //resetta la riga perché poi viene riutilizzata
+            dataRow.pop_back();
+    }
+
+    recordObject.insert("data", _data);
+    recordObject.insert("rowLabel", _rowLabel);
+    recordObject.insert("columnLabel", _columnLabel);
+    QJsonDocument doc(recordObject);
+    file.write(doc.toJson());
+    file.close();
+    qDebug() << "Write to file";
 }
