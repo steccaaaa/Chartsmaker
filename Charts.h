@@ -61,32 +61,19 @@ public:
     /**
      * @brief Draws pie charts 
      *
-     * @param data ????????????
+     * @param chart
      * @return QChart
      */
     virtual QChart draw(QChart chart);
 };
 
-/*class PieChart : public RoundChar // similar to a DonutChart but without the hole
-{
-public:
-    /**
-     * @brief Draws rounded shaped charts
-     *
-     * @param data ????????????
-     * @return QChart
-     */
-/*
-    virtual QChart draw(QChart chart);
-};*/
-
 class DonutChart : public Piechart // similar to a PieChart but with a hole
 {
 public:
     /**
-     * @brief Draws rounded shaped charts
+     * @brief Draws donut charts
      *
-     * @param data ????????????
+     * @param chart
      * @return QChart
      */
     virtual QChart draw(QChart chart);
@@ -96,9 +83,9 @@ class BarChart : public Chart
 {
 public:
     /**
-     * @brief Draws rounded shaped charts
+     * @brief Draws bar charts
      *
-     * @param data ????????????
+     * @param chart
      * @return QChart
      */
     virtual QChart draw(QChart chart);
@@ -108,9 +95,9 @@ class LineChart : public Chart
 {
 public:
     /**
-     * @brief Draws rounded shaped charts
+     * @brief Draws line charts
      *
-     * @param data ????????????
+     * @param chart
      * @return QChart
      */
     virtual QChart draw(QChart chart);
@@ -120,9 +107,9 @@ class SplineChart : public Chart
 {
 public:
     /**
-     * @brief Draws rounded shaped charts
+     * @brief Draws spline charts (similar to line harts but with rounded edges
      *
-     * @param data ????????????
+     * @param chart
      * @return QChart
      */
     virtual QChart draw(QChart chart);

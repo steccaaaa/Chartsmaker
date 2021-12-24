@@ -8,7 +8,7 @@ Chart::Chart(DataMatrix _table) //constructor for Charts objects
     table = _table;
 }
 
-/*DataMatrix Chart::getData()
+/*DataMatrix Chart::getData()     //from json parse
 {
     for (int i = 0; i <= ; ++i)
     {
@@ -34,6 +34,8 @@ QChart PieChart::draw(QChart chart)
     chart->legend()->setVisible(true);
     slice->setPen(QPen(Qt::black, 2));
     slice->setLabelPosition(QPieSlice::LabelOutside);
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+    chart->setTheme(QChart::ChartThemeBlueIcy);
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
@@ -50,7 +52,6 @@ QChart DonutChart::draw(QChart chart)
 
     series->setHoleSize(0, 35);
     slice->setExploded(true);
-    //voglio che erediti il resto dalla drawroundchart ma con queste modifiche
     Piechart::draw();
 }
 
@@ -132,6 +133,34 @@ QChart LineChart::draw(QChart chart)
     window.setCentralWidget(chartView);
     window.resize(400, 300);
     window.show()
+}
+
+QChart SplineChart::draw(QChart chart)
+{
+    QApplication a(argc, argv);
+
+    QSplineSeries *series = new QSplineSeries();
+    series->setName("Spline");
+    series->append(0, 6);
+    series->append(8, 6);
+    series->append(9, 6);
+    series->append(0, 2);
+    *series << QPointF(7, 4) << QPointF(4, 3) << QPointF(8, 3) << QPointF(9, 2) << QPointF(1, 0);
+
+    QChart *chart = new QChart();
+    chart->legend()->setVisible(true);
+    chart->addSeries(series);
+    chart->setTitle("This is your spline chart");
+    chart->createDefaultAxes();
+    chart->axes(Qt::Vertical).first->setRange(0, 5);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    QMainWindow window;
+    window.setCentralWidget(chartView);
+    window.resize(400, 300);
+    window.show();
 }
 
 QChart SplineChart::draw(QChart chart)
