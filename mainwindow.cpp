@@ -16,23 +16,46 @@ MainWindow::MainWindow(QWidget *parent)
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
 
+
+//!--------------------------------------------------MENU
     QMenuBar *menuBar = new QMenuBar(this);
 
+    //! file
     QMenu *file = new QMenu("File", menuBar);
-    QMenu *edit = new QMenu("Edit", menuBar);
-
     menuBar->addMenu(file);
+    file->addAction(new QAction("New graph", file));
+    file->addAction(new QAction("Open", file));
+    file->addSeparator();
+    file->addAction(new QAction("Save", file));
+    file->addAction(new QAction("Save as...", file));
+    file->addAction(new QAction("Export", file));
+    file->addSeparator();
+    file->addAction(new QAction("Exit", file));
+
+    //! edit
+    QMenu *edit = new QMenu("Edit", menuBar);
     menuBar->addMenu(edit);
 
-    //-----------------------------
-    std::vector<std::vector<double>> mat{
-            {1, 2, 3},
-            {4, 5, 6},
-            {7, 8, 9}};
-    std::vector<std::string> mats{"a", "b", "c"};
-    DataMatrix x(mat, mats, mats);
-    //PieChart pchart(x);
-    //QChartView *chartView = new QChartView();
+    //! view
+    QMenu *view = new QMenu("View", menuBar);
+    menuBar->addMenu(view);
+    view->addAction(new QAction("Zoom in", view));
+    view->addAction(new QAction("Zoom out", view));
+    view->addSeparator();
+    view->addAction(new QAction("Logarithmic scale", view));// vorrei una checkbox
+
+    //! help
+    QMenu *help = new QMenu("Help", menuBar);
+    menuBar->addMenu(help);
+    help->addAction(new QAction("About", help));
+    help->addAction(new QAction("Contacts", help));
+
+//!--------------------------------------------------TABLE
+    QTableView *tableView = new QTableView;
+    tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    mainLayout->addWidget(tableView);
 
     setLayout(mainLayout);
 }
