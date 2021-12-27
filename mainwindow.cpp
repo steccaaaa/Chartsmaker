@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "DataMatrix.h"
+#include "model.h"
 #include "Charts.h"
 #include <QApplication>
 #include <QChartView>
@@ -11,13 +12,14 @@
 #include <QMenuBar>
 #include <QVBoxLayout>
 
+#include <iostream> //! debug
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
 
-
-//!--------------------------------------------------MENU
+    //!--------------------------------------------------MENU
     QMenuBar *menuBar = new QMenuBar(this);
 
     //! file
@@ -42,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     view->addAction(new QAction("Zoom in", view));
     view->addAction(new QAction("Zoom out", view));
     view->addSeparator();
-    view->addAction(new QAction("Logarithmic scale", view));// vorrei una checkbox
+    view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox
 
     //! help
     QMenu *help = new QMenu("Help", menuBar);
@@ -50,8 +52,10 @@ MainWindow::MainWindow(QWidget *parent)
     help->addAction(new QAction("About", help));
     help->addAction(new QAction("Contacts", help));
 
-//!--------------------------------------------------TABLE
-    QTableView *tableView = new QTableView;
+    //!--------------------------------------------------TABLE
+    Model *model = new Model;
+    QTableView *tableView = new QTableView();
+    tableView->setModel(model);
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 

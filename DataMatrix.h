@@ -97,6 +97,10 @@ public:
      */
     std::vector<std::vector<double>> *getData() const;
 
+    unsigned int getRowCount() const;
+
+    unsigned int getColumnCount() const;
+
     /**
      * @brief reads from file
      * 

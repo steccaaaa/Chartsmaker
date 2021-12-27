@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
     mat[0][0] = 200;
     x.deleteRow(2);
     x.deleteColumn(0);*/
+    std::cout << "asd";
     QApplication app(argc, argv);
 
     MainWindow gui;

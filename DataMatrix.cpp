@@ -145,6 +145,10 @@ std::vector<string> *DataMatrix::getColumnLabel() const { return columnLabel; }
 
 std::vector<std::vector<double>> *DataMatrix::getData() const { return data; }
 
+unsigned int DataMatrix::getRowCount() const { return data->size(); }
+
+unsigned int DataMatrix::getColumnCount() const { return data->at(0).size(); };
+
 //* OPERATORS
 
 DataMatrix::~DataMatrix() // deep destrucion of the vector
