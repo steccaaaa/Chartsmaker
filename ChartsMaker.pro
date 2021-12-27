@@ -19,7 +19,7 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
-    DataMatrix. \
+    DataMatrix.h \
     Charts.h
 
 # Default rules for deployment.

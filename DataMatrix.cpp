@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QJsonArray>
+#include <QDebug>
 using std::string;
 using std::vector;
 
@@ -138,11 +139,11 @@ std::vector<double> *DataMatrix::getColumnData(unsigned int n)
     return datavector;
 }
 
-std::vector<string> *DataMatrix::getRowLabel() { return rowLabel; }
+std::vector<string> *DataMatrix::getRowLabel() const { return rowLabel; }
 
-std::vector<string> *DataMatrix::getColumnLabel() { return columnLabel; }
+std::vector<string> *DataMatrix::getColumnLabel() const { return columnLabel; }
 
-std::vector<std::vector<double>> *DataMatrix::getData() { return data; }
+std::vector<std::vector<double>> *DataMatrix::getData() const { return data; }
 
 //* OPERATORS
 

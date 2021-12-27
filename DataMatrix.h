@@ -81,16 +81,21 @@ public:
      *
      * @return std::vector<string>*
      */
-    std::vector<std::string> *getRowLabel();
+    std::vector<std::string> *getRowLabel() const;
 
     /**
      * @brief Get the Column Label object
      *
      * @return std::vector<std::string>*
      */
-    std::vector<std::string> *getColumnLabel();
+    std::vector<std::string> *getColumnLabel() const;
 
-    std::vector<std::vector<double>> *getData();
+    /**
+     * @brief Get the data in the matrix
+     *
+     * @return std::vector<std::string>*
+     */
+    std::vector<std::vector<double>> *getData() const;
 
     /**
      * @brief reads from file

@@ -2,7 +2,6 @@
 #define CHARTS_H
 
 #include "DataMatrix.h"
-#include "DataMatrix.cpp"
 #include <QApplication>
 //#include <QtWidget/QMainWindow>
 #include <QMainWindow>
@@ -19,6 +18,9 @@
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QCategoryAxis>
+#include <QPointF>
+#include <QPainter>
+
 
 using namespace QtCharts; //include da sistemare
 
@@ -42,6 +44,13 @@ public:
      * @return returns chart table
      */
     DataMatrix getData();
+    /**
+     * @brief
+     *
+     * @param chart
+     * @return returns a new chart with the characteristics chosen by the user
+     */
+    auto getTable();
 
     /**
      * @brief
@@ -50,6 +59,7 @@ public:
      * @return returns a new chart with the characteristics chosen by the user
      */
     virtual QChart draw(QChart chart) = 0;
+
 };
 
 class Roundchart : public Chart
@@ -64,8 +74,13 @@ public:
      * @param chart
      * @return QChart
      */
-    virtual QChart draw(QChart chart);
-
+     QChart draw();
+    /**
+     * @brief Getter for series
+     *
+     * @return series
+     */
+    auto getSeries() const;
 };
 
 class PieChart : public Roundchart  //eredita da roundchart
@@ -80,7 +95,7 @@ public:
      * @param chart
      * @return QChart
      */
-    virtual QChart draw(QChart chart);
+     QChart draw();
 };
 
 class DonutChart : public Roundchart // eredita da roundchart ma col buco
@@ -92,7 +107,7 @@ public:
      * @param chart
      * @return QChart
      */
-    virtual QChart draw(QChart chart);
+    QChart draw();
 };
 
 class BarChart : public Chart
@@ -104,7 +119,7 @@ public:
      * @param chart
      * @return QChart
      */
-    virtual QChart draw(QChart chart);
+    QChart draw();
 };
 
 class LineChart : public Chart
@@ -116,7 +131,7 @@ public:
      * @param chart
      * @return QChart
      */
-    virtual QChart draw(QChart chart);
+    QChart draw();
 };
 
 class SplineChart : public Chart
@@ -128,7 +143,7 @@ public:
      * @param chart
      * @return QChart
      */
-    virtual QChart draw(QChart chart);
+    QChart draw();
 };
 
 #endif
