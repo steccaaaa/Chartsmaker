@@ -34,11 +34,8 @@ QChart RoundChart::draw(QChart chart)
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
-
-    QMainWindow window;
-    window.setCentralWidget(chartView);
-    window.resize(400, 300);
-    window.show();
+    
+    return QChart;
 }
 
 QChart PieChart::draw(QChart chart)
@@ -99,10 +96,7 @@ QChart BarChart::draw(QChart chart)
     pale.setColor(Qpalette::WindowText, QRbg(0x404040));
     qApp->setPalette(pale);
 
-    QMainWindow window;
-    window.setCentralWidget(chartView);
-    window.resize(400, 300);
-    window.show();
+    return QChart;
 }
 
 QChart LineChart::draw(QChart chart)
@@ -112,12 +106,9 @@ QChart LineChart::draw(QChart chart)
     QLineSeries *series = new QLineSeries();
    
     auto names = datamatrix.getRowLabel(); 
-    auto values = datamatrix.getColumnData(0); 
-    auto values2 = datamatrix.getColumnData(1);
     for (unsigned int i = 0; i < names.size(); i++)
     {
-        series->append(names[i], values[i]);         //lo fa solo per una delle due colonne devo capire come attaccare l'altra (per spline è uguale)
-        
+        series->append(names[i], datamatrix.getColumnData[i]);         //lo fa solo per una delle due colonne devo capire come attaccare l'altra (per spline è uguale)  
     }
     QChart *chart = new QChart();
     chart->addSeries(series);
@@ -130,10 +121,7 @@ QChart LineChart::draw(QChart chart)
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    QMainWindow window;
-    window.setCentralWidget(chartView);
-    window.resize(400, 300);
-    window.show()
+    return QChart;
 }
 
 QChart SplineChart::draw(QChart chart)
@@ -161,10 +149,7 @@ QChart SplineChart::draw(QChart chart)
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    QMainWindow window;
-    window.setCentralWidget(chartView);
-    window.resize(400, 300);
-    window.show();
+    return QChart;
 }
 
 

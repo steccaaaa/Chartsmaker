@@ -1,5 +1,6 @@
 //#include <QApplication>
 #include "DataMatrix.h"
+#include "mainwindow.h"
 #include <vector>
 #include <iostream>
 
@@ -17,7 +18,7 @@ void print(std::vector<std::vector<double>> vec) //! debug
 
 int main()
 {
-    std::vector<std::vector<double>> mat{
+    /*std::vector<std::vector<double>> mat{
         {1, 2, 3},
         {4, 5, 6},
         {7, 8, 9}};
@@ -31,5 +32,6 @@ int main()
     x.addColumn(mario4, 2, "luke");
     mat[0][0] = 200;
     x.deleteRow(2);
-    x.deleteColumn(0);
+    x.deleteColumn(0);*/
+    MainWindow m;
 }
