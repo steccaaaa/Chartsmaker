@@ -128,12 +128,12 @@ void DataMatrix::deleteColumn(unsigned int position) // deletes the column in th
 
 //* GETTERS
 
-std::vector<std::vector<double>> *DataMatrix::getColumnData(int n) 
-{ 
-    std::vector<double> datavector;
-    for(unsigned int i = 0; i < data.size(); ++i)
-    {
-        datavector.push(data[i][n]);
+std::vector<double> *DataMatrix::getColumnData(unsigned int n)
+{
+    //std::vector<double> datavector;
+    std::vector<double> *datavector = new std::vector<double>;
+    for (unsigned int i = 0; i < data->size(); ++i){
+        datavector->push_back(data->at(i).at(n));
     }
     return datavector;
 }
@@ -141,6 +141,8 @@ std::vector<std::vector<double>> *DataMatrix::getColumnData(int n)
 std::vector<string> *DataMatrix::getRowLabel() { return rowLabel; }
 
 std::vector<string> *DataMatrix::getColumnLabel() { return columnLabel; }
+
+std::vector<std::vector<double>> *DataMatrix::getData() { return data; }
 
 //* OPERATORS
 

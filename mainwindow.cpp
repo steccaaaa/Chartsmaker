@@ -1,39 +1,42 @@
 #include "mainwindow.h"
+#include "DataMatrix.h"
+#include "Charts.h"
+#include <QApplication>
+#include <QChartView>
+#include <QLineSeries>
+#include <QChart>
+#include <QtCharts>
+#include <QApplication>
+#include <QWidget>
+#include <QMenuBar>
+#include <QVBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    QLineSeries *series = new QLineSeries();
+    QVBoxLayout *mainLayout = new QVBoxLayout;
 
-    series->append(0,2);
-    series->append(QPointF(2,6));
-    series->append(3,8);
-    series->append(7,9);
-    series->append(11,3);
+    QMenuBar *menuBar = new QMenuBar(this);
 
-    *series << QPointF(11,2) << QPointF(15,5) << QPointF(18,4) << QPointF(19,2);
+    QMenu *file = new QMenu("File", menuBar);
+    QMenu *edit = new QMenu("Edit", menuBar);
 
-    QChart *chart = new QChart();
-    chart->legend()->hide();
-    chart->addSeries(series);
-    //When OpenGL is enabled, qlineseries supports GPU drawing. Other chart types of QT are not supported.
-    series->setUseOpenGL(true);
-    chart->createDefaultAxes();
-    //Set chart title
-    chart->setTitle(QStringLiteral("Qt line chart example"));
+    menuBar->addMenu(file);
+    menuBar->addMenu(edit);
 
-    QChartView *view = new QChartView(chart);
-    //Turn on anti aliasing for better display
-    view->setRenderHint(QPainter::Antialiasing);
-    view->resize(400,300);
-    //Show chart
-    view->show();
+    //-----------------------------
+    std::vector<std::vector<double>> mat{
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}};
+    std::vector<std::string> mats{"a", "b", "c"};
+    DataMatrix x(mat, mats, mats);
+    //PieChart pchart(x);
+    //QChartView *chartView = new QChartView();
 
-    return a.exec();
+    setLayout(mainLayout);
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
 }
-

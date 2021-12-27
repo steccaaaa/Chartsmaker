@@ -10,7 +10,7 @@ Chart::Chart(DataMatrix _table) //constructor for Charts objects
 
 QChart RoundChart::draw(QChart chart)
 {
-    QApplication a(argc, argv);
+    ////QApplication a(argc, argv);
     
     QPieSeries *series = new QPieSeries();
 
@@ -52,7 +52,7 @@ QChart DonutChart::draw(QChart chart)
 
 QChart BarChart::draw(QChart chart)
 {
-    QApplication a(argc, argv);
+    //QApplication a(argc, argv);
 
     QBarSet *set0 = new QBarSet("Pippo");      //da fare i getters
     QBarSet *set1 = new QBarSet("Pluto");
@@ -101,7 +101,7 @@ QChart BarChart::draw(QChart chart)
 
 QChart LineChart::draw(QChart chart)
 {
-    QApplication a(argc, argv);
+    //QApplication a(argc, argv);
 
     QLineSeries *series = new QLineSeries();
    
@@ -126,7 +126,7 @@ QChart LineChart::draw(QChart chart)
 
 QChart SplineChart::draw(QChart chart)
 {
-    QApplication a(argc, argv);
+    //QApplication a(argc, argv);
 
     QSplineSeries *series = new QSplineSeries();
     series->setName("Spline");

@@ -64,11 +64,11 @@ public:
      * @param chart
      * @return QChart
      */
-    virtual QChart draw(QChart chart)
+    virtual QChart draw(QChart chart);
 
-}
+};
 
-class Piechart : public Roundchart  //eredita da roundchart
+class PieChart : public Roundchart  //eredita da roundchart
 {
 private:
     QPieSeries *series;
@@ -129,6 +129,6 @@ public:
      * @return QChart
      */
     virtual QChart draw(QChart chart);
-}
+};
 
 #endif

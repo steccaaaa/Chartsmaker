@@ -3,6 +3,7 @@
 #include "mainwindow.h"
 #include <vector>
 #include <iostream>
+#include <QApplication>
 
 void print(std::vector<std::vector<double>> vec) //! debug
 {
@@ -16,7 +17,7 @@ void print(std::vector<std::vector<double>> vec) //! debug
     }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
     /*std::vector<std::vector<double>> mat{
         {1, 2, 3},
@@ -33,5 +34,10 @@ int main()
     mat[0][0] = 200;
     x.deleteRow(2);
     x.deleteColumn(0);*/
-    MainWindow m;
+    QApplication app(argc, argv);
+
+    MainWindow gui;
+    gui.show();
+
+    return app.exec();
 }

@@ -74,7 +74,7 @@ public:
      *
      * @return std::vector<std::vector<double>>
      */
-    std::vector<std::vector<double>> *getColumnData(n);
+    std::vector<double> *getColumnData(unsigned int n);
 
     /**
      * @brief Get the Row Label object
@@ -89,6 +89,8 @@ public:
      * @return std::vector<std::string>*
      */
     std::vector<std::string> *getColumnLabel();
+
+    std::vector<std::vector<double>> *getData();
 
     /**
      * @brief reads from file
