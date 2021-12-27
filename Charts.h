@@ -52,7 +52,23 @@ public:
     virtual QChart draw(QChart chart) = 0;
 };
 
-class Piechart : public Chart // for rounded shaped charts
+class Roundchart : public Chart
+{
+private:
+    QPieSeries *series;
+
+public:
+    /**
+     * @brief Draws round shaped charts 
+     *
+     * @param chart
+     * @return QChart
+     */
+    virtual QChart draw(QChart chart)
+
+}
+
+class Piechart : public Roundchart  //eredita da roundchart
 {
 private:
     QPieSeries *series;
@@ -67,7 +83,7 @@ public:
     virtual QChart draw(QChart chart);
 };
 
-class DonutChart : public Piechart // similar to a PieChart but with a hole
+class DonutChart : public Roundchart // eredita da roundchart ma col buco
 {
 public:
     /**

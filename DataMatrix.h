@@ -70,11 +70,11 @@ public:
     void deleteColumn(unsigned int n);
 
     /**
-     * @brief Get the Data object
+     * @brief Get the data in from the different columns
      *
      * @return std::vector<std::vector<double>>
      */
-    std::vector<std::vector<double>> *getData();
+    std::vector<std::vector<double>> *getColumnData(n);
 
     /**
      * @brief Get the Row Label object

@@ -8,26 +8,21 @@ Chart::Chart(DataMatrix _table) //constructor for Charts objects
     table = _table;
 }
 
-/*DataMatrix Chart::getData()     //from json parse
-{
-    for (int i = 0; i <= ; ++i)
-    {
-    }
-}*/
-
-QChart PieChart::draw(QChart chart)
+QChart RoundChart::draw(QChart chart)
 {
     QApplication a(argc, argv);
-
+    
     QPieSeries *series = new QPieSeries();
-    series->append("Pippo", 2); //da mettere i valori di datamatrix
-    series->append("Pluto", 5);
-    series->append("Paperino", 4);
-    series->append("Minnie", 4);
+
+    auto names = datamatrix.getRowLabel(); 
+    auto values = datamatrix.getColumnData(0); //getter dei dati della prima colonna (poi nella view andrà fatto in modo che o consideri solo la prima colonna o che faccia la pie solo se ho una sola colonna)
+    for (unsigned int i = 0; i < names.size(); i++)
+    {
+        series->append(names[i], values[i]); 
+    }
 
     QPieSlice *slice = series->slices().at(1);
     slice->setLabelVisible(true);
-
     QChart *chart = new QChart();
     chart->addSeries(series);
     chart->setTitle("This is your PieChart");
@@ -46,20 +41,23 @@ QChart PieChart::draw(QChart chart)
     window.show();
 }
 
+QChart PieChart::draw(QChart chart)
+{
+    Roundchart::draw();
+    series->setHoleSize(0, 0);
+}
+
 QChart DonutChart::draw(QChart chart)
 {
-    QApplication a(argc, argv);
-
+    Roundchart::draw();
     series->setHoleSize(0, 35);
-    slice->setExploded(true);
-    Piechart::draw();
 }
 
 QChart BarChart::draw(QChart chart)
 {
     QApplication a(argc, argv);
 
-    QBarSet *set0 = new QBarSet("Pippo");
+    QBarSet *set0 = new QBarSet("Pippo");      //da fare i getters
     QBarSet *set1 = new QBarSet("Pluto");
     QBarSet *set2 = new QBarSet("Paperino");
     QBarSet *set3 = new QBarSet("Minnie");
@@ -112,12 +110,15 @@ QChart LineChart::draw(QChart chart)
     QApplication a(argc, argv);
 
     QLineSeries *series = new QLineSeries();
-    series->append(0, 6);
-    series->append(8, 6);
-    series->append(9, 6);
-    series->append(0, 2);
-    *series << QPointF(7, 4) << QPointF(4, 3) << QPointF(8, 3) << QPointF(9, 2) << QPointF(1, 0);
-
+   
+    auto names = datamatrix.getRowLabel(); 
+    auto values = datamatrix.getColumnData(0); 
+    auto values2 = datamatrix.getColumnData(1);
+    for (unsigned int i = 0; i < names.size(); i++)
+    {
+        series->append(names[i], values[i]);         //lo fa solo per una delle due colonne devo capire come attaccare l'altra (per spline è uguale)
+        
+    }
     QChart *chart = new QChart();
     chart->addSeries(series);
     chart->createDefaultAxes();
@@ -141,10 +142,13 @@ QChart SplineChart::draw(QChart chart)
 
     QSplineSeries *series = new QSplineSeries();
     series->setName("Spline");
-    series->append(0, 6);
-    series->append(8, 6);
-    series->append(9, 6);
-    series->append(0, 2);
+    auto names = datamatrix.getRowLabel(); 
+    auto values = datamatrix.getColumnData(0); 
+    auto values2 = datamatrix.getColumnData(1);
+    for (unsigned int i = 0; i < names.size(); i++)   
+    {
+        series->append(names[i], values[i]); 
+    }
     *series << QPointF(7, 4) << QPointF(4, 3) << QPointF(8, 3) << QPointF(9, 2) << QPointF(1, 0);
 
     QChart *chart = new QChart();
@@ -163,30 +167,4 @@ QChart SplineChart::draw(QChart chart)
     window.show();
 }
 
-QChart SplineChart::draw(QChart chart)
-{
-    QApplication a(argc, argv);
 
-    QSplineSeries *series = new QSplineSeries();
-    series->setName("Spline");
-    series->append(0, 6);
-    series->append(8, 6);
-    series->append(9, 6);
-    series->append(0, 2);
-    *series << QPointF(7, 4) << QPointF(4, 3) << QPointF(8, 3) << QPointF(9, 2) << QPointF(1, 0);
-
-    QChart *chart = new QChart();
-    chart->legend()->setVisible(true);
-    chart->addSeries(series);
-    chart->setTitle("This is your spline chart");
-    chart->createDefaultAxes();
-    chart->axes(Qt::Vertical).first->setRange(0, 5);
-
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-
-    QMainWindow window;
-    window.setCentralWidget(chartView);
-    window.resize(400, 300);
-    window.show();
-}
