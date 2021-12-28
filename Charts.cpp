@@ -12,7 +12,7 @@ Chart::Chart(DataMatrix _table) //constructor for Charts objects
     return table;
 }*/
 
-QChart RoundChart::draw()
+QChart* RoundChart::draw()
 {
     //QApplication a(argc, argv);
     QChart *RoundChart = new QChart();
@@ -39,7 +39,7 @@ QChart RoundChart::draw()
     QChartView *chartView = new QChartView(RoundChart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    return *RoundChart;
+    return RoundChart;
 }
 
 /*Chart::auto getSeries()     //perchè series in roundchart è privato
@@ -60,7 +60,7 @@ QChart DonutChart::draw()
     series->setHoleSize(35);
 }
 
-QChart BarChart::draw()
+QChart* BarChart::draw()
 {
     //QApplication a(argc, argv);
 
@@ -110,7 +110,7 @@ QChart BarChart::draw()
     return BarChart;
 }
 
-QChart LineChart::draw()
+QChart* LineChart::draw()
 {
     //QApplication a(argc, argv);
 
@@ -136,7 +136,7 @@ QChart LineChart::draw()
     return LineChart;
 }
 
-QChart SplineChart::draw()
+QChart* SplineChart::draw()
 {
     //QApplication a(argc, argv);
 
