@@ -7,16 +7,16 @@ Chart::Chart(DataMatrix _table) //constructor for Charts objects
     table = _table;
 }
 
-Chart::auto getTable()
+/*Chart::auto getTable()
 {
     return table;
-}
+}*/
 
 QChart RoundChart::draw()
 {
     //QApplication a(argc, argv);
     QChart *RoundChart = new QChart();
-    chart->setTitle("This is your PieChart");
+    RoundChart->setTitle("This is your PieChart");
     
     QPieSeries *series = new QPieSeries();
 
@@ -29,18 +29,17 @@ QChart RoundChart::draw()
 
     QPieSlice *slice = series->slices().at(1);
     slice->setLabelVisible(true);
-    QChart *chart = new QChart();
-    chart->addSeries(series);
-    chart->legend()->setVisible(true);
+    RoundChart->addSeries(series);
+    RoundChart->legend()->setVisible(true);
     slice->setPen(QPen(Qt::black, 2));
     slice->setLabelPosition(QPieSlice::LabelOutside);
-    chart->setAnimationOptions(QChart::SeriesAnimations);
-    chart->setTheme(QChart::ChartThemeBlueIcy);
+    RoundChart->setAnimationOptions(QChart::SeriesAnimations);
+    RoundChart->setTheme(QChart::ChartThemeBlueIcy);
 
-    QChartView *chartView = new QChartView(chart);
+    QChartView *chartView = new QChartView(RoundChart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    return RoundChart;
+    return *RoundChart;
 }
 
 /*Chart::auto getSeries()     //perchè series in roundchart è privato
@@ -50,14 +49,15 @@ QChart RoundChart::draw()
 
 QChart PieChart::draw()
 {
-    Roundchart::draw();
-    series->setHoleSize(0, 0);
+    RoundChart::draw();
+    series->setHoleSize(0);
 }
 
 QChart DonutChart::draw()
 {
-    Roundchart::draw();
-    series->setHoleSize(0, 35);
+    RoundChart::draw();
+    //auto getSeries();
+    series->setHoleSize(35);
 }
 
 QChart BarChart::draw()
@@ -65,7 +65,7 @@ QChart BarChart::draw()
     //QApplication a(argc, argv);
 
     QChart *BarChart = new QChart();
-    chart->setTitle("This is your BarChart");
+    BarChart->setTitle("This is your BarChart");
 
     QBarSet *set0 = new QBarSet("Pippo");      //da fare i getters
     QBarSet *set1 = new QBarSet("Pluto");
@@ -83,9 +83,8 @@ QChart BarChart::draw()
     series->append(set2);
     series->append(set3);
 
-    QChart *chart = new QChart();
-    chart->addSeries(series);
-    chart->setAnimationOptions(QChart::SeriesAnimation);
+    BarChart->addSeries(series);
+    BarChart->setAnimationOptions(QChart::SeriesAnimations);
 
     QStringList categories;
     categories << "Gennaio"
@@ -96,16 +95,16 @@ QChart BarChart::draw()
                << "Giugno";
     QBarCategoryAxis *axis = new QBarCategoryAxis();
     axis->append(categories);
-    chart->createDefaultAxes();
-    chat->setAxisX(axis, series);
-    chart->legend()->setVisible(true);
-    chart->legend()->setAllignment(Qt::AllignTop);
+    BarChart->createDefaultAxes();
+    BarChart->setAxisX(axis, series);
+    BarChart->legend()->setVisible(true);
+    BarChart->legend()->setAlignment(Qt::AlignBottom);
 
-    QChartView *chartView = QChartView(chart);
-    chartView->setRenderHint(QPainter::AntiAliasing);
+    QChartView *chartView = QChartView(BarChart);
+    chartView->setRenderHint(QPainter::Antialiasing);
     QPalette pale = qApp->palette();
-    pale.setColor(QPalette::Window, QRbg(0x000000));
-    pale.setColor(Qpalette::WindowText, QRbg(0x404040));
+    pale.setColor(QPalette::Window, QRgb(0x000000));
+    pale.setColor(QPalette::WindowText, QRgb(0x404040));
     qApp->setPalette(pale);
 
     return BarChart;
@@ -116,23 +115,22 @@ QChart LineChart::draw()
     //QApplication a(argc, argv);
 
     QChart *LineChart = new QChart();
-    chart->setTitle("This is your line chart");
+    LineChart->setTitle("This is your line chart");
 
     QLineSeries *series = new QLineSeries();
    
-    auto names = datamatrix.getRowLabel(); 
+    auto names = getTable.getRowLabel();
     for (unsigned int i = 0; i < names.size(); i++)
     {
-        series->append(names[i], datamatrix.getColumnData[i]);         //lo fa solo per una delle due colonne devo capire come attaccare l'altra (per spline è uguale)  
+        series->append(names[i], getTable.getColumnData[i]);         //lo fa solo per una delle due colonne devo capire come attaccare l'altra (per spline è uguale)
     }
-    QChart *chart = new QChart();
-    chart->addSeries(series);
-    chart->createDefaultAxes();
-    chart->legend()->setVisible(true);
-    chart->legend()->setAlignment(Qt::AlignBottom);
-    chart->setAnimationOption(QChart::AllAnimations);
+    LineChart->addSeries(series);
+    LineChart->createDefaultAxes();
+    LineChart->legend()->setVisible(true);
+    LineChart->legend()->setAlignment(Qt::AlignBottom);
+    LineChart->setAnimationOptions(QChart::AllAnimations);
 
-    QChartView *chartView = new QChartView(chart);
+    QChartView *chartView = new QChartView(LineChart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
     return LineChart;
@@ -142,8 +140,8 @@ QChart SplineChart::draw()
 {
     //QApplication a(argc, argv);
 
-    QChart *SpineChart = new QChart();
-    chart->setTitle("This is your spline chart");
+    QChart *SplineChart = new QChart();
+    SplineChart->setTitle("This is your spline chart");
 
     QSplineSeries *series = new QSplineSeries();
     series->setName("Spline");
@@ -156,13 +154,12 @@ QChart SplineChart::draw()
     }
     *series << QPointF(7, 4) << QPointF(4, 3) << QPointF(8, 3) << QPointF(9, 2) << QPointF(1, 0);
 
-    QChart *chart = new QChart();
-    chart->legend()->setVisible(true);
-    chart->addSeries(series);
-    chart->createDefaultAxes();
-    chart->axes(Qt::Vertical).first->setRange(0, 5);
+    SplineChart->legend()->setVisible(true);
+    SplineChart->addSeries(series);
+    SplineChart->createDefaultAxes();
+    SplineChart->axes(Qt::Vertical).first->setRange(0, 5);
 
-    QChartView *chartView = new QChartView(chart);
+    QChartView *chartView = new QChartView(SplineChart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
     return SplineChart;

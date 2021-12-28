@@ -18,11 +18,13 @@
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QCategoryAxis>
+#include <QtCharts/QSplineSeries>
 #include <QPointF>
 #include <QPainter>
+#include <QPalette>
 
 
-using namespace QtCharts; //include da sistemare
+using namespace QtCharts;
 
 class Chart
 {
@@ -62,7 +64,7 @@ public:
 
 };
 
-class Roundchart : public Chart
+class RoundChart : public Chart
 {
 private:
     QPieSeries *series;
@@ -83,7 +85,7 @@ public:
     auto getSeries() const;
 };
 
-class PieChart : public Roundchart  //eredita da roundchart
+class PieChart : public RoundChart  //eredita da roundchart
 {
 private:
     QPieSeries *series;
@@ -98,7 +100,7 @@ public:
      QChart draw();
 };
 
-class DonutChart : public Roundchart // eredita da roundchart ma col buco
+class DonutChart : public RoundChart // eredita da roundchart ma col buco
 {
 public:
     /**

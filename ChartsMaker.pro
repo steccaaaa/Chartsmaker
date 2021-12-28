@@ -15,14 +15,14 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     DataMatrix.cpp \
-    #Charts.cpp
-    model.cpp
+    Charts.cpp \
+    model.cpp \
 
 HEADERS += \
     mainwindow.h \
     DataMatrix.h \
-    #Charts.h
-    model.h
+    Charts.h \
+    model.h \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
