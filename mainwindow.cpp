@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "DataMatrix.h"
 #include "model.h"
-#include "Charts.h"
+//#include "Charts.h"
 #include <QApplication>
 #include <QChartView>
 #include <QLineSeries>
@@ -17,7 +17,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
     //!--------------------------------------------------MENU
     QMenuBar *menuBar = new QMenuBar(this);
@@ -53,14 +54,27 @@ MainWindow::MainWindow(QWidget *parent)
     help->addAction(new QAction("Contacts", help));
 
     //!--------------------------------------------------TABLE
+
     Model *model = new Model;
-    QTableView *tableView = new QTableView();
+    QTableView *tableView = new QTableView(this);
+    auto x = model->table.getData();
     tableView->setModel(model);
-    tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    //tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    //tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     mainLayout->addWidget(tableView);
 
+
+    //!---------------------------------------------------TEST
+
+    /*QPushButton *button = new QPushButton("pisnelo", this);
+    button->setText("sbugba");
+    button->setGeometry(100, 20, 80, 20);
+    QPushButton *button2 = new QPushButton("pisnelo2", this);
+    button2->setGeometry(50, 20, 80, 20);
+
+    mainLayout->addWidget(button);
+    mainLayout->addWidget(button2);*/
     setLayout(mainLayout);
 }
 

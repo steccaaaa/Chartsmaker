@@ -173,6 +173,20 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
     std::cout << "deleted DataMatrix \n"; //!debug
 }
 
+DataMatrix& DataMatrix::operator= (const DataMatrix& table)
+{
+    delete[] data;
+    delete[] rowLabel;
+    delete[] columnLabel;
+
+    data = table.getData();
+    rowLabel = table.getRowLabel();
+    columnLabel = table.getColumnLabel();
+
+    // return the existing object so we can chain this operator
+    return *this;
+}
+
 //* PARSE
 
 void DataMatrix::read()

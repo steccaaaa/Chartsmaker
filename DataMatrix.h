@@ -37,6 +37,8 @@ public:
      */
     ~DataMatrix();
 
+    DataMatrix& operator= (const DataMatrix& table);
+
     /**
      * @brief adds a row in n poition
      *

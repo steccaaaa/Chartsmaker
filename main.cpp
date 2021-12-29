@@ -34,11 +34,11 @@ int main(int argc, char *argv[])
     mat[0][0] = 200;
     x.deleteRow(2);
     x.deleteColumn(0);*/
-    std::cout << "asd";
+    std::cout << "asd\n";
     QApplication app(argc, argv);
 
-    MainWindow gui;
-    gui.show();
+    MainWindow m;
+    m.show();
 
     return app.exec();
 }
