@@ -76,3 +76,8 @@ Thumbs.db
 build
 *.pro
 *.out
+*.json
+*prova*
+icon*
+.gitignore
+ChartsMaker
