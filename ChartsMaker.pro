@@ -15,13 +15,13 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     DataMatrix.cpp \
-    Charts.cpp \
+    #Charts.cpp \
     model.cpp \
 
 HEADERS += \
     mainwindow.h \
     DataMatrix.h \
-    Charts.h \
+    #Charts.h \
     model.h \
 
 # Default rules for deployment.
