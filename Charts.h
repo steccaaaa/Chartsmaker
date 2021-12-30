@@ -76,7 +76,7 @@ public:
      * @param chart
      * @return QChart
      */
-     QChart draw();
+     QChart* draw();
     /**
      * @brief Getter for series
      *
@@ -121,7 +121,7 @@ public:
      * @param chart
      * @return QChart
      */
-    QChart draw();
+    QChart* draw();
 };
 
 class LineChart : public Chart
@@ -133,7 +133,7 @@ public:
      * @param chart
      * @return QChart
      */
-    QChart draw();
+    QChart* draw();
 };
 
 class SplineChart : public Chart
@@ -145,7 +145,7 @@ public:
      * @param chart
      * @return QChart
      */
-    QChart draw();
+    QChart* draw();
 };
 
 #endif
