@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "DataMatrix.h"
 #include "model.h"
-//#include "Charts.h"
+#include "controller.h"//! non spostare
 
 #include <iostream> //! debug
 
@@ -162,7 +162,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     Model *model = new Model;
     QTableView *tableView = new QTableView(this);
-    auto x = model->table.getData();
     tableView->setModel(model);
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
@@ -185,6 +184,4 @@ MainWindow::MainWindow(QWidget *parent)
     setLayout(mainLayout);
 }
 
-MainWindow::~MainWindow()
-{
-}
+void MainWindow::setController(Controller* _controller){ controller = _controller; }

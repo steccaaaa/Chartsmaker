@@ -15,9 +15,9 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const; // overwrite necessario per definizione
     int columnCount(const QModelIndex &parent = QModelIndex()) const; // overwrite necessario per definizione
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const; // overwrite necessario per definizione
-    DataMatrix table;
 
 private:
+    DataMatrix table;
 };
 
 #endif // MODEL_H

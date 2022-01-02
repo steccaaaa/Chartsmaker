@@ -255,7 +255,7 @@ void DataMatrix::write() const
     }
     else
     {
-        qDebug() << "JSONTest2 File open!";
+        qDebug() << "File open!";
     }
 
     // Clear the original content in the file
