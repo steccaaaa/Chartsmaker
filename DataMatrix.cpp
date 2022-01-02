@@ -164,13 +164,19 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
 
 DataMatrix &DataMatrix::operator=(const DataMatrix &table)
 {
-    delete[] data;
-    delete[] rowLabel;
-    delete[] columnLabel;
+    /*if(data)
+    {
+        delete[] data;
+        delete[] rowLabel;
+        delete[] columnLabel;
 
-    data = table.getData();
-    rowLabel = table.getRowLabel();
-    columnLabel = table.getColumnLabel();
+        data = table.getData();
+        rowLabel = table.getRowLabel();
+        columnLabel = table.getColumnLabel();
+    } else*/
+    data = new auto(*table.getData());
+    rowLabel = new auto(*table.getRowLabel());
+    columnLabel = new auto(*table.getColumnLabel());
 
     // return the existing object so we can chain this operator
     return *this;
