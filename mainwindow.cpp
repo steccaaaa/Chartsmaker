@@ -2,15 +2,6 @@
 #include "DataMatrix.h"
 #include "model.h"
 //#include "Charts.h"
-#include <QApplication>
-#include <QChartView>
-#include <QLineSeries>
-#include <QChart>
-#include <QtCharts>
-#include <QApplication>
-#include <QWidget>
-#include <QMenuBar>
-#include <QVBoxLayout>
 
 #include <iostream> //! debug
 
@@ -173,11 +164,13 @@ MainWindow::MainWindow(QWidget *parent)
     QTableView *tableView = new QTableView(this);
     auto x = model->table.getData();
     tableView->setModel(model);
-    //tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    //tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tableView->resizeColumnsToContents();
+    tableView->resizeRowsToContents();
+    tableView->setGeometry(0, 0, 300, 300); //per ora sono obbligato a mettere un misura fissa
+    tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     mainLayout->addWidget(tableView);
-
 
     //!---------------------------------------------------TEST
 

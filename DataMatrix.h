@@ -2,9 +2,16 @@
 #define DATAMATRIX_H
 #include <vector>
 #include <string>
-#include <QJsonObject>
 #include <QObject>
 #include <QString>
+#include <iostream>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonParseError>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QJsonArray>
+#include <QDebug>
 
 class DataMatrix
 {
@@ -37,7 +44,7 @@ public:
      */
     ~DataMatrix();
 
-    DataMatrix& operator= (const DataMatrix& table);
+    DataMatrix &operator=(const DataMatrix &table);
 
     /**
      * @brief adds a row in n poition

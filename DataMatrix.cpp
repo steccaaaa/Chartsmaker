@@ -1,13 +1,5 @@
 #include "DataMatrix.h"
-#include <vector>
-#include <iostream>
-#include <QFile>
-#include <QJsonDocument>
-#include <QJsonParseError>
-#include <QJsonObject>
-#include <QJsonValue>
-#include <QJsonArray>
-#include <QDebug>
+
 using std::string;
 using std::vector;
 
@@ -50,11 +42,7 @@ DataMatrix::DataMatrix(vector<vector<double>> &_data, vector<string> &_rowLabel,
     data = new auto(_data);
     print(data); //! debug
     rowLabel = new auto(_rowLabel);
-    //std::cout << "printing rowLabel \n";
-    //print(rowLabel);
     columnLabel = new auto(_columnLabel);
-    //std::cout << "printing columnLabel \n";
-    //print(columnLabel);
 }
 
 DataMatrix::DataMatrix(DataMatrix &_table) : data(_table.getData()), rowLabel(_table.getRowLabel()), columnLabel(_table.getColumnLabel()) {}
@@ -133,7 +121,8 @@ std::vector<double> *DataMatrix::getColumnData(unsigned int n)
 {
     //std::vector<double> datavector;
     std::vector<double> *datavector = new std::vector<double>;
-    for (unsigned int i = 0; i < data->size(); ++i){
+    for (unsigned int i = 0; i < data->size(); ++i)
+    {
         datavector->push_back(data->at(i).at(n));
     }
     return datavector;
@@ -173,7 +162,7 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
     std::cout << "deleted DataMatrix \n"; //!debug
 }
 
-DataMatrix& DataMatrix::operator= (const DataMatrix& table)
+DataMatrix &DataMatrix::operator=(const DataMatrix &table)
 {
     delete[] data;
     delete[] rowLabel;
