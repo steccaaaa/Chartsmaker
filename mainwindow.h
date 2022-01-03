@@ -57,7 +57,7 @@ public slots:
     * @brief Opens a new window with the contacts of the developers
     * 
     */
-    void saveAsImage();
+    //void saveAsImage();
 
     /**
     * @brief Opens a new window

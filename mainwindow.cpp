@@ -135,14 +135,14 @@ void MainWindow::save()
     std::cout << "asd";
 }
 
-void MainWindow::saveAsImage()
+/*void MainWindow::saveAsImage()
 {
     QWidget *widget = ui->mywidget;
 
     QPixmap pic = QPixmap::grabWidget(widget);
     widget->render(&pic);
     pic.save("Your chart.png");
-}
+}*/
 
 void MainWindow::about()
 {
