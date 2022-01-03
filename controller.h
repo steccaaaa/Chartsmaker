@@ -29,20 +29,23 @@ public:
      */
     void setMainWindow(MainWindow *_mainwindow);
 
-public slots:
     /**
      * 
     * @brief Opens and read a JSon file to create a chart
     * 
     * @param path string of the path
     */
-    void open();
+    void open(std::string path);
+
+    Model *getModel();
+
+public slots:
 
     /**
-    * @brief Creates and shows a new graph on the window
+    * @brief Creates and shows a new chart on the window
     * 
     */
-    void newGraph();
+    void newChart();
 
     /**
     * @brief Saves 

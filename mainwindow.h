@@ -11,6 +11,7 @@
 #include <QWidget>
 #include <QMenuBar>
 #include <QVBoxLayout>
+#include "model.h"
 
 class Controller; //dichiarazione incompleta di classe per evitare dipendenze circolari
 
@@ -25,9 +26,13 @@ private:
     QMenu *view;
     QMenu *help;
 
+    //* table
+    QTableView *tableView;
+
 public:
     MainWindow(QWidget *parent = nullptr);
     void setController(Controller *_controller);
+    void setTableView(Model *_model);
 
 public slots:
     /**
@@ -35,6 +40,24 @@ public slots:
     * 
     */
     void openFile();
+
+    /**
+    * @brief Saves the window in .pdf format
+    * 
+    */
+    void saveAsPdf();
+
+    /**
+    * @brief Saves the window 
+    * 
+    */
+    void save();
+
+    /**
+    * @brief Opens a new window with the contacts of the developers
+    * 
+    */
+    void saveAsImage();
 
     /**
     * @brief Opens a new window

@@ -9,16 +9,17 @@ Controller::Controller(QObject *parent)
 void Controller::setModel(Model *_model) { model = _model; }
 void Controller::setMainWindow(MainWindow *_mainwindow) { mainwindow = _mainwindow; }
 
-void Controller::open()
+void Controller::open(std::string path)
 {
-    std::string path = "bruh";
     std::cout << path << "\n";
     std::cout << "-------------------------------------------------------\n";
 }
 
+Model *Controller::getModel() { return model; }
+
 void Controller::zoomIn(){};
 void Controller::zoomOut(){};
-void Controller::newGraph(){};
+void Controller::newChart(){};
 void Controller::saveAsPfd(){};
 void Controller::exit(){};
 void Controller::save(){};

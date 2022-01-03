@@ -3,7 +3,7 @@ OBJECTS_DIR = build/obj
 UI_DIR      = build/ui
 RCC_DIR     = build/
 
-QT       += core gui charts widgets
+QT       += core gui charts widgets printsupport
 
 CONFIG += c++11
 
