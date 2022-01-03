@@ -42,22 +42,10 @@ public slots:
     void openFile();
 
     /**
-    * @brief Saves the window in .pdf format
-    * 
-    */
-    void saveAsPdf();
-
-    /**
     * @brief Saves the window 
     * 
     */
     void save();
-
-    /**
-    * @brief Opens a new window with the contacts of the developers
-    * 
-    */
-    void saveAsImage();
 
     /**
     * @brief Opens a new window
@@ -70,6 +58,8 @@ public slots:
     * 
     */
     void contacts();
+
+    QWidget *getGraph();
 };
 
 #endif // MAINWINDOW_H

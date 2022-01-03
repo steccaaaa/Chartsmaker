@@ -4,12 +4,6 @@
 #include "controller.h" //! non spostare
 #include "aboutwindow.h"
 #include "contactswindow.h"
-#include <QApplication>
-#include <QtCore>
-#include <QPrinter>
-#include <QPdfWriter>
-#include <QPainter>
-#include <QPixmap>
 
 #include <iostream> //! debug
 
@@ -86,15 +80,26 @@ void MainWindow::setController(Controller *_controller)
     connect(file->actions()[1], SIGNAL(triggered()), this, SLOT(openFile()));   //open
     //2 e' un separator
     connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(open("---------------------------open4----------------------------"))); //save
-    connect(file->actions()[4], SIGNAL(triggered()), this, SLOT(saveAsImage()));                                                              //save as png
-    connect(file->actions()[5], SIGNAL(triggered()), this, SLOT(saveAsPdf()));                                                                //save as pdf
+    connect(file->actions()[4], SIGNAL(triggered()), controller, SLOT(saveAsImage()));                                                        //save as png
+    connect(file->actions()[5], SIGNAL(triggered()), controller, SLOT(saveAsPdf()));                                                          //save as pdf
     //6 e' un separator
     connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close())); //exit
 
     connect(help->actions()[0], SIGNAL(triggered()), this, SLOT(about()));    //about
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts
 
-    //zoom in
+    //zoom in e out
+    /*void MyQGraphicsView::wheelEvent(QWheelEvent *event)
+    {
+        if(event->delta() > 0)
+        {
+            emit mouseWheelZoom(true);
+        }
+        else
+        {
+            emit mouseWheelZoom(false);
+        }
+    }*/
     //zoom out
     //logarithmic scale
 }
@@ -107,40 +112,9 @@ void MainWindow::openFile()
     controller->open(path.toStdString());
 }
 
-void MainWindow::saveAsPdf()
-{
-    QPixmap pixmap;
-    WId asdasd = this->winId();
-    pixmap = QPixmap::grabWindow(asdasd);
-
-    QPrinter printer;
-    printer.setOrientation(QPrinter::Landscape);
-    printer.setOutputFormat(QPrinter::PdfFormat);
-
-    printer.setOutputFileName(QApplication::applicationDirPath() + QDir::separator() + "file");
-
-    QPainter painter(&printer);
-    QRect rect = painter.viewport();
-    QSize size = pixmap.size();
-
-    size.scale(rect.size(), Qt::KeepAspectRatio);
-    painter.setViewport(rect.x(), rect.y(), size.width(), size.height());
-    painter.setWindow(pixmap.rect());
-
-    painter.drawPixmap(0, 0, 100, 100, pixmap);
-}
-
 void MainWindow::save() //DA FAREEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 {
     std::cout << "asd";
-}
-
-void MainWindow::saveAsImage()
-{
-    QWidget *widget = tableView;
-    QPixmap pic = QPixmap::grabWidget(widget);
-    widget->render(&pic);
-    pic.save("Your chart.png");
 }
 
 void MainWindow::about()
@@ -156,3 +130,5 @@ void MainWindow::contacts()
     m_contactswindow->setWindowTitle("Contacts");
     m_contactswindow->show();
 }
+
+QWidget *MainWindow::getGraph() { return tableView; } //! deve ritornare graph

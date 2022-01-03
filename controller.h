@@ -2,6 +2,12 @@
 #define CONTROLLER_H
 
 #include <QObject>
+#include <QApplication>
+#include <QtCore>
+#include <QPrinter>
+#include <QPainter>
+#include <QPixmap>
+#include <QWidget>
 #include "mainwindow.h"
 #include "model.h"
 
@@ -54,10 +60,16 @@ public slots:
     void save();
 
     /**
-    * @brief Saves your chart in .pdf format
-    * 
-    */
-    void saveAsPfd();
+     * @brief 
+     * 
+     */
+    void saveAsPdf();
+
+    /**
+     * @brief 
+     * 
+     */
+    void saveAsImage();
 
     /**
     * @brief closes the window
