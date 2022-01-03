@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     c.setMainWindow(&mw);
     mw.setController(&c);
 
-    mw.setTableView(c.getModel());
+    mw.refreshTableView();
 
     mw.resize(1000, 500);
 

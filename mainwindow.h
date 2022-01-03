@@ -32,7 +32,7 @@ private:
 public:
     MainWindow(QWidget *parent = nullptr);
     void setController(Controller *_controller);
-    void setTableView(Model *_model);
+    void refreshTableView(/*Model *_model*/);
 
 public slots:
     /**
@@ -57,7 +57,7 @@ public slots:
     * @brief Opens a new window with the contacts of the developers
     * 
     */
-    //void saveAsImage();
+    void saveAsImage();
 
     /**
     * @brief Opens a new window

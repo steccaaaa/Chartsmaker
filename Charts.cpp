@@ -12,19 +12,19 @@ Chart::Chart(DataMatrix _table) //constructor for Charts objects
     return table;
 }*/
 
-QChart* RoundChart::draw()
+QChart *RoundChart::draw()
 {
     //QApplication a(argc, argv);
     QChart *RoundChart = new QChart();
     RoundChart->setTitle("This is your PieChart");
-    
+
     QPieSeries *series = new QPieSeries();
 
     auto names = getTable().getRowLabel();
     auto values = getTable().getColumnData(0); //getter dei dati della prima colonna (poi nella view andrà fatto in modo che o consideri solo la prima colonna dando un warning o che faccia la pie solo se ho una sola colonna)
     for (unsigned int i = 0; i < names.size(); i++)
     {
-        series->append(names[i], values[i]); 
+        series->append(names[i], values[i]);
     }
 
     QPieSlice *slice = series->slices().at(1);
@@ -60,14 +60,14 @@ QChart DonutChart::draw()
     series->setHoleSize(35);
 }
 
-QChart* BarChart::draw()
+QChart *BarChart::draw()
 {
     //QApplication a(argc, argv);
 
     QChart *BarChart = new QChart();
     BarChart->setTitle("This is your BarChart");
 
-    QBarSet *set0 = new QBarSet("Pippo");      //da fare i getters
+    QBarSet *set0 = new QBarSet("Pippo"); //da fare i getters
     QBarSet *set1 = new QBarSet("Pluto");
     QBarSet *set2 = new QBarSet("Paperino");
     QBarSet *set3 = new QBarSet("Minnie");
@@ -110,7 +110,7 @@ QChart* BarChart::draw()
     return BarChart;
 }
 
-QChart* LineChart::draw()
+QChart *LineChart::draw()
 {
     //QApplication a(argc, argv);
 
@@ -118,11 +118,11 @@ QChart* LineChart::draw()
     LineChart->setTitle("This is your line chart");
 
     QLineSeries *series = new QLineSeries();
-   
+
     auto names = getTable.getRowLabel();
     for (unsigned int i = 0; i < names.size(); i++)
     {
-        series->append(names[i], getTable.getColumnData[i]);         //lo fa solo per una delle due colonne devo capire come attaccare l'altra (per spline è uguale)
+        series->append(names[i], getTable.getColumnData[i]); //lo fa solo per una delle due colonne devo capire come attaccare l'altra (per spline è uguale)
     }
     LineChart->addSeries(series);
     LineChart->createDefaultAxes();
@@ -136,7 +136,7 @@ QChart* LineChart::draw()
     return LineChart;
 }
 
-QChart* SplineChart::draw()
+QChart *SplineChart::draw()
 {
     //QApplication a(argc, argv);
 
@@ -148,9 +148,9 @@ QChart* SplineChart::draw()
     auto names = getTable().getRowLabel();
     auto values = getTable().getColumnData(0);
     auto values2 = getTable().getColumnData(1);
-    for (unsigned int i = 0; i < names.size(); i++)   
+    for (unsigned int i = 0; i < names.size(); i++)
     {
-        series->append(names[i], values[i]); 
+        series->append(names[i], values[i]);
     }
     *series << QPointF(7, 4) << QPointF(4, 3) << QPointF(8, 3) << QPointF(9, 2) << QPointF(1, 0);
 
@@ -164,5 +164,3 @@ QChart* SplineChart::draw()
 
     return SplineChart;
 }
-
-

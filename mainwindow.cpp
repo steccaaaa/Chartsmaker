@@ -32,24 +32,24 @@ MainWindow::MainWindow(QWidget *parent)
     file->addSeparator();                       //2
     file->addAction(new QAction("Save", file)); //3
 
-    file->addAction(new QAction("Save as...", file)); //4
+    file->addAction(new QAction("Save as PNG", file)); //4
 
-    file->addAction(new QAction("Export", file)); //5
+    file->addAction(new QAction("Save as PDF", file)); //5
 
     file->addSeparator();                       //6
     file->addAction(new QAction("Exit", file)); //7
 
-    //! edit
-    /*QMenu *edit = new QMenu("Edit", menuBar); //da decidere cosa metterci dopo che abbiamo fatto apparire i grafici
+    //! edit da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    /*QMenu *edit = new QMenu("Edit", menuBar); 
     menuBar->addMenu(edit);*/
 
     //! view
     view = new QMenu("View", menuBar);
     menuBar->addMenu(view);
-    view->addAction(new QAction("Zoom in", view));  //da fare
-    view->addAction(new QAction("Zoom out", view)); //da fare
+    view->addAction(new QAction("Zoom in", view));  //da fareeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    view->addAction(new QAction("Zoom out", view)); //da fareeeeeeeeeeeeeeeeeeeeeeeee
     view->addSeparator();
-    view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox da fare
+    view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
     //! help
     help = new QMenu("Help", menuBar);
@@ -65,12 +65,12 @@ MainWindow::MainWindow(QWidget *parent)
     setLayout(mainLayout);
 }
 
-void MainWindow::setTableView(Model *_model)
+void MainWindow::refreshTableView(/*Model *_model*/)
 {
     //*tableview
     tableView = new QTableView(this);
-    //tableView->setModel(controller->getModel());
-    tableView->setModel(_model);
+    tableView->setModel(controller->getModel());
+    //tableView->setModel(_model);
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
     tableView->setGeometry(0, 30, 300, 300); //per ora sono obbligato a mettere un misura fissa
@@ -86,8 +86,8 @@ void MainWindow::setController(Controller *_controller)
     connect(file->actions()[1], SIGNAL(triggered()), this, SLOT(openFile()));   //open
     //2 e' un separator
     connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(open("---------------------------open4----------------------------"))); //save
-    connect(file->actions()[4], SIGNAL(triggered()), controller, SLOT(open("---------------------------open4----------------------------"))); //save as
-    connect(file->actions()[5], SIGNAL(triggered()), this, SLOT(saveAsPdf()));                                                                //export
+    connect(file->actions()[4], SIGNAL(triggered()), this, SLOT(saveAsImage()));                                                              //save as png
+    connect(file->actions()[5], SIGNAL(triggered()), this, SLOT(saveAsPdf()));                                                                //save as pdf
     //6 e' un separator
     connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close())); //exit
 
@@ -130,19 +130,18 @@ void MainWindow::saveAsPdf()
     painter.drawPixmap(0, 0, 100, 100, pixmap);
 }
 
-void MainWindow::save()
+void MainWindow::save() //DA FAREEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 {
     std::cout << "asd";
 }
 
-/*void MainWindow::saveAsImage()
+void MainWindow::saveAsImage()
 {
-    QWidget *widget = ui->mywidget;
-
+    QWidget *widget = tableView;
     QPixmap pic = QPixmap::grabWidget(widget);
     widget->render(&pic);
     pic.save("Your chart.png");
-}*/
+}
 
 void MainWindow::about()
 {
