@@ -143,11 +143,13 @@ void MainWindow::openFile()
 void MainWindow::about()
 {
     aboutwindow *m_aboutwindow = new aboutwindow();
+    m_aboutwindow->setWindowTitle("About");
     m_aboutwindow->show();
 }
 
 void MainWindow::contacts()
 {
     contactswindow *m_contactswindow = new contactswindow();
+    m_contactswindow->setWindowTitle("Contacts");
     m_contactswindow->show();
 }

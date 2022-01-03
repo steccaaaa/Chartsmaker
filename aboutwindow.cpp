@@ -5,12 +5,14 @@
 aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
-    QLabel *l = new QLabel("About", this);
+    QLabel *l = new QLabel("About:", this);
     layout->addWidget(l);
 
     QLabel *label = new QLabel(this);
     label->setText("Manuale d'uso: ......................");
     label->setAlignment(Qt::AlignBottom | Qt::AlignRight);
+
+    //setSizePolicy(0);
 }
 
 aboutwindow::~aboutwindow() {}
