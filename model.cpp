@@ -39,7 +39,7 @@ Model::Model(QObject *parent) : QAbstractTableModel(parent)
 
 int Model::rowCount(const QModelIndex &parent) const
 {
-    Q_UNUSED(parent) // parent non è usato -- evita compilazioni inutili
+    Q_UNUSED(parent) // parent non e' usato -- evita compilazioni inutili
     //std::cout << "rowcount\n";
     return table.getRowCount();
 }
@@ -47,7 +47,7 @@ int Model::rowCount(const QModelIndex &parent) const
 int Model::columnCount(const QModelIndex &parent) const
 {
     //std::cout << "colcount\n";
-    Q_UNUSED(parent) // parent non è usato -- evita compilazioni inutili
+    Q_UNUSED(parent) // parent non e' usato -- evita compilazioni inutili
     return table.getColumnCount();
 }
 
