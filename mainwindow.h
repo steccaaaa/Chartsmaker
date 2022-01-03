@@ -28,11 +28,7 @@ private:
 public:
     MainWindow(QWidget *parent = nullptr);
     void setController(Controller *_controller);
-    /**
-    * @brief Opens and read a JSon file to create a chart
-    * 
-    */
-    void openFile();
+
     /**
     * @brief Opens a new window
     * 
@@ -43,6 +39,13 @@ public:
     * 
     */
     void contacts();
+
+public slots:
+    /**
+    * @brief Opens and read a JSon file to create a chart
+    * 
+    */
+    void openFile();
 };
 
 #endif // MAINWINDOW_H

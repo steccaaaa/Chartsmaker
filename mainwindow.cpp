@@ -22,48 +22,6 @@ MainWindow::MainWindow(QWidget *parent)
     file->addAction(new QAction("New graph", file)); //0
     file->addAction(new QAction("Open", file));      //1
 
-    /*
-    void loadFromFile();
-    QPushButton *loadButton;
-
-    void AddressBook::loadFromFile()
-    {
-        QString fileName = QFileDialog::getOpenFileName(this,
-            tr("Open Address Book"), "",
-            tr("Address Book (*.abk);;All Files (*)"));
-        if (fileName.isEmpty())
-            return;
-        else
-        {
-            QFile file(fileName);
-
-            if (!file.open(QIODevice::ReadOnly))
-            {
-                QMessageBox::information(this, tr("Unable to open file"),
-                    file.errorString());
-                return;
-            }
-
-        QDataStream in(&file);
-        in.setVersion(QDataStream::Qt_4_5);
-        contacts.clear();   // clear existing contacts
-        in >> contacts;
-        if (contacts.isEmpty())
-        {
-            QMessageBox::information(this, tr("No contacts in file"),
-                tr("The file you are attempting to open contains no contacts."));
-        }
-        else
-        {
-             QMap<QString, QString>::iterator i = contacts.begin();
-             nameLine->setText(i.key());
-             addressText->setText(i.value());
-        }
-    }
-    updateInterface(NavigationMode);
-    }
-    */
-
     file->addSeparator();                       //2
     file->addAction(new QAction("Save", file)); //3
 
@@ -122,11 +80,6 @@ MainWindow::MainWindow(QWidget *parent)
     file->addSeparator();                         //6
     file->addAction(new QAction("Exit", file));   //7
 
-    /*   EXIT THE WINDOW
-    QPushButton *quitButton = new QPushButton("Quit");
-    connect(quitButton, &QPushButton::clicked, &app, &QCoreApplication::quit, Qt::QueuedConnection);
-    */
-
     //! edit
     /*QMenu *edit = new QMenu("Edit", menuBar); //da decidere cosa metterci dopo che abbiamo fatto apparire i grafici
     menuBar->addMenu(edit);*/
@@ -165,12 +118,13 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::setController(Controller *_controller)
 {
     controller = _controller;
-    connect(file->actions()[0], SIGNAL(triggered()), this, SLOT(open("---------------------------open0----------------------------")));
-    connect(file->actions()[1], SIGNAL(triggered()), this, SLOT(open("---------------------------open1----------------------------")));
+    std::string path = "-----------------------------aaaaaaaaaaaaaaaaaa";
+    connect(file->actions()[0], SIGNAL(triggered()), controller, SLOT(open()));
+    connect(file->actions()[1], SIGNAL(triggered()), this, SLOT(openFile()));
     //2 è un separator
-    connect(file->actions()[3], SIGNAL(triggered()), this, SLOT(open("---------------------------open4----------------------------")));
-    connect(file->actions()[4], SIGNAL(triggered()), this, SLOT(open("---------------------------open4----------------------------")));
-    connect(file->actions()[5], SIGNAL(triggered()), this, SLOT(open("---------------------------open2----------------------------")));
+    connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(open("---------------------------open4----------------------------")));
+    connect(file->actions()[4], SIGNAL(triggered()), controller, SLOT(open("---------------------------open4----------------------------")));
+    connect(file->actions()[5], SIGNAL(triggered()), controller, SLOT(open("---------------------------open2----------------------------")));
     //6 è un separator
     connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close()));
 }
@@ -180,7 +134,7 @@ void MainWindow::openFile()
     QString path = QFileDialog::getOpenFileName(this,
                                                 tr("Open json graph file"), "",
                                                 tr("Json file (*.json);;All Files (*)"));
-    controller->open(path.toStdString());
+    controller->open(/*path.toStdString()*/);
 }
 
 void MainWindow::about()

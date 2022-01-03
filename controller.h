@@ -36,7 +36,7 @@ public slots:
     * 
     * @param path string of the path
     */
-    void open(std::string path);
+    void open();
 
     /**
     * @brief Creates and shows a new graph on the window

@@ -9,8 +9,9 @@ Controller::Controller(QObject *parent)
 void Controller::setModel(Model *_model) { model = _model; }
 void Controller::setMainWindow(MainWindow *_mainwindow) { mainwindow = _mainwindow; }
 
-void Controller::open(std::string path)
+void Controller::open()
 {
+    std::string path = "bruh";
     std::cout << path << "\n";
     std::cout << "-------------------------------------------------------\n";
 }
