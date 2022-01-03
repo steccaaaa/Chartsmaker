@@ -33,7 +33,7 @@ private:
 
 public:
     /**
-     * @brief Construct a new Chart  object
+     * @brief Construct a new Chart object
      *
      * @param table reference of a 2d vector
      */
@@ -52,7 +52,7 @@ public:
      * @param chart
      * @return returns a new chart with the characteristics chosen by the user
      */
-    auto getTable();
+    DataMatrix getTable();
 
     /**
      * @brief
@@ -60,8 +60,7 @@ public:
      * @param chart
      * @return returns a new chart with the characteristics chosen by the user
      */
-    virtual QChart draw(QChart chart) = 0;
-
+    virtual QChart* draw() = 0;
 };
 
 class RoundChart : public Chart
@@ -71,7 +70,13 @@ private:
 
 public:
     /**
-     * @brief Draws round shaped charts 
+     * @brief Construct a new RoundChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    RoundChart(DataMatrix table);
+    /**
+     * @brief Draws round shaped charts
      *
      * @param chart
      * @return QChart
@@ -82,7 +87,7 @@ public:
      *
      * @return series
      */
-    auto getSeries() const;
+    //auto getSeries() const;
 };
 
 class PieChart : public RoundChart  //eredita da roundchart
@@ -92,29 +97,47 @@ private:
 
 public:
     /**
+     * @brief Construct a new PieChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    PieChart(DataMatrix table);
+    /**
      * @brief Draws pie charts 
      *
      * @param chart
      * @return QChart
      */
-     QChart draw();
+     QChart* draw();
 };
 
 class DonutChart : public RoundChart // eredita da roundchart ma col buco
 {
 public:
     /**
+     * @brief Construct a new DonutChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    DonutChart(DataMatrix table);
+    /**
      * @brief Draws donut charts
      *
      * @param chart
      * @return QChart
      */
-    QChart draw();
+    QChart *draw();
 };
 
 class BarChart : public Chart
 {
 public:
+    /**
+     * @brief Construct a new BarChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    BarChart(DataMatrix table);
     /**
      * @brief Draws bar charts
      *
@@ -128,6 +151,12 @@ class LineChart : public Chart
 {
 public:
     /**
+     * @brief Construct a new LineChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    LineChart(DataMatrix table);
+    /**
      * @brief Draws line charts
      *
      * @param chart
@@ -139,6 +168,12 @@ public:
 class SplineChart : public Chart
 {
 public:
+    /**
+     * @brief Construct a new SplineChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    SplineChart(DataMatrix table);
     /**
      * @brief Draws spline charts (similar to line harts but with rounded edges
      *

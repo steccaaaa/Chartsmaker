@@ -15,11 +15,12 @@
 
 class Controller; //dichiarazione incompleta di classe per evitare dipendenze circolari
 
-class MainWindow : public QMainWindow
+class MainWindow : public QWidget
 {
     Q_OBJECT
 private:
     Controller *controller;
+    Model *model;
 
     //* menu
     QMenu *file;
@@ -30,7 +31,7 @@ private:
     QTableView *tableView;
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(Model * _model, QWidget *parent = nullptr);
     void setController(Controller *_controller);
     void refreshTableView(/*Model *_model*/);
 
@@ -58,8 +59,17 @@ public slots:
     * 
     */
     void contacts();
-
+    /**
+    * @brief
+    *
+    */
     QWidget *getGraph();
+    /**
+    * @brief
+    *
+    */
+    void drawChart();
+
 };
 
 #endif // MAINWINDOW_H

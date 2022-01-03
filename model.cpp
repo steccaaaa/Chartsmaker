@@ -74,3 +74,11 @@ QVariant Model::data(const QModelIndex &index, int role) const
     //std::cout << "qvariant\n";
     return QVariant();
 }
+
+DataMatrix Model::getTable()
+{
+    return table;
+}
+
+
+

@@ -16,7 +16,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     DataMatrix.cpp \
-    #Charts.cpp \
+    Charts.cpp \
     model.cpp \
     aboutwindow.cpp \
     contactswindow.cpp \
@@ -25,7 +25,7 @@ HEADERS += \
     controller.h \
     mainwindow.h \
     DataMatrix.h \
-    #Charts.h \
+    Charts.h \
     model.h \
     aboutwindow.h \
     contactswindow.h \

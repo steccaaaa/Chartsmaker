@@ -37,7 +37,7 @@ public:
      *
      * @param table
      */
-    DataMatrix(DataMatrix &table);
+    DataMatrix(const DataMatrix &table);
     /**
      * @brief Destructor of Data Matrix object
      *

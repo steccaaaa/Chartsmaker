@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
     Controller c;
     Model m;
-    MainWindow mw;
+    MainWindow mw(&m);
 
     c.setModel(&m);
     c.setMainWindow(&mw);

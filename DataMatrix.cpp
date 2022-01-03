@@ -43,9 +43,12 @@ DataMatrix::DataMatrix(vector<vector<double>> &_data, vector<string> &_rowLabel,
     print(data); //! debug
     rowLabel = new auto(_rowLabel);
     columnLabel = new auto(_columnLabel);
+    print(rowLabel);
+    print(columnLabel);
 }
 
-DataMatrix::DataMatrix(DataMatrix &_table) : data(_table.getData()), rowLabel(_table.getRowLabel()), columnLabel(_table.getColumnLabel()) {}
+DataMatrix::DataMatrix(const DataMatrix &_table) : data(new std::vector<std::vector<double>>(*_table.getData())), rowLabel(new std::vector<string>(*_table.getRowLabel())), columnLabel(new std::vector<string>(*_table.getColumnLabel())){
+}
 
 void DataMatrix::addRow(vector<double> &v, unsigned int position, string label) // adds a row in the chosen poition
 {

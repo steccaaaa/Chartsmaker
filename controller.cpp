@@ -4,6 +4,13 @@
 Controller::Controller(QObject *parent)
     : QObject{parent}
 {
+    //new Model.......
+    //new View.....
+    /*costruttore controller:
+1) chiede a utente il file da aprire
+2) chiama la classe per convertire il JSON in DataMatrix
+3) ora che ho la datamatrix, creo Model(Datamatrix)
+4) ora che ho il model, creo la View(Model)*/
 }
 
 void Controller::setModel(Model *_model) { model = _model; }

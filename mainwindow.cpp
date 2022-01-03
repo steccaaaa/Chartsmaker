@@ -4,20 +4,26 @@
 #include "controller.h" //! non spostare
 #include "aboutwindow.h"
 #include "contactswindow.h"
+#include "Charts.h"
 
 #include <iostream> //! debug
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+MainWindow::MainWindow(Model *_model, QWidget *parent)
+    : QWidget(parent)
 {
+    model = _model;
 
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    QHBoxLayout *mainLayout = new QHBoxLayout(this); //devono essere attributi di classe altrimenti poi scompaiono, vanno solo inizializzate nel costruttore. un po' per tutto
+
+    mainLayout->setAlignment(Qt::AlignTop);
+    mainLayout->setContentsMargins(0,0,0,0);
+    mainLayout->setSpacing(0);
 
     //!--------------------------------------------------MENU
-    QMenuBar *menuBar = new QMenuBar(this);
+    QMenuBar *menuBar = new QMenuBar();
 
     //! file
-    file = new QMenu("File", menuBar);
+    file = new QMenu("File");
     menuBar->addMenu(file);
     file->addAction(new QAction("New chart", file)); //0
 
@@ -34,13 +40,13 @@ MainWindow::MainWindow(QWidget *parent)
     file->addAction(new QAction("Exit", file)); //7
 
     //! edit da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-    /*QMenu *edit = new QMenu("Edit", menuBar); 
+    /*QMenu *edit = new QMenu("Edit", menuBar);
     menuBar->addMenu(edit);*/
 
     //! view
     view = new QMenu("View", menuBar);
     menuBar->addMenu(view);
-    view->addAction(new QAction("Zoom in", view));  //da fareeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    view->addAction(new QAction("Zoom in", view));  //da fareeeeeeeeeeeeeeeeeeeeeeeeeeeee non serve
     view->addAction(new QAction("Zoom out", view)); //da fareeeeeeeeeeeeeeeeeeeeeeeee
     view->addSeparator();
     view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
@@ -54,29 +60,39 @@ MainWindow::MainWindow(QWidget *parent)
 
     //!--------------------------------------------------TABLE
 
-    mainLayout->addWidget(tableView);
+     //setLayout(mainLayout);
+    this->layout()->setMenuBar(menuBar);
+    drawChart();
+}
 
-    setLayout(mainLayout);
+void MainWindow::drawChart()
+{
+    qDebug()<<model;
+    auto tabella = model->getTable();
+    PieChart *pie = new PieChart(tabella);
+    QChartView* cv = new QChartView(pie->draw());
+    layout()->addWidget(cv);
 }
 
 void MainWindow::refreshTableView(/*Model *_model*/)
 {
     //*tableview
-    tableView = new QTableView(this);
-    tableView->setModel(controller->getModel());
+    tableView = new QTableView();
+    tableView->setModel(model); //la view non deve sapere nulla del controller, il modello lo passo alla view nel  costruttore!!!!!!
     //tableView->setModel(_model);
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
     tableView->setGeometry(0, 30, 300, 300); //per ora sono obbligato a mettere un misura fissa
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    layout()->addWidget(tableView);
 }
 
 void MainWindow::setController(Controller *_controller)
 {
     controller = _controller;
     std::string path = "-----------------------------aaaaaaaaaaaaaaaaaa";
-    connect(file->actions()[0], SIGNAL(triggered()), controller, SLOT(open())); //new
+    /*connect(file->actions()[0], SIGNAL(triggered()), controller, SLOT(open())); //new
     connect(file->actions()[1], SIGNAL(triggered()), this, SLOT(openFile()));   //open
     //2 e' un separator
     connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(open("---------------------------open4----------------------------"))); //save
@@ -86,7 +102,7 @@ void MainWindow::setController(Controller *_controller)
     connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close())); //exit
 
     connect(help->actions()[0], SIGNAL(triggered()), this, SLOT(about()));    //about
-    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts
+    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts */
 
     //zoom in e out
     /*void MyQGraphicsView::wheelEvent(QWheelEvent *event)
