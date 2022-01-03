@@ -1,5 +1,4 @@
 #include "aboutwindow.h"
-#include "ui_aboutwindow.h"
 #include <QLabel>
 #include <QVBoxLayout>
 

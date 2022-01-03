@@ -18,6 +18,8 @@ SOURCES += \
     DataMatrix.cpp \
     #Charts.cpp \
     model.cpp \
+    aboutwindow.cpp \
+    contactswindow.cpp \
 
 HEADERS += \
     controller.h \
@@ -25,6 +27,8 @@ HEADERS += \
     DataMatrix.h \
     #Charts.h \
     model.h \
+    aboutwindow.h \
+    contactswindow.h \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

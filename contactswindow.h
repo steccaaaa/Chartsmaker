@@ -6,7 +6,7 @@
 #include <QWidget>
 #include <QCloseEvent>
 
-class contacstwindow : public QWidget
+class contactswindow : public QWidget
 {
     Q_OBJECT
 public:
