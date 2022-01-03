@@ -40,13 +40,13 @@ Model::Model(QObject *parent) : QAbstractTableModel(parent)
 int Model::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent) // parent non è usato -- evita compilazioni inutili
-    std::cout<<"rowcount\n";
+    std::cout << "rowcount\n";
     return table.getRowCount();
 }
 
 int Model::columnCount(const QModelIndex &parent) const
 {
-    std::cout<<"colcount\n";
+    std::cout << "colcount\n";
     Q_UNUSED(parent) // parent non è usato -- evita compilazioni inutili
     return table.getColumnCount();
 }
@@ -54,8 +54,7 @@ int Model::columnCount(const QModelIndex &parent) const
 QVariant Model::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole)
-    {/*
-        std::cout<<"dio canaglia\n";
+    { /*
         print2(table.getData());
         QList<QVector<qreal> *> *temp = new QList<QVector<qreal> *>;
         for (unsigned int i = 0; i < table.getRowCount(); i++)
@@ -66,12 +65,12 @@ QVariant Model::data(const QModelIndex &index, int role) const
             temp->append(dataVector); // appendi alla lista di vettori
         }
         return (*temp)[index.row()]->at(index.column());*/
-        std::cout<<"data\n";
+        std::cout << "data\n";
         qreal temp = table.getData()->at(index.row()).at(index.column());
-        std::cout<<temp<<"\n";
+        std::cout << temp << "\n";
         return temp;
     }
 
-    std::cout<<"qvariant\n";
+    std::cout << "qvariant\n";
     return QVariant();
 }

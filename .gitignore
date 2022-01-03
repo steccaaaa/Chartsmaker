@@ -81,3 +81,4 @@ build
 icon*
 .gitignore
 ChartsMaker
+.history

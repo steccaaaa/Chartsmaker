@@ -18,11 +18,29 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 private:
-    Controller* controller;
+    Controller *controller;
+
+    //* menu
+    QMenu *file;
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void setController(Controller* _controller);
+    void setController(Controller *_controller);
+    /**
+    * @brief Opens and read a JSon file to create a chart
+    * 
+    */
+    void openFile();
+    /**
+    * @brief Opens a new window
+    * 
+    */
+    void about();
+    /**
+    * @brief Opens a new window with the contacts of the developers
+    * 
+    */
+    void contacts();
 };
 
 #endif // MAINWINDOW_H

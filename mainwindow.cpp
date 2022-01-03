@@ -1,7 +1,9 @@
 #include "mainwindow.h"
 #include "DataMatrix.h"
 #include "model.h"
-#include "controller.h"//! non spostare
+#include "controller.h" //! non spostare
+#include "aboutwindow.h"
+#include "contactswindow.h"
 
 #include <iostream> //! debug
 
@@ -15,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     QMenuBar *menuBar = new QMenuBar(this);
 
     //! file
-    QMenu *file = new QMenu("File", menuBar);
+    file = new QMenu("File", menuBar);
     menuBar->addMenu(file);
     file->addAction(new QAction("New graph", file));
     file->addAction(new QAction("Open", file));
@@ -141,22 +143,8 @@ MainWindow::MainWindow(QWidget *parent)
     QMenu *help = new QMenu("Help", menuBar);
     menuBar->addMenu(help);
     help->addAction(new QAction("About", help));
-    /*
-     MANUAL OF USE:
-    */
+
     help->addAction(new QAction("Contacts", help));
-    /*
-     Developers:
-
-     Stecca Andrea
-     Email: ..........
-     Student in Computer Science at University of Padua
-
-     Dentone Giulia
-     Email: .........
-     Student in  Computer Science at University of Padua
-
-    */
 
     //!--------------------------------------------------TABLE
 
@@ -171,17 +159,52 @@ MainWindow::MainWindow(QWidget *parent)
 
     mainLayout->addWidget(tableView);
 
-    //!---------------------------------------------------TEST
-
-    /*QPushButton *button = new QPushButton("pisnelo", this);
-    button->setText("sbugba");
-    button->setGeometry(100, 20, 80, 20);
-    QPushButton *button2 = new QPushButton("pisnelo2", this);
-    button2->setGeometry(50, 20, 80, 20);
-
-    mainLayout->addWidget(button);
-    mainLayout->addWidget(button2);*/
     setLayout(mainLayout);
 }
 
-void MainWindow::setController(Controller* _controller){ controller = _controller; }
+void MainWindow::setController(Controller *_controller)
+{
+    controller = _controller;
+    connect(file->actions()[0], SIGNAL(triggered()), this, SLOT(open("---------------------------open0----------------------------")));
+    connect(file->actions()[1], SIGNAL(triggered()), this, SLOT(open("---------------------------open1----------------------------")));
+    connect(file->actions()[2], SIGNAL(triggered()), this, SLOT(open("---------------------------open2----------------------------")));
+    connect(file->actions()[3], SIGNAL(triggered()), this, SLOT(open("---------------------------open4----------------------------")));
+    connect(file->actions()[4], SIGNAL(triggered()), this, SLOT(open("---------------------------open4----------------------------")));
+}
+
+void MainWindow::openFile()
+{
+    QString path = QFileDialog::getOpenFileName(this,
+                                                tr("Open json graph file"), "",
+                                                tr("Json file (*.json);;All Files (*)"));
+    controller->open(path.toStdString());
+}
+
+void MainWindow::about()
+{
+    QPushButton *pb = new QPushButton("About", this);
+    connect(pb, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
+    setCentralWidget(pb);
+    aboutwindow *m_aboutwindow = new aboutwindow();
+    connect(m_aboutwindow, SIGNAL(closing()), this, SLOT(show()));
+}
+
+void MainWindow::contacts()
+{
+    QPushButton *pb = new QPushButton("Contacts", this);
+    connect(pb, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
+    setCentralWidget(pb);
+    contactswindow *m_contactswindow = new contactswindow();
+    connect(m_contactswindow, SIGNAL(closing()), this, SLOT(show()));
+    /*
+     Developers:
+
+     Stecca Andrea
+     Email: andrea.stecca@studenti.unipd.it
+     Student in Computer Science at the University of Padua
+
+     Dentone Giulia
+     Email: giuliadentone@studenti.unipd.it
+     Student in  Computer Science at the University of Padua
+    */
+}
