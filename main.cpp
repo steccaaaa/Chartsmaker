@@ -19,6 +19,8 @@ int main(int argc, char *argv[])
     c.setMainWindow(&mw);
     mw.setController(&c);
 
+    mw.resize(500, 500);
+
     mw.show();
 
     return app.exec();
