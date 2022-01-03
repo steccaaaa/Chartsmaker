@@ -127,6 +127,9 @@ void MainWindow::setController(Controller *_controller)
     connect(file->actions()[5], SIGNAL(triggered()), controller, SLOT(open("---------------------------open2----------------------------")));
     //6 è un separator
     connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close()));
+
+    connect(help->actions()[0], SIGNAL(triggered()), this, SLOT(about()));
+    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts()));
 }
 
 void MainWindow::openFile()
@@ -139,29 +142,12 @@ void MainWindow::openFile()
 
 void MainWindow::about()
 {
-    QPushButton *pb = new QPushButton("About", this);
-    connect(pb, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
-    setCentralWidget(pb);
     aboutwindow *m_aboutwindow = new aboutwindow();
-    connect(m_aboutwindow, SIGNAL(closing()), this, SLOT(show()));
+    m_aboutwindow->show();
 }
 
 void MainWindow::contacts()
 {
-    QPushButton *pb = new QPushButton("Contacts", this);
-    connect(pb, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
-    setCentralWidget(pb);
     contactswindow *m_contactswindow = new contactswindow();
-    connect(m_contactswindow, SIGNAL(closing()), this, SLOT(show()));
-    /*
-     Developers:
-
-     Stecca Andrea
-     Email: andrea.stecca@studenti.unipd.it
-     Student in Computer Science at the University of Padua
-
-     Dentone Giulia
-     Email: giuliadentone@studenti.unipd.it
-     Student in  Computer Science at the University of Padua
-    */
+    m_contactswindow->show();
 }
