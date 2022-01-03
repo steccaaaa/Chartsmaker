@@ -19,8 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
     //! file
     file = new QMenu("File", menuBar);
     menuBar->addMenu(file);
-    file->addAction(new QAction("New graph", file));
-    file->addAction(new QAction("Open", file));
+    file->addAction(new QAction("New graph", file)); //0
+    file->addAction(new QAction("Open", file));      //1
 
     /*
     void loadFromFile();
@@ -64,8 +64,8 @@ MainWindow::MainWindow(QWidget *parent)
     }
     */
 
-    file->addSeparator();
-    file->addAction(new QAction("Save", file));
+    file->addSeparator();                       //2
+    file->addAction(new QAction("Save", file)); //3
 
     /* NON SONO SICURA SE SEMPLICEMENTE SALVA SULLA FINESTRA
     void saveToFile();
@@ -92,7 +92,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
     */
 
-    file->addAction(new QAction("Save as...", file));
+    file->addAction(new QAction("Save as...", file)); //4
 
     /*   SAVE AS PDF
     #include <QApplication>
@@ -118,9 +118,9 @@ MainWindow::MainWindow(QWidget *parent)
     }
     */
 
-    file->addAction(new QAction("Export", file));
-    file->addSeparator();
-    file->addAction(new QAction("Exit", file));
+    file->addAction(new QAction("Export", file)); //5
+    file->addSeparator();                         //6
+    file->addAction(new QAction("Exit", file));   //7
 
     /*   EXIT THE WINDOW
     QPushButton *quitButton = new QPushButton("Quit");
@@ -128,11 +128,11 @@ MainWindow::MainWindow(QWidget *parent)
     */
 
     //! edit
-    QMenu *edit = new QMenu("Edit", menuBar); //da decidere cosa metterci dopo che abbiamo fatto apparire i grafici
-    menuBar->addMenu(edit);
+    /*QMenu *edit = new QMenu("Edit", menuBar); //da decidere cosa metterci dopo che abbiamo fatto apparire i grafici
+    menuBar->addMenu(edit);*/
 
     //! view
-    QMenu *view = new QMenu("View", menuBar);
+    view = new QMenu("View", menuBar);
     menuBar->addMenu(view);
     view->addAction(new QAction("Zoom in", view));
     view->addAction(new QAction("Zoom out", view));
@@ -140,7 +140,7 @@ MainWindow::MainWindow(QWidget *parent)
     view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox
 
     //! help
-    QMenu *help = new QMenu("Help", menuBar);
+    help = new QMenu("Help", menuBar);
     menuBar->addMenu(help);
     help->addAction(new QAction("About", help));
 
@@ -153,7 +153,7 @@ MainWindow::MainWindow(QWidget *parent)
     tableView->setModel(model);
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
-    tableView->setGeometry(0, 0, 300, 300); //per ora sono obbligato a mettere un misura fissa
+    tableView->setGeometry(0, 30, 300, 300); //per ora sono obbligato a mettere un misura fissa
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
@@ -167,9 +167,12 @@ void MainWindow::setController(Controller *_controller)
     controller = _controller;
     connect(file->actions()[0], SIGNAL(triggered()), this, SLOT(open("---------------------------open0----------------------------")));
     connect(file->actions()[1], SIGNAL(triggered()), this, SLOT(open("---------------------------open1----------------------------")));
-    connect(file->actions()[2], SIGNAL(triggered()), this, SLOT(open("---------------------------open2----------------------------")));
+    //2 è un separator
     connect(file->actions()[3], SIGNAL(triggered()), this, SLOT(open("---------------------------open4----------------------------")));
     connect(file->actions()[4], SIGNAL(triggered()), this, SLOT(open("---------------------------open4----------------------------")));
+    connect(file->actions()[5], SIGNAL(triggered()), this, SLOT(open("---------------------------open2----------------------------")));
+    //6 è un separator
+    connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close()));
 }
 
 void MainWindow::openFile()

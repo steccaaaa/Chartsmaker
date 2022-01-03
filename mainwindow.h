@@ -22,6 +22,8 @@ private:
 
     //* menu
     QMenu *file;
+    QMenu *view;
+    QMenu *help;
 
 public:
     MainWindow(QWidget *parent = nullptr);

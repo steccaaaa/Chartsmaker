@@ -21,7 +21,7 @@ contactswindow::contactswindow(QWidget *parent) : QWidget(parent)
     QLabel *label6 = new QLabel(this);
     label6->setText("Email: giuliadentone@studenti.unipd.it");
     QLabel *label7 = new QLabel(this);
-    label7->setText("Student in  Computer Science at the University of Padua");
+    label7->setText("Student in Computer Science at the University of Padua");
 }
 
 contactswindow::~contactswindow() {}
