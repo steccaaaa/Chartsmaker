@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     QMenuBar *menuBar = new QMenuBar(this);
 
     //! file
-    QMenu *file = new QMenu("File", menuBar); //cosa ci mettiamo? di solito dentro ci sono i save ma abbiamo dei tasti apposta quindi boh eviterei
+    QMenu *file = new QMenu("File", menuBar);
     menuBar->addMenu(file);
     file->addAction(new QAction("New graph", file));
     file->addAction(new QAction("Open", file));
@@ -116,7 +116,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
     */
 
-    file->addAction(new QAction("Export", file)); //caghiamo fuori secondo me, abbiamo già salva e salva come pdf
+    file->addAction(new QAction("Export", file));
     file->addSeparator();
     file->addAction(new QAction("Exit", file));
 
@@ -138,7 +138,7 @@ MainWindow::MainWindow(QWidget *parent)
     view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox
 
     //! help
-    QMenu *help = new QMenu("Help", menuBar); //EVITEREI, Cosa CI METTIAMO? METTIAMO TIPO UN MANUALE DI UTILIZZO SU ABOUT PIUTTOSTO?
+    QMenu *help = new QMenu("Help", menuBar);
     menuBar->addMenu(help);
     help->addAction(new QAction("About", help));
     /*
@@ -148,11 +148,11 @@ MainWindow::MainWindow(QWidget *parent)
     /*
      Developers:
 
-     Andrea Stecca
+     Stecca Andrea
      Email: ..........
      Student in Computer Science at University of Padua
 
-     Giulia Dentone
+     Dentone Giulia
      Email: .........
      Student in  Computer Science at University of Padua
 
