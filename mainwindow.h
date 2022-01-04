@@ -24,7 +24,6 @@ private:
 
     //* menu
     QMenu *file;
-    QMenu *newChart;
     QMenu *view;
     QMenu *help;
 
@@ -37,6 +36,11 @@ public:
     void refreshTableView(/*Model *_model*/);
 
 public slots:
+    /**
+    * @brief Opens and read a JSon file to create a chart
+    * 
+    */
+    void openFile();
 
     /**
     * @brief Opens a new window
@@ -50,12 +54,12 @@ public slots:
     */
     void contacts();
     /**
-    * @brief Getter for charts
+    * @brief
     *
     */
     QWidget *getChart();
     /**
-    * @brief to draw the different charts
+    * @brief
     *
     */
     void drawChart();

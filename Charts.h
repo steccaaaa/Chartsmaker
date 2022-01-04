@@ -23,6 +23,7 @@
 #include <QPainter>
 #include <QPalette>
 
+
 using namespace QtCharts;
 
 class Chart
@@ -59,7 +60,7 @@ public:
      * @param chart
      * @return returns a new chart with the characteristics chosen by the user
      */
-    virtual QChart *draw() = 0;
+    virtual QChart* draw() = 0;
 };
 
 class RoundChart : public Chart
@@ -80,7 +81,7 @@ public:
      * @param chart
      * @return QChart
      */
-    QChart *draw();
+     QChart* draw();
     /**
      * @brief Getter for series
      *
@@ -89,7 +90,7 @@ public:
     //auto getSeries() const;
 };
 
-class PieChart : public RoundChart //eredita da roundchart
+class PieChart : public RoundChart  //eredita da roundchart
 {
 private:
     QPieSeries *series;
@@ -107,7 +108,7 @@ public:
      * @param chart
      * @return QChart
      */
-    QChart *draw();
+     QChart* draw();
 };
 
 class DonutChart : public RoundChart // eredita da roundchart ma col buco
@@ -143,7 +144,7 @@ public:
      * @param chart
      * @return QChart
      */
-    QChart *draw();
+    QChart* draw();
 };
 
 class LineChart : public Chart
@@ -161,7 +162,7 @@ public:
      * @param chart
      * @return QChart
      */
-    QChart *draw();
+    QChart* draw();
 };
 
 class SplineChart : public Chart
@@ -179,7 +180,7 @@ public:
      * @param chart
      * @return QChart
      */
-    QChart *draw();
+    QChart* draw();
 };
 
 #endif

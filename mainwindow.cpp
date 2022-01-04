@@ -25,26 +25,19 @@ MainWindow::MainWindow(Model *_model, QWidget *parent)
     //! file
     file = new QMenu("File");
     menuBar->addMenu(file);
+    file->addAction(new QAction("New chart", file)); //0
 
-    newChart = file->addMenu("New chart"); //f0
+    file->addAction(new QAction("Open", file)); //1
 
-    newChart->addAction(new QAction("Pie Chart", newChart));    //nc0
-    newChart->addAction(new QAction("Donut Chart", newChart));  //nc1
-    newChart->addAction(new QAction("Bar Chart", newChart));    //nc2
-    newChart->addAction(new QAction("Line Chart", newChart));   //nc3
-    newChart->addAction(new QAction("Spline Chart", newChart)); //nc4
+    file->addSeparator();                       //2
+    file->addAction(new QAction("Save", file)); //3
 
-    file->addAction(new QAction("Open", file)); //f1
+    file->addAction(new QAction("Save as PNG", file)); //4
 
-    file->addSeparator();                       //f2
-    file->addAction(new QAction("Save", file)); //f3
+    file->addAction(new QAction("Save as PDF", file)); //5
 
-    file->addAction(new QAction("Save as PNG", file)); //f4
-
-    file->addAction(new QAction("Save as PDF", file)); //f5
-
-    file->addSeparator();                       //f6
-    file->addAction(new QAction("Exit", file)); //f7
+    file->addSeparator();                       //6
+    file->addAction(new QAction("Exit", file)); //7
 
     //! edit da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     /*QMenu *edit = new QMenu("Edit", menuBar);
@@ -53,10 +46,6 @@ MainWindow::MainWindow(Model *_model, QWidget *parent)
     //! view
     view = new QMenu("View", menuBar);
     menuBar->addMenu(view);
-<<<<<<< Updated upstream
-=======
-    view->addSeparator();
->>>>>>> Stashed changes
     view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
     //! help
@@ -75,10 +64,6 @@ MainWindow::MainWindow(Model *_model, QWidget *parent)
 
 void MainWindow::drawChart()
 {
-    /*
-    qDebug() << controller->getModel();
-    auto tabella = controller->getModel()->getTable();
-    */
     qDebug() << model;
     auto tabella = model->getTable();
     PieChart *pie = new PieChart(tabella);
@@ -90,9 +75,7 @@ void MainWindow::refreshTableView(/*Model *_model*/)
 {
     //*tableview
     tableView = new QTableView();
-    tableView->setModel(controller->getModel()); //la view non deve sapere nulla del controller, il modello lo passo alla view nel  costruttore!!!!!!
-                                                 //NOOOOOOOOOOOOO è il contrario
-
+    tableView->setModel(model); //la view non deve sapere nulla del controller, il modello lo passo alla view nel  costruttore!!!!!!
     //tableView->setModel(_model);
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
@@ -105,9 +88,8 @@ void MainWindow::refreshTableView(/*Model *_model*/)
 void MainWindow::setController(Controller *_controller)
 {
     controller = _controller;
-    //connect(file->actions()[0], SIGNAL(triggered()), controller, SLOT(open())); //new
-    connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT(openFile())); //fake va fatto seriamente
-    connect(file->actions()[1], SIGNAL(triggered()), controller, SLOT(open()));   //open
+    connect(file->actions()[0], SIGNAL(triggered()), controller, SLOT(open())); //new
+    connect(file->actions()[1], SIGNAL(triggered()), this, SLOT(openFile()));   //open
     //2 e' un separator
     connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(open("---------------------------open4----------------------------"))); //save
     connect(file->actions()[4], SIGNAL(triggered()), controller, SLOT(saveAsImage()));                                                        //save as png
@@ -116,40 +98,20 @@ void MainWindow::setController(Controller *_controller)
     connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close())); //exit
 
     connect(help->actions()[0], SIGNAL(triggered()), this, SLOT(about()));    //about
-<<<<<<< Updated upstream
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts
-=======
-    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts */
 
-       //logarithmic scale
-}
+    void MainWindow::about()
+    {
+        aboutwindow *m_aboutwindow = new aboutwindow();
+        m_aboutwindow->setWindowTitle("About");
+        m_aboutwindow->show();
+    }
 
-void MainWindow::openFile()
-{
-    QString path = QFileDialog::getOpenFileName(this,
-                                                tr("Open json graph file"), "",
-                                                tr("Json file (*.json);;All Files (*)"));
-    controller->open(path.toStdString());
-}
+    void MainWindow::contacts()
+    {
+        contactswindow *m_contactswindow = new contactswindow();
+        m_contactswindow->setWindowTitle("Contacts");
+        m_contactswindow->show();
+    }
 
-void MainWindow::save() //DA FAREEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-{
-    std::cout << "asd";
->>>>>>> Stashed changes
-}
-
-void MainWindow::about()
-{
-    aboutwindow *m_aboutwindow = new aboutwindow();
-    m_aboutwindow->setWindowTitle("About");
-    m_aboutwindow->show();
-}
-
-void MainWindow::contacts()
-{
-    contactswindow *m_contactswindow = new contactswindow();
-    m_contactswindow->setWindowTitle("Contacts");
-    m_contactswindow->show();
-}
-
-QWidget *MainWindow::getChart() { return tableView; } //! deve ritornare graph
+    QWidget *MainWindow::getChart() { return tableView; } //! deve ritornare graph

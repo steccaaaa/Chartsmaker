@@ -41,11 +41,11 @@ public:
     * 
     * @param path string of the path
     */
+    void open(std::string path);
 
     Model *getModel();
 
 public slots:
-    void open(/*std::string path*/);
 
     /**
     * @brief Creates and shows a new chart on the window

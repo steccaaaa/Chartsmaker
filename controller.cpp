@@ -4,20 +4,6 @@
 Controller::Controller(QObject *parent)
     : QObject{parent}
 {
-    /*
-    Model m;
-    MainWindow mw(&m);
-
-    setModel(&m);
-    setMainWindow(&mw);
-    mw.setController(&(*this));
-
-    mw.refreshTableView();
-
-    mw.resize(1000, 500);
-
-    mw.show();
-    */
     //new Model.......
     //new View.....
     /*costruttore controller:
@@ -30,13 +16,10 @@ Controller::Controller(QObject *parent)
 void Controller::setModel(Model *_model) { model = _model; }
 void Controller::setMainWindow(MainWindow *_mainwindow) { mainwindow = _mainwindow; }
 
-void Controller::open(/*std::string path*/)
+void Controller::open(std::string path)
 {
-    QString path = QFileDialog::getOpenFileName(mainwindow,
-                                                tr("Open json graph file"), "",
-                                                tr("Json file (*.json);;All Files (*)"));
-    std::cout << path.toStdString() << "\n";
-    std::cout << "------------------------------------------------------\n";
+    std::cout << path << "\n";
+    std::cout << "-------------------------------------------------------\n";
 }
 
 Model *Controller::getModel() { return model; }
@@ -70,7 +53,7 @@ void Controller::saveAsPdf()
 
 void Controller::saveAsImage()
 {
-    QWidget *widget = mainwindow->getChart();
+    QWidget *widget = mainwindow->getGraph();
     QPixmap pic = QPixmap::grabWidget(widget);
     widget->render(&pic);
     pic.save("Your chart.png");
