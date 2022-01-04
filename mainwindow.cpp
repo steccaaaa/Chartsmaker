@@ -16,7 +16,7 @@ MainWindow::MainWindow(Model *_model, QWidget *parent)
     QHBoxLayout *mainLayout = new QHBoxLayout(this); //devono essere attributi di classe altrimenti poi scompaiono, vanno solo inizializzate nel costruttore. un po' per tutto
 
     mainLayout->setAlignment(Qt::AlignTop);
-    mainLayout->setContentsMargins(0,0,0,0);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
     //!--------------------------------------------------MENU
@@ -60,17 +60,17 @@ MainWindow::MainWindow(Model *_model, QWidget *parent)
 
     //!--------------------------------------------------TABLE
 
-     //setLayout(mainLayout);
+    //setLayout(mainLayout);
     this->layout()->setMenuBar(menuBar);
     drawChart();
 }
 
 void MainWindow::drawChart()
 {
-    qDebug()<<model;
+    qDebug() << model;
     auto tabella = model->getTable();
     PieChart *pie = new PieChart(tabella);
-    QChartView* cv = new QChartView(pie->draw());
+    QChartView *cv = new QChartView(pie->draw());
     layout()->addWidget(cv);
 }
 
@@ -91,8 +91,7 @@ void MainWindow::refreshTableView(/*Model *_model*/)
 void MainWindow::setController(Controller *_controller)
 {
     controller = _controller;
-    std::string path = "-----------------------------aaaaaaaaaaaaaaaaaa";
-    /*connect(file->actions()[0], SIGNAL(triggered()), controller, SLOT(open())); //new
+    connect(file->actions()[0], SIGNAL(triggered()), controller, SLOT(open())); //new
     connect(file->actions()[1], SIGNAL(triggered()), this, SLOT(openFile()));   //open
     //2 e' un separator
     connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(open("---------------------------open4----------------------------"))); //save
@@ -102,7 +101,7 @@ void MainWindow::setController(Controller *_controller)
     connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close())); //exit
 
     connect(help->actions()[0], SIGNAL(triggered()), this, SLOT(about()));    //about
-    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts */
+    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts
 
     //zoom in e out
     /*void MyQGraphicsView::wheelEvent(QWheelEvent *event)
@@ -128,11 +127,6 @@ void MainWindow::openFile()
     controller->open(path.toStdString());
 }
 
-void MainWindow::save() //DA FAREEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-{
-    std::cout << "asd";
-}
-
 void MainWindow::about()
 {
     aboutwindow *m_aboutwindow = new aboutwindow();
@@ -147,4 +141,4 @@ void MainWindow::contacts()
     m_contactswindow->show();
 }
 
-QWidget *MainWindow::getGraph() { return tableView; } //! deve ritornare graph
+QWidget *MainWindow::getChart() { return tableView; } //! deve ritornare graph

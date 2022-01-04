@@ -31,7 +31,7 @@ private:
     QTableView *tableView;
 
 public:
-    MainWindow(Model * _model, QWidget *parent = nullptr);
+    MainWindow(Model *_model, QWidget *parent = nullptr);
     void setController(Controller *_controller);
     void refreshTableView(/*Model *_model*/);
 
@@ -41,12 +41,6 @@ public slots:
     * 
     */
     void openFile();
-
-    /**
-    * @brief Saves the window 
-    * 
-    */
-    void save();
 
     /**
     * @brief Opens a new window
@@ -63,13 +57,12 @@ public slots:
     * @brief
     *
     */
-    QWidget *getGraph();
+    QWidget *getChart();
     /**
     * @brief
     *
     */
     void drawChart();
-
 };
 
 #endif // MAINWINDOW_H
