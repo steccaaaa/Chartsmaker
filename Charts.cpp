@@ -75,38 +75,27 @@ QChart *BarChart::draw()
     //QBarSet *set = new QBarSet();
     auto table = getTable();
     auto names = table.getRowLabel();
-    auto values = table.getColumnData(0); //per tutte le colonne desiderate
-
+   
+     QBarSeries *series = new QBarSeries();
     /*for (unsigned int i = 0; i < names->size(); i++)
     {
-        QBarSet *set[i] = new QBarSet(names[i]); //??
+        QBarSet *set = new QBarSet((*names)[i]);
+        for (auto& tmp: (*table)[i])
+        {
+            *set << tmp;
+        }
+        series->append(set);
     }*/
-    QBarSet *set0 = new QBarSet("Pippo"); //da fare i getters
-    QBarSet *set1 = new QBarSet("Pluto");
-    QBarSet *set2 = new QBarSet("Paperino");
-    QBarSet *set3 = new QBarSet("Minnie");
-
-    *set0 << 4 << 10 << 0 << 3 << 23 << 12;
-    *set1 << 5 << 20 << 7 << 8 << 20 << 2;
-    *set2 << 5 << 0 << 9 << 23 << 23 << 0;
-    *set3 << 8 << 20 << 6 << 5 << 4 << 15;
-
-    QBarSeries *series = new QBarSeries();
-    series->append(set0);
-    series->append(set1);
-    series->append(set2);
-    series->append(set3);
-
+    
     BarChart->addSeries(series);
     BarChart->setAnimationOptions(QChart::SeriesAnimations);
 
     QStringList categories;
-    categories << "Gennaio"
-               << "Febbraio"
-               << "Marzo"
-               << "Aprile"
-               << "Maggio"
-               << "Giugno";
+    for (auto& tmp: *table.getColumnLabel())  
+        {
+            categories << tmp;
+        }
+
     QBarCategoryAxis *axis = new QBarCategoryAxis();
     axis->append(categories);
     BarChart->createDefaultAxes();
