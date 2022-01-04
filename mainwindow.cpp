@@ -46,6 +46,9 @@ MainWindow::MainWindow(Model *_model, QWidget *parent)
     //! view
     view = new QMenu("View", menuBar);
     menuBar->addMenu(view);
+    view->addAction(new QAction("Zoom in", view));  //da fareeeeeeeeeeeeeeeeeeeeeeeeeeeee non serve
+    view->addAction(new QAction("Zoom out", view)); //da fareeeeeeeeeeeeeeeeeeeeeeeee
+    view->addSeparator();
     view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
     //! help
@@ -100,18 +103,42 @@ void MainWindow::setController(Controller *_controller)
     connect(help->actions()[0], SIGNAL(triggered()), this, SLOT(about()));    //about
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts
 
-    void MainWindow::about()
+    //zoom in e out
+    /*void MyQGraphicsView::wheelEvent(QWheelEvent *event)
     {
-        aboutwindow *m_aboutwindow = new aboutwindow();
-        m_aboutwindow->setWindowTitle("About");
-        m_aboutwindow->show();
-    }
+        if(event->delta() > 0)
+        {
+            emit mouseWheelZoom(true);
+        }
+        else
+        {
+            emit mouseWheelZoom(false);
+        }
+    }*/
+    //zoom out
+    //logarithmic scale
+}
 
-    void MainWindow::contacts()
-    {
-        contactswindow *m_contactswindow = new contactswindow();
-        m_contactswindow->setWindowTitle("Contacts");
-        m_contactswindow->show();
-    }
+void MainWindow::openFile()
+{
+    QString path = QFileDialog::getOpenFileName(this,
+                                                tr("Open json graph file"), "",
+                                                tr("Json file (*.json);;All Files (*)"));
+    //controller->open(path.toStdString());
+}
 
-    QWidget *MainWindow::getChart() { return tableView; } //! deve ritornare graph
+void MainWindow::about()
+{
+    aboutwindow *m_aboutwindow = new aboutwindow();
+    m_aboutwindow->setWindowTitle("About");
+    m_aboutwindow->show();
+}
+
+void MainWindow::contacts()
+{
+    contactswindow *m_contactswindow = new contactswindow();
+    m_contactswindow->setWindowTitle("Contacts");
+    m_contactswindow->show();
+}
+
+QWidget *MainWindow::getChart() { return tableView; } //! deve ritornare graph
