@@ -6,6 +6,13 @@
 #include "contactswindow.h"
 #include "Charts.h"
 
+//!        ___          __
+//!   ____/ (_)___     / /_  ______  ____
+//!  / __  / / __ \   / / / / / __ \/ __ \
+//! / /_/ / / /_/ /  / / /_/ / /_/ / /_/ /
+//! \__,_/_/\____/  /_/\__,_/ .___/\____/
+//!                        /_/
+
 #include <iostream> //! debug
 
 MainWindow::MainWindow(Model *_model, QWidget *parent)
