@@ -22,9 +22,9 @@ DataMatrix Chart::getTable()
 {
     return table;
 }
+
 QChart *RoundChart::draw()
 {
-    //QApplication a(argc, argv);
     QChart *RoundChart = new QChart();
     RoundChart->setTitle("This is your PieChart");
 
@@ -69,11 +69,18 @@ QChart *DonutChart::draw()
 
 QChart *BarChart::draw()
 {
-    //QApplication a(argc, argv);
-
     QChart *BarChart = new QChart();
     BarChart->setTitle("This is your BarChart");
 
+    //QBarSet *set = new QBarSet();
+    auto table = getTable();
+    auto names = table.getRowLabel();
+    auto values = table.getColumnData(0); //per tutte le colonne desiderate
+
+    /*for (unsigned int i = 0; i < names->size(); i++)
+    {
+        QBarSet *set[i] = new QBarSet(names[i]); //??
+    }*/
     QBarSet *set0 = new QBarSet("Pippo"); //da fare i getters
     QBarSet *set1 = new QBarSet("Pluto");
     QBarSet *set2 = new QBarSet("Paperino");
@@ -119,8 +126,6 @@ QChart *BarChart::draw()
 
 QChart *LineChart::draw()
 {
-    //QApplication a(argc, argv);
-
     QChart *LineChart = new QChart();
     LineChart->setTitle("This is your line chart");
 
@@ -145,8 +150,6 @@ QChart *LineChart::draw()
 
 QChart *SplineChart::draw()
 {
-    //QApplication a(argc, argv);
-
     QChart *SplineChart = new QChart();
     SplineChart->setTitle("This is your spline chart");
 
@@ -157,7 +160,7 @@ QChart *SplineChart::draw()
     auto values2 = getTable().getColumnData(1);
     /*for (unsigned int i = 0; i < names->size(); i++)
     {
-        series->append(names[i], values[i]);
+        series->append(new QSplineSeries(QString::fromStdString((*names)[i]), (*values)[i]));
     }*/
     *series << QPointF(7, 4) << QPointF(4, 3) << QPointF(8, 3) << QPointF(9, 2) << QPointF(1, 0);
 
