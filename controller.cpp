@@ -53,7 +53,7 @@ void Controller::saveAsPdf()
 
 void Controller::saveAsImage()
 {
-    QWidget *widget = mainwindow->getChart();
+    QWidget *widget = mainwindow->getGraph();
     QPixmap pic = QPixmap::grabWidget(widget);
     widget->render(&pic);
     pic.save("Your chart.png");

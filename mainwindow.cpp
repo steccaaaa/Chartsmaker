@@ -46,6 +46,9 @@ MainWindow::MainWindow(Model *_model, QWidget *parent)
     //! view
     view = new QMenu("View", menuBar);
     menuBar->addMenu(view);
+    view->addAction(new QAction("Zoom in", view));  //da fareeeeeeeeeeeeeeeeeeeeeeeeeeeee non serve
+    view->addAction(new QAction("Zoom out", view)); //da fareeeeeeeeeeeeeeeeeeeeeeeee
+    view->addSeparator();
     view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
     //! help
@@ -99,6 +102,29 @@ void MainWindow::setController(Controller *_controller)
 
     connect(help->actions()[0], SIGNAL(triggered()), this, SLOT(about()));    //about
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts
+
+    //zoom in e out
+    /*void MyQGraphicsView::wheelEvent(QWheelEvent *event)
+    {
+        if(event->delta() > 0)
+        {
+            emit mouseWheelZoom(true);
+        }
+        else
+        {
+            emit mouseWheelZoom(false);
+        }
+    }*/
+    //zoom out
+    //logarithmic scale
+}
+
+void MainWindow::openFile()
+{
+    QString path = QFileDialog::getOpenFileName(this,
+                                                tr("Open json graph file"), "",
+                                                tr("Json file (*.json);;All Files (*)"));
+    controller->open(path.toStdString());
 }
 
 void MainWindow::about()
