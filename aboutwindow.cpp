@@ -20,7 +20,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     layout->addWidget(label5);
     QLabel *label6 = new QLabel("However, we suggest you to stay tuned for any upgrades!", this);
     layout->addWidget(label6);
-    QLabel *label7 = new QLabel("If you have any doubts please contact us in one of the emails you can find on ->HELP->CONTACTS, we will be pleased to answer.", this);
+    QLabel *label7 = new QLabel("If you have any doubts please contact us in one of the emails you can find on HELP->CONTACTS, we will be pleased to answer.", this);
     layout->addWidget(label7);
 
     label->setAlignment(Qt::AlignBottom | Qt::AlignRight);
