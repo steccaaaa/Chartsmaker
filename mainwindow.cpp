@@ -8,19 +8,24 @@
 
 #include <iostream> //! debug
 
-MainWindow::MainWindow(Model *_model, QWidget *parent)
+MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
-    model = _model;
-
     QHBoxLayout *mainLayout = new QHBoxLayout(this); // devono essere attributi di classe altrimenti poi scompaiono, vanno solo inizializzate nel costruttore. un po' per tutto
 
     mainLayout->setAlignment(Qt::AlignTop);
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
+    resize(1000, 500);
+
+    setBar();
+}
+
+void MainWindow::setBar()
+{
     //!--------------------------------------------------MENU
-    QMenuBar *menuBar = new QMenuBar();
+    menuBar = new QMenuBar();
 
     //! file
     file = new QMenu("File");
@@ -64,25 +69,21 @@ MainWindow::MainWindow(Model *_model, QWidget *parent)
     help->addAction(new QAction("About", help));
 
     help->addAction(new QAction("Contacts", help));
-
-    //!--------------------------------------------------TABLE
-
-    // setLayout(mainLayout);
     this->layout()->setMenuBar(menuBar);
-    drawChart();
 }
 
 void MainWindow::drawChart()
 {
-    qDebug() << model;
-    auto table = model->getTable();
+    //qDebug() << model;
+    //auto table = model->getTable();
+    auto table = controller->getModel()->getTable();
     DonutChart *pie = new DonutChart(table);
     QChartView *cv = new QChartView(pie->draw());
     cv->setRenderHint(QPainter::Antialiasing); // messo antialiasing
     layout()->addWidget(cv);
 }
 
-void MainWindow::refreshTableView(/*Model *_model*/)
+void MainWindow::setTableView(/*Model *_model*/)
 {
     //*tableview
     tableView = new QTableView();
@@ -101,7 +102,8 @@ void MainWindow::refreshTableView(/*Model *_model*/)
 void MainWindow::setController(Controller *_controller)
 {
     controller = _controller;
-    // connect(file->actions()[0], SIGNAL(triggered()), controller, SLOT(open())); //new
+
+    //* connessioni a slot
     connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT(openFile())); // fake va fatto seriamente
     connect(file->actions()[1], SIGNAL(triggered()), controller, SLOT(open()));   // open
     // 2 e' un separator
@@ -117,7 +119,11 @@ void MainWindow::setController(Controller *_controller)
 
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts */
 
-    // logarithmic scale
+    //! la table view e il chart va messa ora dopo che il controller è stato settato se no il model non lo ha
+    //* tableview
+    setTableView();
+    //* chart
+    drawChart();
 }
 
 /*void MainWindow::openFile()

@@ -23,6 +23,8 @@ private:
     Model *model;
 
     //* menu
+    QMenuBar *menuBar;
+
     QMenu *file;
     QMenu *newChart;
     QMenu *view;
@@ -32,9 +34,10 @@ private:
     QTableView *tableView;
 
 public:
-    MainWindow(Model *_model, QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr);
     void setController(Controller *_controller);
-    void refreshTableView(/*Model *_model*/);
+    void setTableView(/*Model *_model*/);
+    void setBar();
 
 public slots:
 
