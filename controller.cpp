@@ -76,6 +76,13 @@ void Controller::saveAsImage()
     pic.save("Your chart.png");
 }
 
-void Controller::save(){};
+void Controller::save()
+{
+    QString path = QFileDialog::getSaveFileName(mainwindow,
+                                                tr("Open json graph file"), "",
+                                                tr("Json file (*.json);;All Files (*)"));
+    std::cout << "opening " << path.toStdString() << "...\n";
+    model->writeJson(path.toStdString());
+};
 
 void Controller::exit(){};

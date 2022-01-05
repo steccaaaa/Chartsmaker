@@ -17,6 +17,7 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const; // overwrite necessario per definizione
     DataMatrix getTable();
     void readJson(std::string path);
+    void writeJson(std::string path);
 
 private:
     DataMatrix table;

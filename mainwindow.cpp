@@ -105,9 +105,9 @@ void MainWindow::setController(Controller *_controller)
     connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT());         // new (non ho idea di come farlo)
     connect(file->actions()[1], SIGNAL(triggered()), controller, SLOT(open())); // open
     // 2 e' un separator
-    connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(open("---------------------------open4----------------------------"))); // save
-    connect(file->actions()[4], SIGNAL(triggered()), controller, SLOT(saveAsImage()));                                                        // save as png
-    connect(file->actions()[5], SIGNAL(triggered()), controller, SLOT(saveAsPdf()));                                                          // save as pdf
+    connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(save()));        // save
+    connect(file->actions()[4], SIGNAL(triggered()), controller, SLOT(saveAsImage())); // save as png
+    connect(file->actions()[5], SIGNAL(triggered()), controller, SLOT(saveAsPdf()));   // save as pdf
     // 6 e' un separator
     connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close())); // exit
 

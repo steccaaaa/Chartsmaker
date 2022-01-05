@@ -86,3 +86,8 @@ void Model::readJson(std::string path)
 {
     table.read(path);
 }
+
+void Model::writeJson(std::string path)
+{
+    table.write(path);
+}
