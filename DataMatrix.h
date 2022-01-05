@@ -115,14 +115,14 @@ public:
      * 
      * @param json 
      */
-    void read(/*const QJsonObject &json*/);
+    void read(std::string path = "inputfile.json");
 
     /**
      * @brief write to file
      * 
      * @param json 
      */
-    void write(/*QJsonObject &json*/) const;
+    void write(std::string path = "1.json") const;
 };
 
 #endif

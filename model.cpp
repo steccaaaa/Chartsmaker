@@ -81,3 +81,8 @@ DataMatrix Model::getTable()
 {
     return table;
 }
+
+void Model::readJson(std::string path)
+{
+    table.read(path);
+}

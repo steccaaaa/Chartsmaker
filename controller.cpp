@@ -35,8 +35,8 @@ void Controller::open(/*std::string path*/)
     QString path = QFileDialog::getOpenFileName(mainwindow,
                                                 tr("Open json graph file"), "",
                                                 tr("Json file (*.json);;All Files (*)"));
-    std::cout << path.toStdString() << "\n";
-    std::cout << "------------------------------------------------------\n";
+    std::cout << "opening " << path.toStdString() << "...\n";
+    model->readJson(path.toStdString());
 }
 
 Model *Controller::getModel() { return model; }
