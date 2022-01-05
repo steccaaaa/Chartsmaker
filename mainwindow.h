@@ -33,6 +33,9 @@ private:
     //* table
     QTableView *tableView;
 
+    //* chart
+    QChartView *chartView;
+
 public:
     MainWindow(QWidget *parent = nullptr);
     void setController(Controller *_controller);

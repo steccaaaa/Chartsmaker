@@ -21,7 +21,7 @@ private:
     std::vector<std::string> *columnLabel;  // vector of labels for the columns
 
 public:
-    DataMatrix() : data(nullptr), rowLabel(nullptr), columnLabel(nullptr) {}
+    DataMatrix() : data(new std::vector<std::vector<double>>), rowLabel(new std::vector<std::string>), columnLabel(new std::vector<std::string>) {}
 
     /**
      * @brief Construct a new Data Matrix object
