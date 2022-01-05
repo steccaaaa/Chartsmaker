@@ -74,13 +74,11 @@ void MainWindow::setBar()
 
 void MainWindow::drawChart()
 {
-    //qDebug() << model;
-    //auto table = model->getTable();
     auto table = controller->getModel()->getTable();
-    DonutChart *pie = new DonutChart(table);
-    QChartView *cv = new QChartView(pie->draw());
-    cv->setRenderHint(QPainter::Antialiasing); // messo antialiasing
-    layout()->addWidget(cv);
+    DonutChart *pie = new DonutChart(table); //qua sarebbe bello usare il polimorfismo
+    chartView = new QChartView(pie->draw());
+    chartView->setRenderHint(QPainter::Antialiasing); // antialiasing arrotonda i pixel
+    layout()->addWidget(chartView);
 }
 
 void MainWindow::setTableView(/*Model *_model*/)
@@ -104,8 +102,8 @@ void MainWindow::setController(Controller *_controller)
     controller = _controller;
 
     //* connessioni a slot
-    connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT(openFile())); // fake va fatto seriamente
-    connect(file->actions()[1], SIGNAL(triggered()), controller, SLOT(open()));   // open
+    connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT());         // new (non ho idea di come farlo)
+    connect(file->actions()[1], SIGNAL(triggered()), controller, SLOT(open())); // open
     // 2 e' un separator
     connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(open("---------------------------open4----------------------------"))); // save
     connect(file->actions()[4], SIGNAL(triggered()), controller, SLOT(saveAsImage()));                                                        // save as png
@@ -126,20 +124,6 @@ void MainWindow::setController(Controller *_controller)
     drawChart();
 }
 
-/*void MainWindow::openFile()
-{
-    QString path = QFileDialog::getOpenFileName(this,
-                                                tr("Open json graph file"), "",
-                                                tr("Json file (*.json);;All Files (*)"));
-    controller->open(path.toStdString());
-}
-
-void MainWindow::save() //DA FAREEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-{
-    std::cout << "asd";
-
-}*/
-
 void MainWindow::about()
 {
     aboutwindow *m_aboutwindow = new aboutwindow();
@@ -154,4 +138,4 @@ void MainWindow::contacts()
     m_contactswindow->show();
 }
 
-QWidget *MainWindow::getChart() { return tableView; } //! deve ritornare graph
+QWidget *MainWindow::getChart() { return chartView; } //! deve ritornare graph
