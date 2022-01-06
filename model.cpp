@@ -28,13 +28,15 @@ Model::Model(QObject *parent) : QAbstractTableModel(parent)
             dataVector->replace(j, (j+1)*i);
         _data.append(dataVector); // appendi alla lista di vettori
     }*/
+    DataMatrix k;
+    k.read(); /*
     std::vector<std::vector<double>> mat{
         {1, 2, 7},
-        {4, 7, 6},
+        {9, 7, 6},
         {7, 8, 9}};
     std::vector<std::string> mats{"a", "b", "c"};
-    DataMatrix x(mat, mats, mats);
-    table = x;
+    DataMatrix x(mat, mats, mats);*/
+    table = k;
 }
 
 int Model::rowCount(const QModelIndex &parent) const
@@ -80,5 +82,12 @@ DataMatrix Model::getTable()
     return table;
 }
 
+void Model::readJson(std::string path)
+{
+    table.read(path);
+}
 
-
+void Model::writeJson(std::string path)
+{
+    table.write(path);
+}

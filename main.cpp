@@ -13,15 +13,11 @@ int main(int argc, char *argv[])
 
     Controller c;
     Model m;
-    MainWindow mw(&m);
+    MainWindow mw;
 
     c.setModel(&m);
     c.setMainWindow(&mw);
     mw.setController(&c);
-
-    mw.refreshTableView();
-
-    mw.resize(1000, 500);
 
     mw.show();
 
