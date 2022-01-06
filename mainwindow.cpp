@@ -70,13 +70,12 @@ void MainWindow::setBar()
 
     help->addAction(new QAction("Contacts", help));
     this->layout()->setMenuBar(menuBar);
-    qDebug() << "ciao1";
 }
 
 void MainWindow::drawChart()
 {
     auto tabella = controller->getModel()->getTable();
-    DonutChart *pie = new DonutChart(tabella);
+    BarChart *pie = new BarChart(tabella);
     QChartView *SeriesView = new QChartView(pie->draw());
     SeriesView->setRenderHint(QPainter::Antialiasing);
     QChartView *cv = new QChartView(pie->draw());
@@ -102,7 +101,7 @@ void MainWindow::setController(Controller *_controller)
     controller = _controller;
 
     //connessioni a slot
-    connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT());         // new (non ho idea di come farlo)
+    /*connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT());         // new (non ho idea di come farlo)
     connect(file->actions()[1], SIGNAL(triggered()), controller, SLOT(open())); // open
     // 2 e' un separator
     connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(save()));        // save
@@ -115,7 +114,7 @@ void MainWindow::setController(Controller *_controller)
 
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts
 
-    //connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts */
+    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts  */
 
     //! la table view e il chart va messa ora dopo che il controller è stato settato se no il model non lo ha
     //* tableview

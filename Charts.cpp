@@ -28,7 +28,7 @@ QPieSeries *RoundChart::toSeries()
     QPieSeries *series = new QPieSeries();
     auto table = getTable();
     auto names = table.getRowLabel();
-    auto values = table.getColumnData(0); //getter dei dati della prima colonna (poi nella view andrà fatto in modo che o consideri solo la prima colonna dando un warning o che faccia la pie solo se ho una sola colon
+    auto values = table.getColumnData(0); //andrà fatto in modo che dia un warning che prende solo la prima colonna come dati
     for (unsigned int i = 0; i < names->size(); i++)
     {
         series->append(new QPieSlice(QString::fromStdString((*names)[i]), (*values)[i]));
@@ -86,8 +86,8 @@ QBarSeries *BarChart::toSeries()
     auto names = table.getRowLabel();
     for (unsigned int i = 0; i < names->size(); i++)
     {
-        QBarSet *set = new QBarSet((*names)[i]);
-        for (auto& tmp: (*table)[i])
+        QBarSet *set = new QBarSet(QString::fromStdString((*names)[i]));
+        for (auto& tmp: (*(table.getData()))[i])
         {
             *set << tmp;
         }
@@ -101,15 +101,14 @@ QChart *BarChart::draw()
     QChart *BarChart = new QChart();
     BarChart->setTitle("This is your BarChart");
     auto series = BarChart::toSeries();
-    //QBarSet *set = new QBarSet();   
     BarChart->addSeries(series);
     BarChart->setAnimationOptions(QChart::SeriesAnimations);
-
+    auto table = getTable();
     QStringList categories;
-    /*for (auto& tmp: *table.getColumnLabel())
-        {
-            categories << tmp;
-        }*/
+    for (auto& tmp: *table.getColumnLabel())
+    {
+        categories << QString::fromStdString(tmp);
+    }
 
     QBarCategoryAxis *axis = new QBarCategoryAxis();
     axis->append(categories);
@@ -121,7 +120,7 @@ QChart *BarChart::draw()
     QChartView *chartView = new QChartView(BarChart);
     chartView->setRenderHint(QPainter::Antialiasing);
     QPalette pale = qApp->palette();
-    pale.setColor(QPalette::Window, QRgb(0x000000));
+    pale.setColor(QPalette::Window, QRgb(0xFFFFFF));
     pale.setColor(QPalette::WindowText, QRgb(0x404040));
     qApp->setPalette(pale);
 
