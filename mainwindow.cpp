@@ -115,7 +115,7 @@ void MainWindow::setController(Controller *_controller)
 
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts
 
-    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts
+    //connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts */
 
     //! la table view e il chart va messa ora dopo che il controller è stato settato se no il model non lo ha
     //* tableview
