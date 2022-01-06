@@ -72,14 +72,12 @@ void MainWindow::setBar()
     this->layout()->setMenuBar(menuBar);
 }
 
-void MainWindow::drawChart()
+void MainWindow::drawChart(Chart *chart)
 {
-    auto tabella = controller->getModel()->getTable();
-    SplineChart *pie = new SplineChart(tabella);
-    QChartView *SeriesView = new QChartView(pie->draw());
-    SeriesView->setRenderHint(QPainter::Antialiasing);
-    QChartView *cv = new QChartView(pie->draw());
-    layout()->addWidget(cv);
+    layout()->removeWidget(chartView);
+    chartView = new QChartView(chart->draw());
+    chartView->setRenderHint(QPainter::Antialiasing);
+    layout()->addWidget(chartView);
 }
 
 void MainWindow::setTableView(/*Model *_model*/)
@@ -101,7 +99,7 @@ void MainWindow::setController(Controller *_controller)
     controller = _controller;
 
     //connessioni a slot
-    connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT());         // new (non ho idea di come farlo)
+    //connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT());         // newChart
     connect(file->actions()[1], SIGNAL(triggered()), controller, SLOT(open())); // open
     // 2 e' un separator
     connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(save()));        // save
@@ -114,13 +112,44 @@ void MainWindow::setController(Controller *_controller)
 
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts
 
-    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts
+    connect(newChart->actions()[0], &QAction::triggered, [&]()
+    {
+         auto tabella = controller->getModel()->getTable();
+         auto *chart = new PieChart(tabella);
+         drawChart(chart);
+    });
+
+    connect(newChart->actions()[1], &QAction::triggered, [&]()
+    {
+         auto tabella = controller->getModel()->getTable();
+         auto *chart = new DonutChart(tabella);
+         drawChart(chart);
+    });
+
+    connect(newChart->actions()[2], &QAction::triggered, [&]()
+    {
+         auto tabella = controller->getModel()->getTable();
+         auto *chart = new BarChart(tabella);
+         drawChart(chart);
+    });
+
+    connect(newChart->actions()[3], &QAction::triggered, [&]()
+    {
+         auto tabella = controller->getModel()->getTable();
+         auto *chart = new LineChart(tabella);
+         drawChart(chart);
+    });
+
+    connect(newChart->actions()[4], &QAction::triggered, [&]()
+    {
+         auto tabella = controller->getModel()->getTable();
+         auto *chart = new SplineChart(tabella);
+         drawChart(chart);
+    });
 
     //! la table view e il chart va messa ora dopo che il controller è stato settato se no il model non lo ha
     //* tableview
     setTableView();
-    //* chart
-    drawChart();
 }
 
 void MainWindow::about()

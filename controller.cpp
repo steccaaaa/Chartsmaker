@@ -73,7 +73,7 @@ void Controller::saveAsImage()
     QWidget *widget = mainwindow->getChart();
     QPixmap pic = QPixmap::grabWidget(widget);
     widget->render(&pic);
-    pic.save("Your chart.png");
+    pic.save("~/Desktop/Chart.png");
 }
 
 void Controller::save()

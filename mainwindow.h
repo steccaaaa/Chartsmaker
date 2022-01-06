@@ -12,6 +12,7 @@
 #include <QMenuBar>
 #include <QVBoxLayout>
 #include "model.h"
+#include "Charts.h"
 
 class Controller; //dichiarazione incompleta di classe per evitare dipendenze circolari
 
@@ -64,7 +65,7 @@ public slots:
     * @brief to draw the different charts
     *
     */
-    void drawChart();
+    void drawChart(Chart *chart);
 };
 
 #endif // MAINWINDOW_H

@@ -29,8 +29,6 @@ class Chart
 {
 private:
     DataMatrix table;
-protected:
-    virtual QAbstractSeries* toSeries() = 0;
 public:
     /**
      * @brief Construct a new Chart object
@@ -67,7 +65,7 @@ public:
 class RoundChart : public Chart
 {
 protected:
-    virtual QPieSeries* toSeries(); //vector con un solo elem
+    QPieSeries* toSeries();
 public:
     /**
      * @brief Construct a new RoundChart object
@@ -77,7 +75,7 @@ public:
     RoundChart(DataMatrix table);
 };
 
-class PieChart : public RoundChart //eredita da roundchart
+class PieChart : public RoundChart
 {
 public:
     /**
@@ -95,7 +93,7 @@ public:
     QChart *draw();
 };
 
-class DonutChart : public RoundChart // eredita da roundchart ma col buco
+class DonutChart : public RoundChart
 {
 public:
     /**
@@ -116,7 +114,7 @@ public:
 class BarChart : public Chart
 {
 protected:
-    virtual QBarSeries* toSeries();
+    QBarSeries* toSeries();
 public:
     /**
      * @brief Construct a new BarChart object
@@ -133,10 +131,21 @@ public:
     QChart *draw();
 };
 
-class LineChart : public Chart
+class ContinuousChart : public Chart
 {
 protected:
-    virtual QLineSeries* toSeries();
+    template <class T> T* toSeries(unsigned int i);
+public:
+    /**
+     * @brief Construct a new RoundChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    ContinuousChart(DataMatrix table);
+};
+
+class LineChart : public ContinuousChart
+{
 public:
     /**
      * @brief Construct a new LineChart object
@@ -153,10 +162,8 @@ public:
     QChart *draw();
 };
 
-class SplineChart : public Chart
+class SplineChart : public ContinuousChart
 {
-protected:
-    virtual QSplineSeries* toSeries();
 public:
     /**
      * @brief Construct a new SplineChart object

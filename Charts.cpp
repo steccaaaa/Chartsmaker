@@ -14,9 +14,11 @@ DonutChart::DonutChart(DataMatrix _table) : RoundChart(_table) {}
 
 BarChart::BarChart(DataMatrix _table) : Chart(_table) {}
 
-LineChart::LineChart(DataMatrix _table) : Chart(_table) {}
+ContinuousChart::ContinuousChart(DataMatrix _table) : Chart(_table) {}
 
-SplineChart::SplineChart(DataMatrix _table) : Chart(_table) {}
+LineChart::LineChart(DataMatrix _table) : ContinuousChart(_table) {}
+
+SplineChart::SplineChart(DataMatrix _table) : ContinuousChart(_table) {}
 
 DataMatrix Chart::getTable()
 {
@@ -127,36 +129,40 @@ QChart *BarChart::draw()
     return BarChart;
 }
 
-QLineSeries *LineChart::toSeries()
+template <class T>
+T *ContinuousChart::toSeries(unsigned int i)
 {
     auto table = getTable();
-    QLineSeries *series = new QLineSeries();
+    T *series = new T();
     for(unsigned int j = 0; j < table.getColumnCount(); j++)
     {
-        series->append(j, table.getData()->at(0).at(j));
+        series->append(j, table.getData()->at(i).at(j));
     }
-
     return series;
 }
+
+//DA SISTEMARE LA LEGENDA PER LINE E SPLINE
 
 QChart *LineChart::draw()
 {
     QChart *LineChart = new QChart();
     LineChart->setTitle("This is your Line chart");
     auto table = getTable();
-    auto series = LineChart::toSeries();
-    LineChart->addSeries(series);
-    LineChart->createDefaultAxes();
-    QCategoryAxis *axisX = new QCategoryAxis();
-    QCategoryAxis *axisY = new QCategoryAxis();
-    for(unsigned int i = 0; i < table.getColumnCount(); i++)
+    for(unsigned int j = 0; j < table.getRowCount(); j++)
     {
-        axisX->append(QString::fromStdString(table.getColumnLabel()->at(i)), i + 0.5);
+        auto series = ContinuousChart::toSeries<QLineSeries>(j);
+        LineChart->addSeries(series);
+        LineChart->createDefaultAxes();
+        QCategoryAxis *axisX = new QCategoryAxis();
+        QCategoryAxis *axisY = new QCategoryAxis();
+        for(unsigned int i = 0; i < table.getColumnCount(); i++)
+        {
+            axisX->append(QString::fromStdString(table.getColumnLabel()->at(i)), i + 0.5);
+        }
+        LineChart->addAxis(axisX, Qt::AlignBottom);
+        LineChart->addAxis(axisY, Qt::AlignLeft);
+        series->attachAxis(axisX);
     }
-    LineChart->addAxis(axisX, Qt::AlignBottom);
-    LineChart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisX);
-    //series->attachAxis(axisY);
     LineChart->legend()->setVisible(true);
     LineChart->legend()->setAlignment(Qt::AlignBottom);
     LineChart->setAnimationOptions(QChart::AllAnimations);
@@ -168,35 +174,26 @@ QChart *LineChart::draw()
     return LineChart;
 }
 
-QSplineSeries *SplineChart::toSeries()
-{
-    auto table = getTable();
-    QSplineSeries *series = new QSplineSeries();
-    for(unsigned int j = 0; j < table.getColumnCount(); j++)
-    {
-        series->append(j, table.getData()->at(0).at(j));
-    }
-    return series;
-}
-
 QChart *SplineChart::draw()
 {
     QChart *SplineChart = new QChart();
     SplineChart->setTitle("This is your Spline chart");
     auto table = getTable();
-    auto series = SplineChart::toSeries();
-    SplineChart->addSeries(series);
-    SplineChart->createDefaultAxes();
-    QCategoryAxis *axisX = new QCategoryAxis();
-    QCategoryAxis *axisY = new QCategoryAxis();
-    for(unsigned int i = 0; i < table.getColumnCount(); i++)
+    for(unsigned int j = 0; j < table.getRowCount(); j++)
     {
-        axisX->append(QString::fromStdString(table.getColumnLabel()->at(i)), i + 0.5);
+        auto series = ContinuousChart::toSeries<QSplineSeries>(j);
+        SplineChart->addSeries(series);
+        SplineChart->createDefaultAxes();
+        QCategoryAxis *axisX = new QCategoryAxis();
+        QCategoryAxis *axisY = new QCategoryAxis();
+        for(unsigned int i = 0; i < table.getColumnCount(); i++)
+        {
+            axisX->append(QString::fromStdString(table.getColumnLabel()->at(i)), i + 0.5);
+        }
+        SplineChart->addAxis(axisX, Qt::AlignBottom);
+        SplineChart->addAxis(axisY, Qt::AlignLeft);
+        series->attachAxis(axisX);
     }
-    SplineChart->addAxis(axisX, Qt::AlignBottom);
-    SplineChart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisX);
-    SplineChart->axes(Qt::Vertical).first()->setRange(0, 5);
     QChartView *chartView = new QChartView(SplineChart);
     SplineChart->legend()->setVisible(true);
     SplineChart->legend()->setAlignment(Qt::AlignBottom);
