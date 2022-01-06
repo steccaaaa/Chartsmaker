@@ -75,7 +75,7 @@ void MainWindow::setBar()
 void MainWindow::drawChart()
 {
     auto tabella = controller->getModel()->getTable();
-    LineChart *pie = new LineChart(tabella);
+    SplineChart *pie = new SplineChart(tabella);
     QChartView *SeriesView = new QChartView(pie->draw());
     SeriesView->setRenderHint(QPainter::Antialiasing);
     QChartView *cv = new QChartView(pie->draw());

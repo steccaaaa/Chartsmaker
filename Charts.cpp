@@ -28,7 +28,7 @@ QPieSeries *RoundChart::toSeries()
     QPieSeries *series = new QPieSeries();
     auto table = getTable();
     auto names = table.getRowLabel();
-    auto values = table.getColumnData(0); //andrà fatto in modo che dia un warning che prende solo la prima colonna come dati
+    auto values = table.getColumnData(0); //andrà fatto in modo che dia un warning che prende solo la prima colonna come dati!!!!!!!!!!!!!!1
     for (unsigned int i = 0; i < names->size(); i++)
     {
         series->append(new QPieSlice(QString::fromStdString((*names)[i]), (*values)[i]));
@@ -130,22 +130,33 @@ QChart *BarChart::draw()
 QLineSeries *LineChart::toSeries()
 {
     auto table = getTable();
-    auto names = getTable().getColumnLabel();
     QLineSeries *series = new QLineSeries();
-    for(unsigned int j = 0; j < names->size(); j++)
+    for(unsigned int j = 0; j < table.getColumnCount(); j++)
     {
         series->append(j, table.getData()->at(0).at(j));
     }
-    return series;  //ritorno un vector di serie per le diverse persone
+
+    return series;
 }
 
 QChart *LineChart::draw()
 {
     QChart *LineChart = new QChart();
     LineChart->setTitle("This is your Line chart");
+    auto table = getTable();
     auto series = LineChart::toSeries();
     LineChart->addSeries(series);
     LineChart->createDefaultAxes();
+    QCategoryAxis *axisX = new QCategoryAxis();
+    QCategoryAxis *axisY = new QCategoryAxis();
+    for(unsigned int i = 0; i < table.getColumnCount(); i++)
+    {
+        axisX->append(QString::fromStdString(table.getColumnLabel()->at(i)), i + 0.5);
+    }
+    LineChart->addAxis(axisX, Qt::AlignBottom);
+    LineChart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisX);
+    //series->attachAxis(axisY);
     LineChart->legend()->setVisible(true);
     LineChart->legend()->setAlignment(Qt::AlignBottom);
     LineChart->setAnimationOptions(QChart::AllAnimations);
@@ -159,31 +170,36 @@ QChart *LineChart::draw()
 
 QSplineSeries *SplineChart::toSeries()
 {
-
+    auto table = getTable();
+    QSplineSeries *series = new QSplineSeries();
+    for(unsigned int j = 0; j < table.getColumnCount(); j++)
+    {
+        series->append(j, table.getData()->at(0).at(j));
+    }
+    return series;
 }
 
 QChart *SplineChart::draw()
 {
     QChart *SplineChart = new QChart();
     SplineChart->setTitle("This is your Spline chart");
-
-    QSplineSeries *series = new QSplineSeries();
-    //series->setName("Spline");
-    auto names = getTable().getRowLabel();
-    auto values = getTable().getColumnData(0);
-    auto values2 = getTable().getColumnData(1);
-    /*for (unsigned int i = 0; i < names->size(); i++)
-    {
-        series->append(new QSplineSeries(QString::fromStdString((*names)[i]), (*values)[i]));
-    }*/
-    *series << QPointF(7, 4) << QPointF(4, 3) << QPointF(8, 3) << QPointF(9, 2) << QPointF(1, 0);
-
-    SplineChart->legend()->setVisible(true);
+    auto table = getTable();
+    auto series = SplineChart::toSeries();
     SplineChart->addSeries(series);
     SplineChart->createDefaultAxes();
+    QCategoryAxis *axisX = new QCategoryAxis();
+    QCategoryAxis *axisY = new QCategoryAxis();
+    for(unsigned int i = 0; i < table.getColumnCount(); i++)
+    {
+        axisX->append(QString::fromStdString(table.getColumnLabel()->at(i)), i + 0.5);
+    }
+    SplineChart->addAxis(axisX, Qt::AlignBottom);
+    SplineChart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisX);
     SplineChart->axes(Qt::Vertical).first()->setRange(0, 5);
-
     QChartView *chartView = new QChartView(SplineChart);
+    SplineChart->legend()->setVisible(true);
+    SplineChart->legend()->setAlignment(Qt::AlignBottom);
     chartView->setRenderHint(QPainter::Antialiasing);
     SplineChart->setTheme(QChart::ChartThemeBlueIcy);
 
