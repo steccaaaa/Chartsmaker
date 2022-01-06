@@ -70,38 +70,24 @@ void MainWindow::setBar()
 
     help->addAction(new QAction("Contacts", help));
     this->layout()->setMenuBar(menuBar);
+    qDebug() << "ciao1";
 }
 
 void MainWindow::drawChart()
 {
-<<<<<<< HEAD
-    /*
-    qDebug() << controller->getModel();
     auto tabella = controller->getModel()->getTable();
-    */
-    qDebug() << model;
-    auto tabella = model->getTable();
     DonutChart *pie = new DonutChart(tabella);
     QChartView *SeriesView = new QChartView(pie->draw());
     SeriesView->setRenderHint(QPainter::Antialiasing);
     QChartView *cv = new QChartView(pie->draw());
     layout()->addWidget(cv);
-=======
-    auto table = controller->getModel()->getTable();
-    DonutChart *pie = new DonutChart(table); //qua sarebbe bello usare il polimorfismo
-    chartView = new QChartView(pie->draw());
-    chartView->setRenderHint(QPainter::Antialiasing); // antialiasing arrotonda i pixel
-    layout()->addWidget(chartView);
->>>>>>> 563185c762459ec1048779cd820fe4d31e84167d
 }
 
 void MainWindow::setTableView(/*Model *_model*/)
 {
     //*tableview
     tableView = new QTableView();
-    tableView->setModel(controller->getModel()); // la view non deve sapere nulla del controller, il modello lo passo alla view nel  costruttore!!!!!!
-                                                 // NOOOOOOOOOOOOO è il contrario
-
+    tableView->setModel(controller->getModel());
     // tableView->setModel(_model);
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
@@ -114,27 +100,8 @@ void MainWindow::setTableView(/*Model *_model*/)
 void MainWindow::setController(Controller *_controller)
 {
     controller = _controller;
-<<<<<<< HEAD
-    //connect(file->actions()[0], SIGNAL(triggered()), controller, SLOT(open())); //new
-    connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT(openFile())); //fake va fatto seriamente
-    connect(file->actions()[1], SIGNAL(triggered()), controller, SLOT(open()));   //open
-    //2 e' un separator
-    connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(open("---------------------------open4----------------------------"))); //save
-    connect(file->actions()[4], SIGNAL(triggered()), controller, SLOT(saveAsImage()));                                                        //save as png
-    connect(file->actions()[5], SIGNAL(triggered()), controller, SLOT(saveAsPdf()));                                                          //save as pdf
-    //6 e' un separator
-    connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close())); //exit
 
-    connect(help->actions()[0], SIGNAL(triggered()), this, SLOT(about()));    //about
-
-    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts
-
-    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts */
-
-       //logarithmic scale
-=======
-
-    //* connessioni a slot
+    //connessioni a slot
     connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT());         // new (non ho idea di come farlo)
     connect(file->actions()[1], SIGNAL(triggered()), controller, SLOT(open())); // open
     // 2 e' un separator
@@ -148,29 +115,14 @@ void MainWindow::setController(Controller *_controller)
 
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts
 
-    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts */
+    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts
 
     //! la table view e il chart va messa ora dopo che il controller è stato settato se no il model non lo ha
     //* tableview
     setTableView();
     //* chart
     drawChart();
->>>>>>> 563185c762459ec1048779cd820fe4d31e84167d
 }
-
-/*void MainWindow::openFile()
-{
-    QString path = QFileDialog::getOpenFileName(this,
-                                                tr("Open json graph file"), "",
-                                                tr("Json file (*.json);;All Files (*)"));
-    controller->open(path.toStdString());
-}
-
-void MainWindow::save() //DA FAREEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-{
-    std::cout << "asd";
-
-}*/
 
 void MainWindow::about()
 {

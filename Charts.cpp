@@ -23,15 +23,9 @@ DataMatrix Chart::getTable()
     return table;
 }
 
-QAbstractSeries *BarChart::toSeries() {}  //dovrò cambiare il tipo do ritorno dei vari grafici
-QAbstractSeries *LineChart::toSeries() {}
-QAbstractSeries *SplineChart::toSeries() {}
-
 QPieSeries *RoundChart::toSeries()
-
 {
     QPieSeries *series = new QPieSeries();
-
     auto table = getTable();
     auto names = table.getRowLabel();
     auto values = table.getColumnData(0); //getter dei dati della prima colonna (poi nella view andrà fatto in modo che o consideri solo la prima colonna dando un warning o che faccia la pie solo se ho una sola colon
@@ -40,6 +34,33 @@ QPieSeries *RoundChart::toSeries()
         series->append(new QPieSlice(QString::fromStdString((*names)[i]), (*values)[i]));
     }
     return series;
+}
+
+QBarSeries *BarChart::toSeries()
+{
+    QBarSeries *series = new QBarSeries();
+    auto table = getTable();
+    auto names = table.getRowLabel();
+    /*for (unsigned int i = 0; i < names->size(); i++)
+    {
+        QBarSet *set = new QBarSet((*names)[i]);
+        for (auto& tmp: (*table)[i])
+        {
+            *set << tmp;
+        }
+        series->append(set);
+    }*/
+    return series;
+}
+
+QLineSeries *LineChart::toSeries()
+{
+
+}
+
+QSplineSeries *SplineChart::toSeries()
+{
+
 }
 
 QChart *PieChart::draw()
@@ -68,7 +89,6 @@ QChart *DonutChart::draw()
 {
     QChart *RoundChart = new QChart();
     RoundChart->setTitle("This is your DonutChart");
-
     auto series = RoundChart::toSeries();
     QPieSlice *slice = series->slices().at(1);
     slice->setLabelVisible(true);
@@ -90,22 +110,8 @@ QChart *BarChart::draw()
 {
     QChart *BarChart = new QChart();
     BarChart->setTitle("This is your BarChart");
-
-    //QBarSet *set = new QBarSet();
-    auto table = getTable();
-    auto names = table.getRowLabel();
-   
-     QBarSeries *series = new QBarSeries();
-    /*for (unsigned int i = 0; i < names->size(); i++)
-    {
-        QBarSet *set = new QBarSet((*names)[i]);
-        for (auto& tmp: (*table)[i])
-        {
-            *set << tmp;
-        }
-        series->append(set);
-    }*/
-    
+    auto series = BarChart::toSeries();
+    //QBarSet *set = new QBarSet();   
     BarChart->addSeries(series);
     BarChart->setAnimationOptions(QChart::SeriesAnimations);
 

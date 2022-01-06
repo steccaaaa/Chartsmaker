@@ -116,7 +116,7 @@ public:
 class BarChart : public Chart
 {
 protected:
-    virtual QAbstractSeries* toSeries();
+    virtual QBarSeries* toSeries();
 public:
     /**
      * @brief Construct a new BarChart object
@@ -136,7 +136,7 @@ public:
 class LineChart : public Chart
 {
 protected:
-    virtual QAbstractSeries* toSeries();
+    virtual QLineSeries* toSeries();
 public:
     /**
      * @brief Construct a new LineChart object
@@ -156,7 +156,7 @@ public:
 class SplineChart : public Chart
 {
 protected:
-    virtual QAbstractSeries* toSeries();
+    virtual QSplineSeries* toSeries();
 public:
     /**
      * @brief Construct a new SplineChart object
