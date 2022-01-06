@@ -119,9 +119,9 @@ QChart *BarChart::draw()
 
     QChartView *chartView = new QChartView(BarChart);
     chartView->setRenderHint(QPainter::Antialiasing);
+    BarChart->setTheme(QChart::ChartThemeBlueIcy);
     QPalette pale = qApp->palette();
-    pale.setColor(QPalette::Window, QRgb(0xFFFFFF));
-    pale.setColor(QPalette::WindowText, QRgb(0x404040));
+    pale.setColor(QPalette::Window, QRgb(0xd2d2d2));
     qApp->setPalette(pale);
 
     return BarChart;
@@ -129,21 +129,24 @@ QChart *BarChart::draw()
 
 QLineSeries *LineChart::toSeries()
 {
+    /*QLineSeries *series = new QLineSeries();
+    auto table = getTable();
+    auto names = getTable().getRowLabel();
+    auto values = getTable().getColumnData(0);
+    auto values2 = getTable().getColumnData(1);
+    for (unsigned int i = 0; i < names->size(); i++)
+    {
+        series->append(new QSplineSeries(QString::fromStdString((*names)[i]), (*values)[i]));
+    }
 
+    return series;*/
 }
 
 QChart *LineChart::draw()
 {
     QChart *LineChart = new QChart();
-    LineChart->setTitle("This is your line chart");
-
-    QLineSeries *series = new QLineSeries();
-
-    auto names = getTable().getRowLabel();
-    /*for (unsigned int i = 0; i < names->size(); i++)  sta roba andrà messo nel toseries dei vari grafici
-    {
-        series->append(names[i], getTable().getColumnData[i]); //lo fa solo per una delle due colonne devo capire come attaccare l'altra (per spline è uguale)
-    }*/
+    LineChart->setTitle("This is your Line chart");
+    auto series = LineChart::toSeries();
     LineChart->addSeries(series);
     LineChart->createDefaultAxes();
     LineChart->legend()->setVisible(true);
@@ -152,6 +155,7 @@ QChart *LineChart::draw()
 
     QChartView *chartView = new QChartView(LineChart);
     chartView->setRenderHint(QPainter::Antialiasing);
+    LineChart->setTheme(QChart::ChartThemeBlueIcy);
 
     return LineChart;
 }
@@ -164,10 +168,10 @@ QSplineSeries *SplineChart::toSeries()
 QChart *SplineChart::draw()
 {
     QChart *SplineChart = new QChart();
-    SplineChart->setTitle("This is your spline chart");
+    SplineChart->setTitle("This is your Spline chart");
 
     QSplineSeries *series = new QSplineSeries();
-    series->setName("Spline");
+    //series->setName("Spline");
     auto names = getTable().getRowLabel();
     auto values = getTable().getColumnData(0);
     auto values2 = getTable().getColumnData(1);
@@ -184,6 +188,7 @@ QChart *SplineChart::draw()
 
     QChartView *chartView = new QChartView(SplineChart);
     chartView->setRenderHint(QPainter::Antialiasing);
+    SplineChart->setTheme(QChart::ChartThemeBlueIcy);
 
     return SplineChart;
 }
