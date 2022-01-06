@@ -29,7 +29,8 @@ class Chart
 {
 private:
     DataMatrix table;
-
+protected:
+    virtual QAbstractSeries* toSeries() = 0; //converte tabella in una serie
 public:
     /**
      * @brief Construct a new Chart object
@@ -60,13 +61,13 @@ public:
      * @return returns a new chart with the characteristics chosen by the user
      */
     virtual QChart *draw() = 0;
+
 };
 
 class RoundChart : public Chart
 {
-private:
-    QPieSeries *series;
-
+protected:
+    virtual QPieSeries* toSeries();
 public:
     /**
      * @brief Construct a new RoundChart object
@@ -74,26 +75,10 @@ public:
      * @param table reference of a 2d vector
      */
     RoundChart(DataMatrix table);
-    /**
-     * @brief Draws round shaped charts
-     *
-     * @param chart
-     * @return QChart
-     */
-    QChart *draw();
-    /**
-     * @brief Getter for series
-     *
-     * @return series
-     */
-    //auto getSeries() const;
 };
 
 class PieChart : public RoundChart //eredita da roundchart
 {
-private:
-    QPieSeries *series;
-
 public:
     /**
      * @brief Construct a new PieChart object
@@ -130,6 +115,8 @@ public:
 
 class BarChart : public Chart
 {
+protected:
+    virtual QAbstractSeries* toSeries();
 public:
     /**
      * @brief Construct a new BarChart object
@@ -148,6 +135,8 @@ public:
 
 class LineChart : public Chart
 {
+protected:
+    virtual QAbstractSeries* toSeries();
 public:
     /**
      * @brief Construct a new LineChart object
@@ -166,6 +155,8 @@ public:
 
 class SplineChart : public Chart
 {
+protected:
+    virtual QAbstractSeries* toSeries();
 public:
     /**
      * @brief Construct a new SplineChart object

@@ -53,6 +53,9 @@ MainWindow::MainWindow(Model *_model, QWidget *parent)
     //! view
     view = new QMenu("View", menuBar);
     menuBar->addMenu(view);
+
+    view->addSeparator();
+
     view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
     //! help
@@ -77,7 +80,9 @@ void MainWindow::drawChart()
     */
     qDebug() << model;
     auto tabella = model->getTable();
-    PieChart *pie = new PieChart(tabella);
+    DonutChart *pie = new DonutChart(tabella);
+    QChartView *SeriesView = new QChartView(pie->draw());
+    SeriesView->setRenderHint(QPainter::Antialiasing);
     QChartView *cv = new QChartView(pie->draw());
     layout()->addWidget(cv);
 }
@@ -112,8 +117,27 @@ void MainWindow::setController(Controller *_controller)
     connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close())); //exit
 
     connect(help->actions()[0], SIGNAL(triggered()), this, SLOT(about()));    //about
+
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts
+
+    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); //contacts */
+
+       //logarithmic scale
 }
+
+/*void MainWindow::openFile()
+{
+    QString path = QFileDialog::getOpenFileName(this,
+                                                tr("Open json graph file"), "",
+                                                tr("Json file (*.json);;All Files (*)"));
+    controller->open(path.toStdString());
+}
+
+void MainWindow::save() //DA FAREEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+{
+    std::cout << "asd";
+
+}*/
 
 void MainWindow::about()
 {
