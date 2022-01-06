@@ -132,6 +132,8 @@ std::vector<double> *DataMatrix::getColumnData(unsigned int n)
     return datavector;
 }
 
+std::vector<double> *DataMatrix::getRowData(unsigned int n) { return &data->at(n); }
+
 std::vector<string> *DataMatrix::getRowLabel() const { return rowLabel; }
 
 std::vector<string> *DataMatrix::getColumnLabel() const { return columnLabel; }

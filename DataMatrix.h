@@ -86,6 +86,13 @@ public:
     std::vector<double> *getColumnData(unsigned int n);
 
     /**
+     * @brief Get the data in from the different rows
+     *
+     * @return std::vector<std::vector<double>>
+     */
+    std::vector<double> *getRowData(unsigned int n);
+
+    /**
      * @brief Get the Row Label object
      *
      * @return std::vector<string>*
