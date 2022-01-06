@@ -36,33 +36,6 @@ QPieSeries *RoundChart::toSeries()
     return series;
 }
 
-QBarSeries *BarChart::toSeries()
-{
-    QBarSeries *series = new QBarSeries();
-    auto table = getTable();
-    auto names = table.getRowLabel();
-    /*for (unsigned int i = 0; i < names->size(); i++)
-    {
-        QBarSet *set = new QBarSet((*names)[i]);
-        for (auto& tmp: (*table)[i])
-        {
-            *set << tmp;
-        }
-        series->append(set);
-    }*/
-    return series;
-}
-
-QLineSeries *LineChart::toSeries()
-{
-
-}
-
-QSplineSeries *SplineChart::toSeries()
-{
-
-}
-
 QChart *PieChart::draw()
 {
     QChart *RoundChart = new QChart();
@@ -106,6 +79,23 @@ QChart *DonutChart::draw()
     return RoundChart;
 }
 
+QBarSeries *BarChart::toSeries()
+{
+    QBarSeries *series = new QBarSeries();
+    auto table = getTable();
+    auto names = table.getRowLabel();
+    for (unsigned int i = 0; i < names->size(); i++)
+    {
+        QBarSet *set = new QBarSet((*names)[i]);
+        for (auto& tmp: (*table)[i])
+        {
+            *set << tmp;
+        }
+        series->append(set);
+    }
+    return series;
+}
+
 QChart *BarChart::draw()
 {
     QChart *BarChart = new QChart();
@@ -138,6 +128,11 @@ QChart *BarChart::draw()
     return BarChart;
 }
 
+QLineSeries *LineChart::toSeries()
+{
+
+}
+
 QChart *LineChart::draw()
 {
     QChart *LineChart = new QChart();
@@ -160,6 +155,11 @@ QChart *LineChart::draw()
     chartView->setRenderHint(QPainter::Antialiasing);
 
     return LineChart;
+}
+
+QSplineSeries *SplineChart::toSeries()
+{
+
 }
 
 QChart *SplineChart::draw()
