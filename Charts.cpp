@@ -121,7 +121,7 @@ QChart *BarChart::draw()
     chartView->setRenderHint(QPainter::Antialiasing);
     BarChart->setTheme(QChart::ChartThemeBlueIcy);
     QPalette pale = qApp->palette();
-    pale.setColor(QPalette::Window, QRgb(0xd2d2d2));
+    pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
     qApp->setPalette(pale);
 
     return BarChart;
@@ -129,17 +129,14 @@ QChart *BarChart::draw()
 
 QLineSeries *LineChart::toSeries()
 {
-    /*QLineSeries *series = new QLineSeries();
     auto table = getTable();
-    auto names = getTable().getRowLabel();
-    auto values = getTable().getColumnData(0);
-    auto values2 = getTable().getColumnData(1);
-    for (unsigned int i = 0; i < names->size(); i++)
+    auto names = getTable().getColumnLabel();
+    QLineSeries *series = new QLineSeries();
+    for(unsigned int j = 0; j < names->size(); j++)
     {
-        series->append(new QSplineSeries(QString::fromStdString((*names)[i]), (*values)[i]));
+        series->append(j, table.getData()->at(0).at(j));
     }
-
-    return series;*/
+    return series;  //ritorno un vector di serie per le diverse persone
 }
 
 QChart *LineChart::draw()

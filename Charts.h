@@ -30,7 +30,7 @@ class Chart
 private:
     DataMatrix table;
 protected:
-    virtual QAbstractSeries* toSeries() = 0; //converte tabella in una serie
+    virtual QAbstractSeries* toSeries() = 0;
 public:
     /**
      * @brief Construct a new Chart object
@@ -67,7 +67,7 @@ public:
 class RoundChart : public Chart
 {
 protected:
-    virtual QPieSeries* toSeries();
+    virtual QPieSeries* toSeries(); //vector con un solo elem
 public:
     /**
      * @brief Construct a new RoundChart object
