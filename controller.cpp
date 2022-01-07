@@ -73,15 +73,18 @@ void Controller::saveAsImage()
     QWidget *widget = mainwindow->getChart();
     QPixmap pic = QPixmap::grabWidget(widget);
     widget->render(&pic);
-    pic.save("~/Desktop/Chart.png");
+    QString path = QFileDialog::getSaveFileName(mainwindow,
+                                                tr("Png image"), "",
+                                                tr("Png image (*.png)"));
+    pic.save(path);
 }
 
 void Controller::save()
 {
     QString path = QFileDialog::getSaveFileName(mainwindow,
-                                                tr("Open json graph file"), "",
+                                                tr("Json graph file"), "",
                                                 tr("Json file (*.json);;All Files (*)"));
-    std::cout << "opening " << path.toStdString() << "...\n";
+    std::cout << "saving " << path.toStdString() << "...\n";
     model->writeJson(path.toStdString());
 };
 
