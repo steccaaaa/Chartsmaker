@@ -47,25 +47,22 @@ void Controller::newChart(){};
 
 void Controller::saveAsPdf()
 {
-    QPixmap pixmap;
-    WId asdasd = mainwindow->winId();
-    pixmap = QPixmap::grabWindow(asdasd);
+    auto chart = mainwindow->getChart();
+    QPrinter printer(QPrinter::HighResolution);
+    QString path = QFileDialog::getSaveFileName(mainwindow,
+                                                tr("Pdf file"), "",
+                                                tr("Pdf file (*.pdf)"));
+    printer.setOutputFileName(path);
+    printer.setPageMargins(0, 0, 0, 0, QPrinter::DevicePixel);
 
-    QPrinter printer;
-    printer.setOrientation(QPrinter::Landscape);
-    printer.setOutputFormat(QPrinter::PdfFormat);
+    QPainter painter;
+    painter.begin(&printer);
+    double xscale = printer.pageRect().width() / double(chart->width());
+    double yscale = printer.pageRect().height() / double(chart->height());
+    double scale = qMin(xscale, yscale);
+    painter.scale(scale, scale);
 
-    printer.setOutputFileName(QApplication::applicationDirPath() + QDir::separator() + "file");
-
-    QPainter painter(&printer);
-    QRect rect = painter.viewport();
-    QSize size = pixmap.size();
-
-    size.scale(rect.size(), Qt::KeepAspectRatio);
-    painter.setViewport(rect.x(), rect.y(), size.width(), size.height());
-    painter.setWindow(pixmap.rect());
-
-    painter.drawPixmap(0, 0, 100, 100, pixmap);
+    chart->render(&painter);
 }
 
 void Controller::saveAsImage()
