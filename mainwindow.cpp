@@ -83,6 +83,7 @@ void MainWindow::drawChart(Chart *chart)
 void MainWindow::setTableView(/*Model *_model*/)
 {
     //*tableview
+    layout()->removeWidget(tableView);
     tableView = new QTableView();
     tableView->setModel(controller->getModel());
     // tableView->setModel(_model);
@@ -113,39 +114,39 @@ void MainWindow::setController(Controller *_controller)
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts
 
     connect(newChart->actions()[0], &QAction::triggered, [&]()
-    {
-         auto tabella = controller->getModel()->getTable();
-         auto *chart = new PieChart(tabella);
-         drawChart(chart);
-    });
+            {
+                auto tabella = controller->getModel()->getTable();
+                auto *chart = new PieChart(tabella);
+                drawChart(chart);
+            });
 
     connect(newChart->actions()[1], &QAction::triggered, [&]()
-    {
-         auto tabella = controller->getModel()->getTable();
-         auto *chart = new DonutChart(tabella);
-         drawChart(chart);
-    });
+            {
+                auto tabella = controller->getModel()->getTable();
+                auto *chart = new DonutChart(tabella);
+                drawChart(chart);
+            });
 
     connect(newChart->actions()[2], &QAction::triggered, [&]()
-    {
-         auto tabella = controller->getModel()->getTable();
-         auto *chart = new BarChart(tabella);
-         drawChart(chart);
-    });
+            {
+                auto tabella = controller->getModel()->getTable();
+                auto *chart = new BarChart(tabella);
+                drawChart(chart);
+            });
 
     connect(newChart->actions()[3], &QAction::triggered, [&]()
-    {
-         auto tabella = controller->getModel()->getTable();
-         auto *chart = new LineChart(tabella);
-         drawChart(chart);
-    });
+            {
+                auto tabella = controller->getModel()->getTable();
+                auto *chart = new LineChart(tabella);
+                drawChart(chart);
+            });
 
     connect(newChart->actions()[4], &QAction::triggered, [&]()
-    {
-         auto tabella = controller->getModel()->getTable();
-         auto *chart = new SplineChart(tabella);
-         drawChart(chart);
-    });
+            {
+                auto tabella = controller->getModel()->getTable();
+                auto *chart = new SplineChart(tabella);
+                drawChart(chart);
+            });
 
     //! la table view e il chart va messa ora dopo che il controller è stato settato se no il model non lo ha
     //* tableview
