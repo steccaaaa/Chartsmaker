@@ -37,6 +37,11 @@ void Controller::open(/*std::string path*/)
                                                 tr("Json file (*.json);;All Files (*)"));
     std::cout << "opening " << path.toStdString() << "...\n";
     model->readJson(path.toStdString());
+    //! non è il miglior comportamento che possa avere ma non so come fare altrimenti
+    //refresh
+    mainwindow->setTableView();
+    //mainwindow->drawChart(/* non so cosa metterci dentro*/);
+    mainwindow->layout()->removeWidget(mainwindow->getChart());
 }
 
 Model *Controller::getModel() { return model; }
