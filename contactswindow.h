@@ -5,6 +5,9 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <QCloseEvent>
+#include <QLabel>
+#include <QVBoxLayout>
+#include <QFont>
 
 class contactswindow : public QWidget
 {

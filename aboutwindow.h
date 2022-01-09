@@ -5,6 +5,12 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <QCloseEvent>
+#include <QLabel>
+#include <QVBoxLayout>
+#include <QPixmap>
+#include <QFont>
+#include <QLabel>
+
 
 class aboutwindow : public QWidget
 {

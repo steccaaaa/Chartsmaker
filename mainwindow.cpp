@@ -83,7 +83,6 @@ void MainWindow::drawChart(Chart *chart)
     {
         chartView->setChart(qchart);
     }
-    //chartView = new QChartView(chart->draw());
     chartView->setRenderHint(QPainter::Antialiasing);
     layout()->addWidget(chartView);
 }

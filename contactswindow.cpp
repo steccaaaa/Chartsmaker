@@ -1,7 +1,4 @@
 #include "contactswindow.h"
-#include <QLabel>
-#include <QVBoxLayout>
-#include <QFont>
 
 contactswindow::contactswindow(QWidget *parent) : QWidget(parent)
 {
