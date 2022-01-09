@@ -58,7 +58,6 @@ void Controller::saveAsPdf()
                                                 tr("Pdf file"), "",
                                                 tr("Pdf file (*.pdf)"));
     printer.setOutputFileName(path);
-    std::cout << path << "\n"; //!debug
     printer.setPageMargins(0, 0, 0, 0, QPrinter::DevicePixel);
 
     QPainter painter;
@@ -80,7 +79,6 @@ void Controller::saveAsImage()
                                                 tr("Png image"), "",
                                                 tr("Png image (*.png)"));
     pic.save(path);
-    std::cout << path << "\n"; //!debug
 }
 
 void Controller::save()

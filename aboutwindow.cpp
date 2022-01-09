@@ -7,8 +7,8 @@
 
 aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
 {
-    QFont f( "Helvetica", 20, QFont::SansSerif);
-    QFont g( "Helvetica", 12, QFont::SansSerif);
+    QFont f("Helvetica", 20, QFont::SansSerif);
+    QFont g("Helvetica", 12, QFont::SansSerif);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
 
@@ -28,31 +28,31 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     layout->addWidget(label5);
     label5->setFont(g);
 
-    QPixmap image("/home/giulia/Desktop/Chartmaker/pie.png");
+    QPixmap image(":/images/Q15.png");
     image = image.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel = new QLabel();
     imageLabel->setPixmap(image);
     layout->addWidget(imageLabel);
 
-    QPixmap image2("/home/giulia/Desktop/Chartmaker/donut.png");
+    QPixmap image2(":/images/Q15.png");
     image2 = image2.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel2 = new QLabel();
     imageLabel->setPixmap(image2);
     layout->addWidget(imageLabel2);
 
-    QPixmap image3("/home/giulia/Desktop/Chartmaker/bar.png");
+    QPixmap image3(":/images/Q15.png");
     image3 = image3.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel3 = new QLabel();
     imageLabel->setPixmap(image3);
     layout->addWidget(imageLabel3);
 
-    QPixmap image4("/home/giulia/Desktop/Chartmaker/line.png");
+    QPixmap image4(":/images/Q15.png");
     image4 = image4.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel4 = new QLabel();
     imageLabel->setPixmap(image4);
     layout->addWidget(imageLabel4);
 
-    QPixmap image5("/home/giulia/Desktop/Chartmaker/spline.png");
+    QPixmap image5(":/images/Q15.png");
     image5 = image5.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel5 = new QLabel();
     imageLabel->setPixmap(image5);
@@ -71,7 +71,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     layout->addWidget(label9);
     label9->setFont(g);
 
-    QPixmap image6("/home/giulia/Desktop/Chartmaker/explphoto.png");
+    QPixmap image6(":/images/Q15.png");
     image5 = image6.scaled(200, 200, Qt::KeepAspectRatio);
     QLabel *imageLabel6 = new QLabel();
     imageLabel->setPixmap(image6);
@@ -99,7 +99,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     QPalette pale = qApp->palette();
     pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
     qApp->setPalette(pale);
- }
+}
 
 aboutwindow::~aboutwindow() {}
 
