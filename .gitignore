@@ -77,7 +77,6 @@ build
 *.out
 *.json
 *prova*
-icon*
 .gitignore
 ChartsMaker
 .history

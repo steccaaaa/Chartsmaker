@@ -6,5 +6,6 @@
     <file>images/line.png</file>
     <file>images/spline.png</file>
     <file>images/explphoto.png</file>
+    <file>images/icon.png</file>
 </qresource>
 </RCC>

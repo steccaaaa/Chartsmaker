@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     mainLayout->setSpacing(0);
 
     resize(1000, 500);
+    setWindowIcon(QIcon(":/images/icon.png"));
 
     setBar();
 }
@@ -75,7 +76,7 @@ void MainWindow::setBar()
 void MainWindow::drawChart(Chart *chart)
 {
     auto qchart = chart->draw();
-    if(!chartView)
+    if (!chartView)
     {
         chartView = new QChartView(qchart);
     }
