@@ -28,35 +28,44 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     layout->addWidget(label5);
     label5->setFont(g);
 
-    QPixmap image(":/images/Q15.png");
+    QPixmap image(":/images/pie.png");
     image = image.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel = new QLabel();
     imageLabel->setPixmap(image);
     layout->addWidget(imageLabel);
 
-    QPixmap image2(":/images/Q15.png");
+
+    QPixmap image2(":/images/donut.png");
     image2 = image2.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel2 = new QLabel();
     imageLabel->setPixmap(image2);
     layout->addWidget(imageLabel2);
 
-    QPixmap image3(":/images/Q15.png");
+    QPixmap image3(":/images/bar.png");
     image3 = image3.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel3 = new QLabel();
     imageLabel->setPixmap(image3);
     layout->addWidget(imageLabel3);
 
-    QPixmap image4(":/images/Q15.png");
+    QPixmap image4(":/images/line.png");
     image4 = image4.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel4 = new QLabel();
     imageLabel->setPixmap(image4);
     layout->addWidget(imageLabel4);
 
-    QPixmap image5(":/images/Q15.png");
+    QPixmap image5(":/images/spline.png");
     image5 = image5.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel5 = new QLabel();
     imageLabel->setPixmap(image5);
     layout->addWidget(imageLabel5);
+
+
+    QHBoxLayout *layout2 = new QHBoxLayout();
+    layout2->addWidget(imageLabel);
+    layout2->addWidget(imageLabel2);
+    layout2->addWidget(imageLabel3);
+    layout2->addWidget(imageLabel4);
+    layout2->addWidget(imageLabel5);
 
     QLabel *label6 = new QLabel("    However, we suggest you to stay tuned for any upgrades!", this);
     layout->addWidget(label6);
@@ -71,11 +80,11 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     layout->addWidget(label9);
     label9->setFont(g);
 
-    QPixmap image6(":/images/Q15.png");
+    /*QPixmap image6(":/images/explphoto.png");
     image5 = image6.scaled(200, 200, Qt::KeepAspectRatio);
     QLabel *imageLabel6 = new QLabel();
     imageLabel->setPixmap(image6);
-    layout->addWidget(imageLabel6);
+    layout->addWidget(imageLabel6);*/
 
     QLabel *label10 = new QLabel("○ If you want to save your data you can click FILE->SAVE and by choosing were to save on your computer and choosing a name the program will create a new .json file with your data.", this);
     layout->addWidget(label10);

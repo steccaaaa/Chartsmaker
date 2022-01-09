@@ -10,6 +10,7 @@
 #include <QPixmap>
 #include <QFont>
 #include <QLabel>
+#include <QHBoxLayout>
 
 
 class aboutwindow : public QWidget

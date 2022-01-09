@@ -1,5 +1,10 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-    <file>images/Q15.png</file>
+    <file>images/pie.png</file>
+    <file>images/donut.png</file>
+    <file>images/bar.png</file>
+    <file>images/line.png</file>
+    <file>images/spline.png</file>
+    <file>images/explphoto.png</file>
 </qresource>
 </RCC>
