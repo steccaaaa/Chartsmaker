@@ -71,7 +71,6 @@ Thumbs.db
 *.dll
 *.exe
 
-*.png
 .vscode
 build
 *.pro
