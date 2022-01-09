@@ -32,40 +32,39 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     image = image.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel = new QLabel();
     imageLabel->setPixmap(image);
-    layout->addWidget(imageLabel);
-
+    //layout->addWidget(imageLabel);
 
     QPixmap image2(":/images/donut.png");
     image2 = image2.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel2 = new QLabel();
     imageLabel->setPixmap(image2);
-    layout->addWidget(imageLabel2);
+    //layout->addWidget(imageLabel2);
 
     QPixmap image3(":/images/bar.png");
     image3 = image3.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel3 = new QLabel();
     imageLabel->setPixmap(image3);
-    layout->addWidget(imageLabel3);
+    //layout->addWidget(imageLabel3);
 
     QPixmap image4(":/images/line.png");
     image4 = image4.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel4 = new QLabel();
     imageLabel->setPixmap(image4);
-    layout->addWidget(imageLabel4);
+    //layout->addWidget(imageLabel4);
 
     QPixmap image5(":/images/spline.png");
     image5 = image5.scaled(300, 300, Qt::KeepAspectRatio);
     QLabel *imageLabel5 = new QLabel();
     imageLabel->setPixmap(image5);
-    layout->addWidget(imageLabel5);
-
+    //layout->addWidget(imageLabel5);
 
     QHBoxLayout *layout2 = new QHBoxLayout();
+    layout->addLayout(layout2);
     layout2->addWidget(imageLabel);
     layout2->addWidget(imageLabel2);
     layout2->addWidget(imageLabel3);
     layout2->addWidget(imageLabel4);
-    layout2->addWidget(imageLabel5);
+    //layout2->addWidget(imageLabel5);
 
     QLabel *label6 = new QLabel("    However, we suggest you to stay tuned for any upgrades!", this);
     layout->addWidget(label6);
