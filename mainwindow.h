@@ -35,7 +35,7 @@ private:
     QTableView *tableView;
 
     //* chart
-    QChartView *chartView;
+    QChartView *chartView = nullptr;
 
 public:
     MainWindow(QWidget *parent = nullptr);

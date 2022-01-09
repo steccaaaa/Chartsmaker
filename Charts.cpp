@@ -45,16 +45,18 @@ QChart *PieChart::draw()
 
     auto series = RoundChart::toSeries();
     QPieSlice *slice = series->slices().at(1);
-    slice->setLabelVisible(true);
     RoundChart->addSeries(series);
     RoundChart->legend()->setVisible(true);
+    RoundChart->legend()->setAlignment(Qt::AlignBottom);
     slice->setPen(QPen(Qt::black, 2));
-    slice->setLabelPosition(QPieSlice::LabelOutside);
     RoundChart->setAnimationOptions(QChart::SeriesAnimations);
     RoundChart->setTheme(QChart::ChartThemeBlueIcy);
 
     QChartView *chartView = new QChartView(RoundChart);
     chartView->setRenderHint(QPainter::Antialiasing);
+    QPalette pale = qApp->palette();
+    pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
+    qApp->setPalette(pale);
 
     series->setHoleSize(0);
     return RoundChart;
@@ -66,9 +68,9 @@ QChart *DonutChart::draw()
     RoundChart->setTitle("This is your DonutChart");
     auto series = RoundChart::toSeries();
     QPieSlice *slice = series->slices().at(1);
-    slice->setLabelVisible(true);
     RoundChart->addSeries(series);
     RoundChart->legend()->setVisible(true);
+    RoundChart->legend()->setAlignment(Qt::AlignBottom);
     slice->setPen(QPen(Qt::black, 2));
     slice->setLabelPosition(QPieSlice::LabelOutside);
     RoundChart->setAnimationOptions(QChart::SeriesAnimations);
@@ -76,6 +78,9 @@ QChart *DonutChart::draw()
 
     QChartView *chartView = new QChartView(RoundChart);
     chartView->setRenderHint(QPainter::Antialiasing);
+    QPalette pale = qApp->palette();
+    pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
+    qApp->setPalette(pale);
 
     series->setHoleSize(0.5);
     return RoundChart;
@@ -170,6 +175,9 @@ QChart *LineChart::draw()
     QChartView *chartView = new QChartView(LineChart);
     chartView->setRenderHint(QPainter::Antialiasing);
     LineChart->setTheme(QChart::ChartThemeBlueIcy);
+    QPalette pale = qApp->palette();
+    pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
+    qApp->setPalette(pale);
 
     return LineChart;
 }
@@ -199,6 +207,9 @@ QChart *SplineChart::draw()
     SplineChart->legend()->setAlignment(Qt::AlignBottom);
     chartView->setRenderHint(QPainter::Antialiasing);
     SplineChart->setTheme(QChart::ChartThemeBlueIcy);
+    QPalette pale = qApp->palette();
+    pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
+    qApp->setPalette(pale);
 
     return SplineChart;
 }

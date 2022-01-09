@@ -1,17 +1,25 @@
 {
     "data": [
         [1, 2, 3],
-        [7, 7 ,7],
-        [4, 4 ,4]
+        [1, 2, 2],
+        [1, 2, 2]
     ],
     "rowLabel": [
-        "a",
-        "b",
-        "c"
+        "Giulia",
+        "Andrea"
     ],
     "columnLabel": [
-        "y",
-        "h",
-        "n"
+        "Gennaio",
+        "Febbraio",
+        "Gennaio"
     ]
 }
+
+
+
+
+
+
+
+
+

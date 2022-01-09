@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "DataMatrix.h"
 #include "model.h"
 #include "controller.h" //! non spostare
@@ -74,8 +74,16 @@ void MainWindow::setBar()
 
 void MainWindow::drawChart(Chart *chart)
 {
-    layout()->removeWidget(chartView);
-    chartView = new QChartView(chart->draw());
+    auto qchart = chart->draw();
+    if(!chartView)
+    {
+        chartView = new QChartView(qchart);
+    }
+    else
+    {
+        chartView->setChart(qchart);
+    }
+    //chartView = new QChartView(chart->draw());
     chartView->setRenderHint(QPainter::Antialiasing);
     layout()->addWidget(chartView);
 }
