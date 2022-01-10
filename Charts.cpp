@@ -153,9 +153,11 @@ QChart *LineChart::draw()
     QChart *LineChart = new QChart();
     LineChart->setTitle("This is your Line chart");
     auto table = getTable();
+    auto names = table.getRowLabel();
     for(unsigned int j = 0; j < table.getRowCount(); j++)
     {
         auto series = ContinuousChart::toSeries<QLineSeries>(j);
+        series->setName(QString::fromStdString((*names)[j]));
         LineChart->addSeries(series);
         LineChart->createDefaultAxes();
         QCategoryAxis *axisX = new QCategoryAxis();
@@ -187,6 +189,7 @@ QChart *SplineChart::draw()
     QChart *SplineChart = new QChart();
     SplineChart->setTitle("This is your Spline chart");
     auto table = getTable();
+    auto names = table.getRowLabel();
     for(unsigned int j = 0; j < table.getRowCount(); j++)
     {
         auto series = ContinuousChart::toSeries<QSplineSeries>(j);
@@ -197,6 +200,7 @@ QChart *SplineChart::draw()
         for(unsigned int i = 0; i < table.getColumnCount(); i++)
         {
             axisX->append(QString::fromStdString(table.getColumnLabel()->at(i)), i + 0.5);
+            series->setName(QString::fromStdString((*names)[j]));
         }
         SplineChart->addAxis(axisX, Qt::AlignBottom);
         SplineChart->addAxis(axisY, Qt::AlignLeft);
