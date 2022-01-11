@@ -110,6 +110,17 @@ QVariant Model::headerData(int section, Qt::Orientation orientation, int role) c
     return QVariant();
 }
 
+Qt::ItemFlags Model::flags(const QModelIndex &index) const
+{
+    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+}
+
+bool Model::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    table.getData()->at(index.row()).at(index.column()) = value.toDouble();
+    return true;
+}
+
 
 
 
