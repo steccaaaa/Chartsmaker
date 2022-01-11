@@ -12,6 +12,7 @@
 #include <QMenuBar>
 #include <QVBoxLayout>
 #include <QAbstractItemModel>
+#include <QCheckBox>
 #include "model.h"
 #include "Charts.h"
 
