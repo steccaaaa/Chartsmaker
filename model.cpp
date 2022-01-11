@@ -1,4 +1,5 @@
 #include "model.h"
+#include <QVariant>
 #include <iostream>
 using std::vector;
 
@@ -38,6 +39,7 @@ Model::Model(QObject *parent) : QAbstractTableModel(parent)
     std::vector<std::string> matss{"x", "y", "z"};
     DataMatrix x(mat, mats, matss);
     table = x;
+
 }
 
 int Model::rowCount(const QModelIndex &parent) const
@@ -73,7 +75,6 @@ QVariant Model::data(const QModelIndex &index, int role) const
         //std::cout << temp << "\n";
         return temp;
     }
-
     //std::cout << "qvariant\n";
     return QVariant();
 }
@@ -92,3 +93,31 @@ void Model::writeJson(std::string path)
 {
     table.write(path);
 }
+
+QVariant Model::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if(role == Qt::DisplayRole)
+    {
+        if(Qt::Orientation::Vertical == orientation)
+        {
+            return QString::fromStdString(table.getRowLabel()->at(section));
+        }
+        else
+        {
+            return QString::fromStdString(table.getColumnLabel()->at(section));
+        }
+    }
+    return QVariant();
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -18,6 +18,7 @@ public:
     DataMatrix getTable();
     void readJson(std::string path);
     void writeJson(std::string path);
+    virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
 private:
     DataMatrix table;

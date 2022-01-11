@@ -95,15 +95,6 @@ void MainWindow::setTableView(/*Model *_model*/)
     tableView = new QTableView();
     tableView->setModel(controller->getModel());
     // tableView->setModel(_model);
-    /*auto table = getTable();
-    auto names = table.getRowLabel();
-    auto values = table.getColumnLabel();
-    for(int i = 0; i < table.getRowCount(); i++){
-         bool setHeaderData(int i, Qt::Orientation vertical, const QVariant (*names)[i], int role = Qt::EditRole);
-    }
-    for(int i = 0; i < table.getColumnCount(); i++){
-         bool setHeaderData2(int i, Qt::Orientation horizontal, const QVariant (*values)[i], int role = Qt::EditRole);
-    }*/
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
     tableView->setGeometry(0, 30, 300, 300); // per ora sono obbligato a mettere un misura fissa
