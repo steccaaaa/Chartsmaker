@@ -98,6 +98,7 @@ void MainWindow::setTableView(/*Model *_model*/)
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
     tableView->setGeometry(0, 30, 300, 300); // per ora sono obbligato a mettere un misura fissa
+    tableView->setStyleSheet("QHeaderView::section { background-color:lightblue }");
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     layout()->addWidget(tableView);
