@@ -95,6 +95,15 @@ void MainWindow::setTableView(/*Model *_model*/)
     tableView = new QTableView();
     tableView->setModel(controller->getModel());
     // tableView->setModel(_model);
+    /*auto table = getTable();
+    auto names = table.getRowLabel();
+    auto values = table.getColumnLabel();
+    for(int i = 0; i < table.getRowCount(); i++){
+         bool setHeaderData(int i, Qt::Orientation vertical, const QVariant (*names)[i], int role = Qt::EditRole);
+    }
+    for(int i = 0; i < table.getColumnCount(); i++){
+         bool setHeaderData2(int i, Qt::Orientation horizontal, const QVariant (*values)[i], int role = Qt::EditRole);
+    }*/
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
     tableView->setGeometry(0, 30, 300, 300); // per ora sono obbligato a mettere un misura fissa
@@ -108,7 +117,6 @@ void MainWindow::setController(Controller *_controller)
     controller = _controller;
 
     //connessioni a slot
-    //connect(newChart->actions()[0], SIGNAL(triggered()), this, SLOT());         // newChart
     connect(file->actions()[1], SIGNAL(triggered()), controller, SLOT(open())); // open
     // 2 e' un separator
     connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(save()));        // save
@@ -121,7 +129,7 @@ void MainWindow::setController(Controller *_controller)
 
     connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts
 
-    connect(newChart->actions()[0], &QAction::triggered, [&]()
+    connect(newChart->actions()[0], &QAction::triggered, [&]()  //new chart
             {
                 auto tabella = controller->getModel()->getTable();
                 auto *chart = new PieChart(tabella);

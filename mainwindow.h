@@ -11,6 +11,7 @@
 #include <QWidget>
 #include <QMenuBar>
 #include <QVBoxLayout>
+#include <QAbstractItemModel>
 #include "model.h"
 #include "Charts.h"
 

@@ -28,28 +28,28 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     layout->addWidget(label5);
     label5->setFont(g);
 
-    QPixmap image(":/images/pie.png");
+    QPixmap image(":/images/PieChart.png");
     image = image.scaled(270, 270, Qt::KeepAspectRatio);
     QLabel *imageLabel = new QLabel();
     imageLabel->setPixmap(image);
 
-    QPixmap image2(":/images/donut.png");
+    QPixmap image2(":/images/DonutChart.png");
     image2 = image2.scaled(270, 270, Qt::KeepAspectRatio);
     QLabel *imageLabel2 = new QLabel();
     imageLabel2->setPixmap(image2);
 
-    QPixmap image3(":/images/bar.png");
+    QPixmap image3(":/images/BarChart.png");
     image3 = image3.scaled(270, 270, Qt::KeepAspectRatio);
     QLabel *imageLabel3 = new QLabel();
     imageLabel3->setPixmap(image3);
 
-    QPixmap image4(":/images/line.png");
-    image4 = image4.scaled(270, 270, Qt::KeepAspectRatio);
+    QPixmap image4(":/images/LineChart.png");
+    image4 = image4.scaled(250, 250, Qt::KeepAspectRatio);
     QLabel *imageLabel4 = new QLabel();
     imageLabel4->setPixmap(image4);
 
-    QPixmap image5(":/images/spline.png");
-    image5 = image5.scaled(270, 270, Qt::KeepAspectRatio);
+    QPixmap image5(":/images/SplineChart.png");
+    image5 = image5.scaled(250, 250, Qt::KeepAspectRatio);
     QLabel *imageLabel5 = new QLabel();
     imageLabel5->setPixmap(image5);
 

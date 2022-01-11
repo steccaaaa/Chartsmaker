@@ -1,10 +1,10 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-    <file>images/pie.png</file>
-    <file>images/donut.png</file>
-    <file>images/bar.png</file>
-    <file>images/line.png</file>
-    <file>images/spline.png</file>
+    <file>images/PieChart.png</file>
+    <file>images/DonutChart.png</file>
+    <file>images/BarChart.png</file>
+    <file>images/LineChart.png</file>
+    <file>images/SplineChart.png</file>
     <file>images/explphoto.png</file>
     <file>images/icon.png</file>
 </qresource>
