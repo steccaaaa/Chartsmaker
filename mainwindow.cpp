@@ -124,36 +124,41 @@ void MainWindow::setController(Controller *_controller)
     connect(newChart->actions()[0], &QAction::triggered, [&]()  //new chart
             {
                 auto tabella = controller->getModel()->getTable();
-                auto *chart = new PieChart(tabella);
+                chart = new PieChart(tabella);
                 drawChart(chart);
             });
 
     connect(newChart->actions()[1], &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                auto *chart = new DonutChart(tabella);
+                chart = new DonutChart(tabella);
                 drawChart(chart);
             });
 
     connect(newChart->actions()[2], &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                auto *chart = new BarChart(tabella);
+                chart = new BarChart(tabella);
                 drawChart(chart);
             });
 
     connect(newChart->actions()[3], &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                auto *chart = new LineChart(tabella);
+                chart = new LineChart(tabella);
                 drawChart(chart);
             });
 
     connect(newChart->actions()[4], &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                auto *chart = new SplineChart(tabella);
+                chart = new SplineChart(tabella);
                 drawChart(chart);
+            });
+    connect(controller->getModel(), &QAbstractItemModel::dataChanged, [&]()
+            {
+                auto tabella = controller->getModel()->getTable();
+                drawChart(chart->clone(tabella));
             });
 
     //! la table view e il chart va messa ora dopo che il controller è stato settato se no il model non lo ha

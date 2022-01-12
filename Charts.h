@@ -59,6 +59,13 @@ public:
      * @return returns a new chart with the characteristics chosen by the user
      */
     virtual QChart *draw() = 0;
+    /**
+     * @brief
+     *
+     * @param chart
+     * @return
+     */
+    virtual Chart* clone(DataMatrix table) = 0;
 
 };
 
@@ -91,6 +98,7 @@ public:
      * @return QChart
      */
     QChart *draw();
+    Chart* clone(DataMatrix table);
 };
 
 class DonutChart : public RoundChart
@@ -109,6 +117,7 @@ public:
      * @return QChart
      */
     QChart *draw();
+    Chart* clone(DataMatrix table);
 };
 
 class BarChart : public Chart
@@ -129,6 +138,7 @@ public:
      * @return QChart
      */
     QChart *draw();
+    Chart* clone(DataMatrix table);
 };
 
 class ContinuousChart : public Chart
@@ -160,6 +170,7 @@ public:
      * @return QChart
      */
     QChart *draw();
+    Chart* clone(DataMatrix table);
 };
 
 class SplineChart : public ContinuousChart
@@ -178,6 +189,7 @@ public:
      * @return QChart
      */
     QChart *draw();
+    Chart* clone(DataMatrix table);
 };
 
 #endif

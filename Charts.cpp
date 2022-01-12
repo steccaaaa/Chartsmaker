@@ -217,3 +217,29 @@ QChart *SplineChart::draw()
 
     return SplineChart;
 }
+
+Chart *SplineChart::clone(DataMatrix table)
+{
+    return new SplineChart(table);
+}
+
+Chart *LineChart::clone(DataMatrix table)
+{
+    return new LineChart(table);
+}
+
+Chart *PieChart::clone(DataMatrix table)
+{
+    return new PieChart(table);
+}
+
+Chart *DonutChart::clone(DataMatrix table)
+{
+    return new DonutChart(table);
+}
+
+Chart *BarChart::clone(DataMatrix table)
+{
+    return new BarChart(table);
+}
+
