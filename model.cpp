@@ -100,11 +100,13 @@ QVariant Model::headerData(int section, Qt::Orientation orientation, int role) c
     {
         if(Qt::Orientation::Vertical == orientation)
         {
-            return QString::fromStdString(table.getRowLabel()->at(section));
+            if(table.getRowCount()>section)
+                return QString::fromStdString(table.getRowLabel()->at(section));
         }
         else
         {
-            return QString::fromStdString(table.getColumnLabel()->at(section));
+            if(table.getColumnCount()>section)
+                return QString::fromStdString(table.getColumnLabel()->at(section));
         }
     }
     return QVariant();
