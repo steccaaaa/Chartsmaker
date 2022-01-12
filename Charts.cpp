@@ -16,6 +16,8 @@ BarChart::BarChart(DataMatrix _table) : Chart(_table) {}
 
 StackedBarChart::StackedBarChart(DataMatrix _table) : Chart(_table) {}
 
+HorizontalBarChart::HorizontalBarChart(DataMatrix _table) : Chart(_table) {}
+
 ContinuousChart::ContinuousChart(DataMatrix _table) : Chart(_table) {}
 
 LineChart::LineChart(DataMatrix _table) : ContinuousChart(_table) {}
@@ -186,6 +188,53 @@ QChart *StackedBarChart::draw()
     return StackedBarChart;
 }
 
+QHorizontalBarSeries *HorizontalBarChart::toSeries()
+{
+    QHorizontalBarSeries *series = new QHorizontalBarSeries();
+    auto table = getTable();
+    auto names = table.getRowLabel();
+    for (unsigned int i = 0; i < names->size(); i++)
+    {
+        QBarSet *set = new QBarSet(QString::fromStdString((*names)[i]));
+        for (auto& tmp: (*(table.getData()))[i])
+        {
+            *set << tmp;
+        }
+        series->append(set);
+    }
+    return series;
+}
+
+QChart *HorizontalBarChart::draw()
+{
+    QChart *HorizontalBarChart = new QChart();
+    HorizontalBarChart->setTitle("This is your HorizontalBar Chart");
+    auto series = HorizontalBarChart::toSeries();
+    HorizontalBarChart->addSeries(series);
+    HorizontalBarChart->setAnimationOptions(QChart::SeriesAnimations);
+    auto table = getTable();
+    QStringList categories;
+    for (auto& tmp: *table.getColumnLabel())
+    {
+        categories << QString::fromStdString(tmp);
+    }
+
+    QBarCategoryAxis *axis = new QBarCategoryAxis();
+    axis->append(categories);
+    HorizontalBarChart->createDefaultAxes();
+    HorizontalBarChart->setAxisY(axis, series);
+    HorizontalBarChart->legend()->setVisible(true);
+    HorizontalBarChart->legend()->setAlignment(Qt::AlignBottom);
+
+    QChartView *chartView = new QChartView(HorizontalBarChart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    HorizontalBarChart->setTheme(QChart::ChartThemeBlueIcy);
+    QPalette pale = qApp->palette();
+    pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
+    qApp->setPalette(pale);
+
+    return HorizontalBarChart;
+}
 
 template <class T>
 T *ContinuousChart::toSeries(unsigned int i)
@@ -334,6 +383,11 @@ Chart *BarChart::clone(DataMatrix table)
 Chart *StackedBarChart::clone(DataMatrix table)
 {
     return new StackedBarChart(table);
+}
+
+Chart *HorizontalBarChart::clone(DataMatrix table)
+{
+    return new HorizontalBarChart(table);
 }
 
 Chart *LineChart::clone(DataMatrix table)

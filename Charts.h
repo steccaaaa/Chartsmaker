@@ -171,13 +171,13 @@ protected:
     QHorizontalBarSeries* toSeries();
 public:
     /**
-     * @brief Construct a new HorizontalBarChart object
+     * @brief Construct a new StckedBarChart object
      *
      * @param table reference of a 2d vector
      */
     HorizontalBarChart(DataMatrix table);
     /**
-     * @brief Draws horizontal bar charts
+     * @brief Draws stacked bar charts
      *
      * @param chart
      * @return QChart

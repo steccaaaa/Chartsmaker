@@ -81,12 +81,14 @@ void MainWindow::setBar()
     item3->setCheckable(true);
     QAction *item4 = new QAction("Stackedbar Chart");
     item4->setCheckable(true);
-    QAction *item5 = new QAction("Line Chart");
+    QAction *item5 = new QAction("Horizontalbar Chart");
     item5->setCheckable(true);
-    QAction *item6 = new QAction("Spline Chart");
+    QAction *item6 = new QAction("Line Chart");
     item6->setCheckable(true);
-    QAction *item7 = new QAction("Scatter Chart");
+    QAction *item7 = new QAction("Spline Chart");
     item7->setCheckable(true);
+    QAction *item8 = new QAction("Scatter Chart");
+    item8->setCheckable(true);
 
     view->addAction(item1);
     view->addAction(item2);
@@ -197,23 +199,31 @@ void MainWindow::setController(Controller *_controller)
     connect(view->actions().at(4), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                chart = new LineChart(tabella);
+                chart = new HorizontalBarChart(tabella);
                 drawChart(chart);
             });
 
     connect(view->actions().at(5), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                chart = new SplineChart(tabella);
+                chart = new LineChart(tabella);
                 drawChart(chart);
             });
 
     connect(view->actions().at(6), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
+                chart = new SplineChart(tabella);
+                drawChart(chart);
+            });
+
+    connect(view->actions().at(7), &QAction::triggered, [&]()
+            {
+                auto tabella = controller->getModel()->getTable();
                 chart = new ScatterChart(tabella);
                 drawChart(chart);
             });
+
 
     connect(controller->getModel(), &QAbstractItemModel::dataChanged, [&]()
             {

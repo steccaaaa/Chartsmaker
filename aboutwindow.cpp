@@ -21,7 +21,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     QLabel *label3 = new QLabel("○ All you need to do is opening a Json file with your elaborated data by clicking on FILE->OPEN and searching in your computer.", this);
     layout->addWidget(label3);
     label3->setFont(g);
-    QLabel *label4 = new QLabel("○ If you want to create new charts you need to click on FILE->NEW CHART and choose the one you want to display", this);
+    QLabel *label4 = new QLabel("○ If you want to create new charts you need to click VIEW and choose the one you want to display", this);
     layout->addWidget(label4);
     label4->setFont(g);
     QLabel *label5 = new QLabel("○ The available charts at the moment are Pie Charts, Donut Charts, Bar Charts, StackedBar Chart, Line Chart, Spline Charts and Scatter Chart.", this);
