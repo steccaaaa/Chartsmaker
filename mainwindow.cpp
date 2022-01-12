@@ -37,8 +37,9 @@ void MainWindow::setBar()
     newChart->addAction(new QAction("Pie Chart", newChart));    // nc0
     newChart->addAction(new QAction("Donut Chart", newChart));  // nc1
     newChart->addAction(new QAction("Bar Chart", newChart));    // nc2
-    newChart->addAction(new QAction("Line Chart", newChart));   // nc3
-    newChart->addAction(new QAction("Spline Chart", newChart)); // nc4
+    newChart->addAction(new QAction("StackedBar Chart", newChart)); // nc3
+    newChart->addAction(new QAction("Line Chart", newChart));   // nc4
+    newChart->addAction(new QAction("Spline Chart", newChart)); // nc5
 
     file->addAction(new QAction("Open", file)); // f1
 
@@ -142,19 +143,28 @@ void MainWindow::setController(Controller *_controller)
                 drawChart(chart);
             });
 
+
     connect(newChart->actions().at(3), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                chart = new LineChart(tabella);
+                chart = new StackedBarChart(tabella);
                 drawChart(chart);
             });
 
     connect(newChart->actions().at(4), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
+                chart = new LineChart(tabella);
+                drawChart(chart);
+            });
+
+    connect(newChart->actions().at(5), &QAction::triggered, [&]()
+            {
+                auto tabella = controller->getModel()->getTable();
                 chart = new SplineChart(tabella);
                 drawChart(chart);
             });
+
     connect(controller->getModel(), &QAbstractItemModel::dataChanged, [&]()
             {
                 auto tabella = controller->getModel()->getTable();

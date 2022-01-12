@@ -19,6 +19,7 @@
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QCategoryAxis>
 #include <QtCharts/QSplineSeries>
+#include <QStackedBarSeries>
 #include <QPointF>
 #include <QPainter>
 #include <QPalette>
@@ -131,6 +132,27 @@ public:
      * @param table reference of a 2d vector
      */
     BarChart(DataMatrix table);
+    /**
+     * @brief Draws bar charts
+     *
+     * @param chart
+     * @return QChart
+     */
+    QChart *draw();
+    Chart* clone(DataMatrix table);
+};
+
+class StackedBarChart : public Chart
+{
+protected:
+    QStackedBarSeries* toSeries();
+public:
+    /**
+     * @brief Construct a new BarChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    StackedBarChart(DataMatrix table);
     /**
      * @brief Draws bar charts
      *

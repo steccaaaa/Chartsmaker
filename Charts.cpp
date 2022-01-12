@@ -14,6 +14,8 @@ DonutChart::DonutChart(DataMatrix _table) : RoundChart(_table) {}
 
 BarChart::BarChart(DataMatrix _table) : Chart(_table) {}
 
+StackedBarChart::StackedBarChart(DataMatrix _table) : Chart(_table) {}
+
 ContinuousChart::ContinuousChart(DataMatrix _table) : Chart(_table) {}
 
 LineChart::LineChart(DataMatrix _table) : ContinuousChart(_table) {}
@@ -134,6 +136,54 @@ QChart *BarChart::draw()
     return BarChart;
 }
 
+QStackedBarSeries *StackedBarChart::toSeries()
+{
+    QStackedBarSeries *series = new QStackedBarSeries();
+    auto table = getTable();
+    auto names = table.getRowLabel();
+    for (unsigned int i = 0; i < names->size(); i++)
+    {
+        QBarSet *set = new QBarSet(QString::fromStdString((*names)[i]));
+        for (auto& tmp: (*(table.getData()))[i])
+        {
+            *set << tmp;
+        }
+        series->append(set);
+    }
+    return series;
+}
+
+QChart *StackedBarChart::draw()
+{
+    QChart *StackedBarChart = new QChart();
+    StackedBarChart->setTitle("This is your StackedBarChart");
+    auto series = StackedBarChart::toSeries();
+    StackedBarChart->addSeries(series);
+    StackedBarChart->setAnimationOptions(QChart::SeriesAnimations);
+    auto table = getTable();
+    QStringList categories;
+    for (auto& tmp: *table.getColumnLabel())
+    {
+        categories << QString::fromStdString(tmp);
+    }
+
+    QBarCategoryAxis *axis = new QBarCategoryAxis();
+    axis->append(categories);
+    StackedBarChart->createDefaultAxes();
+    StackedBarChart->setAxisX(axis, series);
+    StackedBarChart->legend()->setVisible(true);
+    StackedBarChart->legend()->setAlignment(Qt::AlignBottom);
+
+    QChartView *chartView = new QChartView(StackedBarChart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    StackedBarChart->setTheme(QChart::ChartThemeBlueIcy);
+    QPalette pale = qApp->palette();
+    pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
+    qApp->setPalette(pale);
+
+    return StackedBarChart;
+}
+
 template <class T>
 T *ContinuousChart::toSeries(unsigned int i)
 {
@@ -145,8 +195,6 @@ T *ContinuousChart::toSeries(unsigned int i)
     }
     return series;
 }
-
-//DA SISTEMARE LA LEGENDA PER LINE E SPLINE
 
 QChart *LineChart::draw()
 {
@@ -218,15 +266,6 @@ QChart *SplineChart::draw()
     return SplineChart;
 }
 
-Chart *SplineChart::clone(DataMatrix table)
-{
-    return new SplineChart(table);
-}
-
-Chart *LineChart::clone(DataMatrix table)
-{
-    return new LineChart(table);
-}
 
 Chart *PieChart::clone(DataMatrix table)
 {
@@ -241,5 +280,20 @@ Chart *DonutChart::clone(DataMatrix table)
 Chart *BarChart::clone(DataMatrix table)
 {
     return new BarChart(table);
+}
+
+Chart *StackedBarChart::clone(DataMatrix table)
+{
+    return new BarChart(table);
+}
+
+Chart *LineChart::clone(DataMatrix table)
+{
+    return new LineChart(table);
+}
+
+Chart *SplineChart::clone(DataMatrix table)
+{
+    return new SplineChart(table);
 }
 
