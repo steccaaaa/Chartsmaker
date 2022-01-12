@@ -31,6 +31,7 @@ private:
     QMenu *file;
     QMenu *newChart;
     QMenu *view;
+    QMenu *edit;
     QMenu *help;
 
     //* table
@@ -46,6 +47,8 @@ public:
     void setController(Controller *_controller);
     void setTableView(/*Model *_model*/);
     void setBar();
+    unsigned int getSelectedRow();
+    unsigned int getSelectedColumn();
 
 public slots:
 

@@ -84,10 +84,23 @@ public slots:
     void zoomIn();
 
     /**
-    * @brief >Zooms out the content of the window
+    * @brief Zooms out the content of the window
     * 
     */
     void zoomOut();
+
+    /**
+    * @brief Adds column before
+    */
+    void addColumnB();
+
+    /**
+     * @brief Adds column after
+     */
+    void addColumnA();
+
+    void addRowB();
+    void addRowA();
 };
 
 #endif // CONTROLLER_H

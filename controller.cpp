@@ -58,7 +58,7 @@ void Controller::saveAsPdf()
                                                 tr("Pdf file"), "",
                                                 tr("Pdf file (*.pdf)"));
     printer.setOutputFileName(path);
-    printer.setPageMargins(QMarginsF(0,0,0,0));
+    printer.setPageMargins(QMarginsF(0, 0, 0, 0));
 
     QPainter painter;
     painter.begin(&printer);
@@ -73,7 +73,7 @@ void Controller::saveAsPdf()
 void Controller::saveAsImage()
 {
     QWidget *widget = mainwindow->getChart();
-    QPixmap pic = widget->grab(QRect(QPoint(10,10), QSize( widget->width(), widget->height()) ));
+    QPixmap pic = widget->grab(QRect(QPoint(10, 10), QSize(widget->width(), widget->height())));
     widget->render(&pic);
     QString path = QFileDialog::getSaveFileName(mainwindow,
                                                 tr("Png image"), "",
@@ -91,3 +91,42 @@ void Controller::save()
 };
 
 void Controller::exit(){};
+
+void Controller::addColumnB()
+{
+    QString label = QInputDialog::getText(mainwindow, "Insert", "Column label:", QLineEdit::Normal);
+    if (!label.isEmpty())
+    {
+        model->insertColumn(mainwindow->getSelectedColumn(), label.toStdString());
+        mainwindow->setTableView();
+    }
+};
+void Controller::addColumnA()
+{
+    QString label = QInputDialog::getText(mainwindow, "Insert", "Column label:", QLineEdit::Normal);
+    if (!label.isEmpty())
+    {
+        model->insertColumn(mainwindow->getSelectedColumn() + 1, label.toStdString());
+        mainwindow->setTableView();
+    }
+};
+
+void Controller::addRowB()
+{
+    QString label = QInputDialog::getText(mainwindow, "Insert", "Row label:", QLineEdit::Normal);
+    if (!label.isEmpty())
+    {
+        model->insertRow(mainwindow->getSelectedRow(), label.toStdString());
+        mainwindow->setTableView();
+    }
+}
+
+void Controller::addRowA()
+{
+    QString label = QInputDialog::getText(mainwindow, "Insert", "Row label:", QLineEdit::Normal);
+    if (!label.isEmpty())
+    {
+        model->insertRow(mainwindow->getSelectedRow() + 1, label.toStdString());
+        mainwindow->setTableView();
+    }
+}

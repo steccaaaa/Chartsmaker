@@ -47,7 +47,7 @@ void MainWindow::setBar()
     file->addAction(new QAction("Exit", file)); // f7
 
     //! edit
-    QMenu *edit = new QMenu("Edit", menuBar);
+    edit = new QMenu("Edit", menuBar);
     menuBar->addMenu(edit);
 
     edit->addAction(new QAction("Add column before", edit));
@@ -165,6 +165,10 @@ void MainWindow::setController(Controller *_controller)
     connect(file->actions().at(7), SIGNAL(triggered()), this, SLOT(close()));             // exit
 
     // edit
+    connect(edit->actions().at(0), SIGNAL(triggered()), controller, SLOT(addColumnB()));
+    connect(edit->actions().at(1), SIGNAL(triggered()), controller, SLOT(addColumnA()));
+    connect(edit->actions().at(2), SIGNAL(triggered()), controller, SLOT(addRowB()));
+    connect(edit->actions().at(3), SIGNAL(triggered()), controller, SLOT(addRowA()));
 
     // help
     connect(help->actions().at(0), SIGNAL(triggered()), this, SLOT(about()));    // about
@@ -259,8 +263,13 @@ void MainWindow::setController(Controller *_controller)
     setTableView();
 }
 
+unsigned int MainWindow::getSelectedColumn() { return tableView->selectionModel()->currentIndex().column(); }
+
+unsigned int MainWindow::getSelectedRow() { return tableView->selectionModel()->currentIndex().row(); }
+
 void MainWindow::about()
 {
+    std::cout << tableView->selectionModel()->currentIndex().row();
     aboutwindow *m_aboutwindow = new aboutwindow();
     m_aboutwindow->setWindowTitle("About");
     m_aboutwindow->show();
