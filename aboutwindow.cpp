@@ -67,7 +67,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     QLabel *label7 = new QLabel("○ By clicking on FILE->OPEN you can give the .json file that you want to analyze in input.", this);
     layout->addWidget(label7);
     label7->setFont(g);
-    QLabel *label8 = new QLabel("    Pay attention: the data must be already elaborated. This means that the program will not for example sum data if they are from the same istance.", this);
+    QLabel *label8 = new QLabel("    Pay attention: the data must be already elaborated. This means that the program will not for example sum data if they are from the same instance.", this);
     layout->addWidget(label8);
     label8->setFont(g);
     QLabel *label9 = new QLabel("    To clarify, here's an image:", this);
@@ -80,7 +80,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     imageLabel6->setPixmap(image6);
     layout->addWidget(imageLabel6);
 
-    QLabel *label20 = new QLabel("○ It is possible to modify the data directly on the table by clicking, changing the data and pressing enter on your keyboard. After modifying the data you need to draw the new chart and you will see the updates.", this);
+    QLabel *label20 = new QLabel("○ It is possible to modify the data directly on the table by clicking, changing the data and pressing enter on your keyboard. The chart will automatically refresh itself.", this);
     layout->addWidget(label20);
     label20->setFont(g);
     QLabel *label10 = new QLabel("○ If you want to save your data you can click FILE->SAVE and by choosing were to save on your computer and choosing a name the program will create a new .json file with your data.", this);

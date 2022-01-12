@@ -117,15 +117,11 @@ Qt::ItemFlags Model::flags(const QModelIndex &index) const
 
 bool Model::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-<<<<<<< HEAD
-    table.getData()->at(index.row()).at(index.column()) = value.toDouble();
-    emit dataChanged(index, index);
-=======
     if(role == Qt::EditRole)
     {
         table.getData()->at(index.row()).at(index.column()) = value.toDouble();
+        emit dataChanged(index, index);
     }
->>>>>>> 3e9d571f7d9afad64c43079a6ed42858a1a162b9
     return true;
 }
 
