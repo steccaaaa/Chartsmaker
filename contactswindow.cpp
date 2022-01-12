@@ -2,8 +2,8 @@
 
 contactswindow::contactswindow(QWidget *parent) : QWidget(parent)
 {
-    QFont f( "Helvetica", 20, QFont::SansSerif, QFont::Bold);
-    QFont g( "Helvetica", 12, QFont::SansSerif);
+    QFont f( "Helvetica", 20, QFont::Bold);
+    QFont g( "Helvetica", 12);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
 
@@ -31,10 +31,13 @@ contactswindow::contactswindow(QWidget *parent) : QWidget(parent)
     label6->setTextInteractionFlags(Qt::TextBrowserInteraction);
     label6->setOpenExternalLinks(true);
 
+
     layout->addWidget(label);
+    layout->addSpacing(15);
     layout->addWidget(label2);
     layout->addWidget(label3);
     layout->addWidget(label4);
+    layout->addSpacing(15);
     layout->addWidget(label5);
     layout->addWidget(label6);
     layout->addWidget(label7);

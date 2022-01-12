@@ -7,8 +7,8 @@
 
 aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
 {
-    QFont f("Helvetica", 20, QFont::SansSerif,  QFont::Bold);
-    QFont g("Helvetica", 12, QFont::SansSerif);
+    QFont f("Helvetica", 20, QFont::Bold);
+    QFont g("Helvetica", 12);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
 
