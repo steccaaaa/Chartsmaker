@@ -109,47 +109,47 @@ void MainWindow::setController(Controller *_controller)
     controller = _controller;
 
     //connessioni a slot
-    connect(file->actions()[1], SIGNAL(triggered()), controller, SLOT(open())); // open
+    connect(file->actions().at(1), SIGNAL(triggered()), controller, SLOT(open())); // open
     // 2 e' un separator
-    connect(file->actions()[3], SIGNAL(triggered()), controller, SLOT(save()));        // save
-    connect(file->actions()[4], SIGNAL(triggered()), controller, SLOT(saveAsImage())); // save as png
-    connect(file->actions()[5], SIGNAL(triggered()), controller, SLOT(saveAsPdf()));   // save as pdf
+    connect(file->actions().at(3), SIGNAL(triggered()), controller, SLOT(save()));        // save
+    connect(file->actions().at(4), SIGNAL(triggered()), controller, SLOT(saveAsImage())); // save as png
+    connect(file->actions().at(5), SIGNAL(triggered()), controller, SLOT(saveAsPdf()));   // save as pdf
     // 6 e' un separator
-    connect(file->actions()[7], SIGNAL(triggered()), this, SLOT(close())); // exit
+    connect(file->actions().at(7), SIGNAL(triggered()), this, SLOT(close())); // exit
 
-    connect(help->actions()[0], SIGNAL(triggered()), this, SLOT(about())); // about
+    connect(help->actions().at(0), SIGNAL(triggered()), this, SLOT(about())); // about
 
-    connect(help->actions()[1], SIGNAL(triggered()), this, SLOT(contacts())); // contacts
+    connect(help->actions().at(1), SIGNAL(triggered()), this, SLOT(contacts())); // contacts
 
-    connect(newChart->actions()[0], &QAction::triggered, [&]()  //new chart
+    connect(newChart->actions().at(0), &QAction::triggered, [&]()  //new chart
             {
                 auto tabella = controller->getModel()->getTable();
                 auto *chart = new PieChart(tabella);
                 drawChart(chart);
             });
 
-    connect(newChart->actions()[1], &QAction::triggered, [&]()
+    connect(newChart->actions().at(1), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 auto *chart = new DonutChart(tabella);
                 drawChart(chart);
             });
 
-    connect(newChart->actions()[2], &QAction::triggered, [&]()
+    connect(newChart->actions().at(2), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 auto *chart = new BarChart(tabella);
                 drawChart(chart);
             });
 
-    connect(newChart->actions()[3], &QAction::triggered, [&]()
+    connect(newChart->actions().at(3), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 auto *chart = new LineChart(tabella);
                 drawChart(chart);
             });
 
-    connect(newChart->actions()[4], &QAction::triggered, [&]()
+    connect(newChart->actions().at(4), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 auto *chart = new SplineChart(tabella);
