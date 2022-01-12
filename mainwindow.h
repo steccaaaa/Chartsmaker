@@ -50,6 +50,18 @@ public:
     unsigned int getSelectedRow();
     unsigned int getSelectedColumn();
 
+    /**
+    * @brief Getter for chartView
+    *
+    */
+    QWidget *getChartView();
+
+    /**
+    * @brief Getter for chart
+    *
+    */
+    Chart *getChart();
+
 public slots:
 
     /**
@@ -63,11 +75,6 @@ public slots:
     * 
     */
     void contacts();
-    /**
-    * @brief Getter for charts
-    *
-    */
-    QWidget *getChart();
     /**
     * @brief to draw the different charts
     *

@@ -282,4 +282,6 @@ void MainWindow::contacts()
     m_contactswindow->show();
 }
 
-QWidget *MainWindow::getChart() { return chartView; } //! deve ritornare graph
+QWidget *MainWindow::getChartView() { return chartView; }
+
+Chart *MainWindow::getChart() { return chart; }

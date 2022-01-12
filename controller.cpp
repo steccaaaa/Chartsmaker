@@ -41,7 +41,7 @@ void Controller::open(/*std::string path*/)
     //refresh
     mainwindow->setTableView();
     //mainwindow->drawChart(/* non so cosa metterci dentro*/);
-    mainwindow->layout()->removeWidget(mainwindow->getChart());
+    mainwindow->layout()->removeWidget(mainwindow->getChartView());
 }
 
 Model *Controller::getModel() { return model; }
@@ -52,7 +52,7 @@ void Controller::newChart(){};
 
 void Controller::saveAsPdf()
 {
-    auto chart = mainwindow->getChart();
+    auto chart = mainwindow->getChartView();
     QPrinter printer(QPrinter::HighResolution);
     QString path = QFileDialog::getSaveFileName(mainwindow,
                                                 tr("Pdf file"), "",
@@ -72,7 +72,7 @@ void Controller::saveAsPdf()
 
 void Controller::saveAsImage()
 {
-    QWidget *widget = mainwindow->getChart();
+    QWidget *widget = mainwindow->getChartView();
     QPixmap pic = widget->grab(QRect(QPoint(10, 10), QSize(widget->width(), widget->height())));
     widget->render(&pic);
     QString path = QFileDialog::getSaveFileName(mainwindow,
@@ -99,6 +99,7 @@ void Controller::addColumnB()
     {
         model->insertColumn(mainwindow->getSelectedColumn(), label.toStdString());
         mainwindow->setTableView();
+        mainwindow->drawChart(mainwindow->getChart());
     }
 };
 void Controller::addColumnA()
@@ -108,6 +109,7 @@ void Controller::addColumnA()
     {
         model->insertColumn(mainwindow->getSelectedColumn() + 1, label.toStdString());
         mainwindow->setTableView();
+        mainwindow->drawChart(mainwindow->getChart());
     }
 };
 
@@ -118,6 +120,7 @@ void Controller::addRowB()
     {
         model->insertRow(mainwindow->getSelectedRow(), label.toStdString());
         mainwindow->setTableView();
+        mainwindow->drawChart(mainwindow->getChart());
     }
 }
 
@@ -128,5 +131,6 @@ void Controller::addRowA()
     {
         model->insertRow(mainwindow->getSelectedRow() + 1, label.toStdString());
         mainwindow->setTableView();
+        mainwindow->drawChart(mainwindow->getChart());
     }
 }
