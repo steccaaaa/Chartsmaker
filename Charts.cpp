@@ -12,17 +12,19 @@ PieChart::PieChart(DataMatrix _table) : RoundChart(_table) {}
 
 DonutChart::DonutChart(DataMatrix _table) : RoundChart(_table) {}
 
-BarChart::BarChart(DataMatrix _table) : Chart(_table) {}
+BarredChart::BarredChart(DataMatrix _table) : Chart(_table) {}
 
-StackedBarChart::StackedBarChart(DataMatrix _table) : Chart(_table) {}
+BarChart::BarChart(DataMatrix _table) : BarredChart(_table) {}
 
-HorizontalBarChart::HorizontalBarChart(DataMatrix _table) : Chart(_table) {}
+StackedBarChart::StackedBarChart(DataMatrix _table) : BarredChart(_table) {}
 
-HorizontalStackedBarChart::HorizontalStackedBarChart(DataMatrix _table) : Chart(_table) {}
+HorizontalBarChart::HorizontalBarChart(DataMatrix _table) : BarredChart(_table) {}
 
-PercentBarChart::PercentBarChart(DataMatrix _table) : Chart(_table) {}
+HorizontalStackedBarChart::HorizontalStackedBarChart(DataMatrix _table) : BarredChart(_table) {}
 
-HorizontalPercentBarChart::HorizontalPercentBarChart(DataMatrix _table) : Chart(_table) {}
+PercentBarChart::PercentBarChart(DataMatrix _table) : BarredChart(_table) {}
+
+HorizontalPercentBarChart::HorizontalPercentBarChart(DataMatrix _table) : BarredChart(_table) {}
 
 ContinuousChart::ContinuousChart(DataMatrix _table) : Chart(_table) {}
 
@@ -98,14 +100,15 @@ QChart *DonutChart::draw()
     return RoundChart;
 }
 
-QBarSeries *BarChart::toSeries()
+template <class T, class T2>
+T *BarredChart::toSeries()
 {
-    QBarSeries *series = new QBarSeries();
+    T *series = new T();
     auto table = getTable();
     auto names = table.getRowLabel();
     for (unsigned int i = 0; i < names->size(); i++)
     {
-        QBarSet *set = new QBarSet(QString::fromStdString((*names)[i]));
+        T2 *set = new T2(QString::fromStdString((*names)[i]));
         for (auto& tmp: (*(table.getData()))[i])
         {
             *set << tmp;
@@ -119,7 +122,7 @@ QChart *BarChart::draw()
 {
     QChart *BarChart = new QChart();
     BarChart->setTitle("This is your Bar Chart");
-    auto series = BarChart::toSeries();
+    auto series = BarredChart::toSeries<QBarSeries, QBarSet>();
     BarChart->addSeries(series);
     BarChart->setAnimationOptions(QChart::SeriesAnimations);
     auto table = getTable();
@@ -146,28 +149,11 @@ QChart *BarChart::draw()
     return BarChart;
 }
 
-QStackedBarSeries *StackedBarChart::toSeries()
-{
-    QStackedBarSeries *series = new QStackedBarSeries();
-    auto table = getTable();
-    auto names = table.getRowLabel();
-    for (unsigned int i = 0; i < names->size(); i++)
-    {
-        QBarSet *set = new QBarSet(QString::fromStdString((*names)[i]));
-        for (auto& tmp: (*(table.getData()))[i])
-        {
-            *set << tmp;
-        }
-        series->append(set);
-    }
-    return series;
-}
-
 QChart *StackedBarChart::draw()
 {
     QChart *StackedBarChart = new QChart();
     StackedBarChart->setTitle("This is your Stacked Bar Chart");
-    auto series = StackedBarChart::toSeries();
+    auto series = BarredChart::toSeries<QStackedBarSeries, QBarSet>();
     StackedBarChart->addSeries(series);
     StackedBarChart->setAnimationOptions(QChart::SeriesAnimations);
     auto table = getTable();
@@ -194,28 +180,11 @@ QChart *StackedBarChart::draw()
     return StackedBarChart;
 }
 
-QHorizontalBarSeries *HorizontalBarChart::toSeries()
-{
-    QHorizontalBarSeries *series = new QHorizontalBarSeries();
-    auto table = getTable();
-    auto names = table.getRowLabel();
-    for (unsigned int i = 0; i < names->size(); i++)
-    {
-        QBarSet *set = new QBarSet(QString::fromStdString((*names)[i]));
-        for (auto& tmp: (*(table.getData()))[i])
-        {
-            *set << tmp;
-        }
-        series->append(set);
-    }
-    return series;
-}
-
 QChart *HorizontalBarChart::draw()
 {
     QChart *HorizontalBarChart = new QChart();
     HorizontalBarChart->setTitle("This is your Horizontal Bar Chart");
-    auto series = HorizontalBarChart::toSeries();
+    auto series = BarredChart::toSeries<QHorizontalBarSeries, QBarSet>();
     HorizontalBarChart->addSeries(series);
     HorizontalBarChart->setAnimationOptions(QChart::SeriesAnimations);
     auto table = getTable();
@@ -242,28 +211,11 @@ QChart *HorizontalBarChart::draw()
     return HorizontalBarChart;
 }
 
-QHorizontalStackedBarSeries *HorizontalStackedBarChart::toSeries()
-{
-    QHorizontalStackedBarSeries *series = new QHorizontalStackedBarSeries();
-    auto table = getTable();
-    auto names = table.getRowLabel();
-    for (unsigned int i = 0; i < names->size(); i++)
-    {
-        QBarSet *set = new QBarSet(QString::fromStdString((*names)[i]));
-        for (auto& tmp: (*(table.getData()))[i])
-        {
-            *set << tmp;
-        }
-        series->append(set);
-    }
-    return series;
-}
-
 QChart *HorizontalStackedBarChart::draw()
 {
     QChart *HorizontalStackedBarChart = new QChart();
     HorizontalStackedBarChart->setTitle("This is your Horizontal Stacked Bar Chart");
-    auto series = HorizontalStackedBarChart::toSeries();
+    auto series = BarredChart::toSeries<QHorizontalStackedBarSeries, QBarSet>();
     HorizontalStackedBarChart->addSeries(series);
     HorizontalStackedBarChart->setAnimationOptions(QChart::SeriesAnimations);
     auto table = getTable();
@@ -290,28 +242,11 @@ QChart *HorizontalStackedBarChart::draw()
     return HorizontalStackedBarChart;
 }
 
-QPercentBarSeries *PercentBarChart::toSeries()
-{
-    QPercentBarSeries *series = new QPercentBarSeries();
-    auto table = getTable();
-    auto names = table.getRowLabel();
-    for (unsigned int i = 0; i < names->size(); i++)
-    {
-        QBarSet *set = new QBarSet(QString::fromStdString((*names)[i]));
-        for (auto& tmp: (*(table.getData()))[i])
-        {
-            *set << tmp;
-        }
-        series->append(set);
-    }
-    return series;
-}
-
 QChart *PercentBarChart::draw()
 {
     QChart *PercentBarChart = new QChart();
     PercentBarChart->setTitle("This is your Percent Bar Chart");
-    auto series = PercentBarChart::toSeries();
+    auto series = BarredChart::toSeries<QPercentBarSeries, QBarSet>();
     PercentBarChart->addSeries(series);
     PercentBarChart->setAnimationOptions(QChart::SeriesAnimations);
     auto table = getTable();
@@ -338,28 +273,11 @@ QChart *PercentBarChart::draw()
     return PercentBarChart;
 }
 
-QHorizontalPercentBarSeries *HorizontalPercentBarChart::toSeries()
-{
-    QHorizontalPercentBarSeries *series = new QHorizontalPercentBarSeries();
-    auto table = getTable();
-    auto names = table.getRowLabel();
-    for (unsigned int i = 0; i < names->size(); i++)
-    {
-        QBarSet *set = new QBarSet(QString::fromStdString((*names)[i]));
-        for (auto& tmp: (*(table.getData()))[i])
-        {
-            *set << tmp;
-        }
-        series->append(set);
-    }
-    return series;
-}
-
 QChart *HorizontalPercentBarChart::draw()
 {
     QChart *HorizontalPercentBarChart = new QChart();
     HorizontalPercentBarChart->setTitle("This is your Horizontal Percent Bar Chart");
-    auto series = HorizontalPercentBarChart::toSeries();
+    auto series = BarredChart::toSeries<QHorizontalPercentBarSeries, QBarSet>();
     HorizontalPercentBarChart->addSeries(series);
     HorizontalPercentBarChart->setAnimationOptions(QChart::SeriesAnimations);
     auto table = getTable();
@@ -550,7 +468,6 @@ Chart *PercentBarChart::clone(DataMatrix table)
 {
     return new PercentBarChart(table);
 }
-
 
 Chart *HorizontalPercentBarChart::clone(DataMatrix table)
 {

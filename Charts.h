@@ -126,10 +126,21 @@ public:
     Chart* clone(DataMatrix table);
 };
 
-class BarChart : public Chart
+class BarredChart : public Chart
 {
 protected:
-    QBarSeries* toSeries();
+    template <class T, class T2> T* toSeries();
+public:
+    /**
+     * @brief Construct a new RoundChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    BarredChart(DataMatrix table);
+};
+
+class BarChart : public BarredChart
+{
 public:
     /**
      * @brief Construct a new BarChart object
@@ -147,10 +158,8 @@ public:
     Chart* clone(DataMatrix table);
 };
 
-class StackedBarChart : public Chart
+class StackedBarChart : public BarredChart
 {
-protected:
-    QStackedBarSeries* toSeries();
 public:
     /**
      * @brief Construct a new StckedBarChart object
@@ -168,10 +177,8 @@ public:
     Chart* clone(DataMatrix table);
 };
 
-class HorizontalBarChart : public Chart
+class HorizontalBarChart : public BarredChart
 {
-protected:
-    QHorizontalBarSeries* toSeries();
 public:
     /**
      * @brief Construct a new StckedBarChart object
@@ -189,10 +196,8 @@ public:
     Chart* clone(DataMatrix table);
 };
 
-class HorizontalStackedBarChart : public Chart
+class HorizontalStackedBarChart : public BarredChart
 {
-protected:
-    QHorizontalStackedBarSeries* toSeries();
 public:
     /**
      * @brief Construct a new StckedBarChart object
@@ -210,10 +215,8 @@ public:
     Chart* clone(DataMatrix table);
 };
 
-class PercentBarChart : public Chart
+class PercentBarChart : public BarredChart
 {
-protected:
-    QPercentBarSeries* toSeries();
 public:
     /**
      * @brief Construct a new BarChart object
@@ -231,10 +234,8 @@ public:
     Chart* clone(DataMatrix table);
 };
 
-class HorizontalPercentBarChart : public Chart
+class HorizontalPercentBarChart : public BarredChart
 {
-protected:
-    QHorizontalPercentBarSeries* toSeries();
 public:
     /**
      * @brief Construct a new BarChart object
