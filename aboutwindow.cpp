@@ -24,7 +24,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     QLabel *label4 = new QLabel("○ If you want to create new charts you need to click VIEW and choose the one you want to display", this);
     layout->addWidget(label4);
     label4->setFont(g);
-    QLabel *label5 = new QLabel("○ The available charts at the moment are Pie Charts, Donut Charts, Bar Charts, StackedBar Charts, HorizontalBar Charts, HorizontalStackedBar Charts, Line Charts, Spline Charts and Scatter Charts.", this);
+    QLabel *label5 = new QLabel("○ The available charts at the moment are Pie Charts, Donut Charts, Bar Charts, Stacked Bar Charts, Horizontal Bar Charts, Horizontal Stacked Bar Charts, Percent Bar Charts, Line Charts, Spline Charts and Scatter Charts.", this);
     layout->addWidget(label5);
     label5->setFont(g);
 

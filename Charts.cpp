@@ -20,6 +20,8 @@ HorizontalBarChart::HorizontalBarChart(DataMatrix _table) : Chart(_table) {}
 
 HorizontalStackedBarChart::HorizontalStackedBarChart(DataMatrix _table) : Chart(_table) {}
 
+PercentBarChart::PercentBarChart(DataMatrix _table) : Chart(_table) {}
+
 ContinuousChart::ContinuousChart(DataMatrix _table) : Chart(_table) {}
 
 LineChart::LineChart(DataMatrix _table) : ContinuousChart(_table) {}
@@ -49,7 +51,7 @@ QPieSeries *RoundChart::toSeries()
 QChart *PieChart::draw()
 {
     QChart *RoundChart = new QChart();
-    RoundChart->setTitle("This is your PieChart");
+    RoundChart->setTitle("This is your Pie Chart");
 
     auto series = RoundChart::toSeries();
     QPieSlice *slice = series->slices().at(1);
@@ -73,7 +75,7 @@ QChart *PieChart::draw()
 QChart *DonutChart::draw()
 {
     QChart *RoundChart = new QChart();
-    RoundChart->setTitle("This is your DonutChart");
+    RoundChart->setTitle("This is your Donut Chart");
     auto series = RoundChart::toSeries();
     QPieSlice *slice = series->slices().at(1);
     RoundChart->addSeries(series);
@@ -114,7 +116,7 @@ QBarSeries *BarChart::toSeries()
 QChart *BarChart::draw()
 {
     QChart *BarChart = new QChart();
-    BarChart->setTitle("This is your BarChart");
+    BarChart->setTitle("This is your Bar Chart");
     auto series = BarChart::toSeries();
     BarChart->addSeries(series);
     BarChart->setAnimationOptions(QChart::SeriesAnimations);
@@ -162,7 +164,7 @@ QStackedBarSeries *StackedBarChart::toSeries()
 QChart *StackedBarChart::draw()
 {
     QChart *StackedBarChart = new QChart();
-    StackedBarChart->setTitle("This is your StackedBar Chart");
+    StackedBarChart->setTitle("This is your Stacked Bar Chart");
     auto series = StackedBarChart::toSeries();
     StackedBarChart->addSeries(series);
     StackedBarChart->setAnimationOptions(QChart::SeriesAnimations);
@@ -210,7 +212,7 @@ QHorizontalBarSeries *HorizontalBarChart::toSeries()
 QChart *HorizontalBarChart::draw()
 {
     QChart *HorizontalBarChart = new QChart();
-    HorizontalBarChart->setTitle("This is your HorizontalBar Chart");
+    HorizontalBarChart->setTitle("This is your Horizontal Bar Chart");
     auto series = HorizontalBarChart::toSeries();
     HorizontalBarChart->addSeries(series);
     HorizontalBarChart->setAnimationOptions(QChart::SeriesAnimations);
@@ -258,7 +260,7 @@ QHorizontalStackedBarSeries *HorizontalStackedBarChart::toSeries()
 QChart *HorizontalStackedBarChart::draw()
 {
     QChart *HorizontalStackedBarChart = new QChart();
-    HorizontalStackedBarChart->setTitle("This is your HorizontalStackedBar Chart");
+    HorizontalStackedBarChart->setTitle("This is your Horizontal Stacked Bar Chart");
     auto series = HorizontalStackedBarChart::toSeries();
     HorizontalStackedBarChart->addSeries(series);
     HorizontalStackedBarChart->setAnimationOptions(QChart::SeriesAnimations);
@@ -284,6 +286,54 @@ QChart *HorizontalStackedBarChart::draw()
     qApp->setPalette(pale);
 
     return HorizontalStackedBarChart;
+}
+
+QPercentBarSeries *PercentBarChart::toSeries()
+{
+    QPercentBarSeries *series = new QPercentBarSeries();
+    auto table = getTable();
+    auto names = table.getRowLabel();
+    for (unsigned int i = 0; i < names->size(); i++)
+    {
+        QBarSet *set = new QBarSet(QString::fromStdString((*names)[i]));
+        for (auto& tmp: (*(table.getData()))[i])
+        {
+            *set << tmp;
+        }
+        series->append(set);
+    }
+    return series;
+}
+
+QChart *PercentBarChart::draw()
+{
+    QChart *PercentBarChart = new QChart();
+    PercentBarChart->setTitle("This is your Percentbar Chart");
+    auto series = PercentBarChart::toSeries();
+    PercentBarChart->addSeries(series);
+    PercentBarChart->setAnimationOptions(QChart::SeriesAnimations);
+    auto table = getTable();
+    QStringList categories;
+    for (auto& tmp: *table.getColumnLabel())
+    {
+        categories << QString::fromStdString(tmp);
+    }
+
+    QBarCategoryAxis *axis = new QBarCategoryAxis();
+    axis->append(categories);
+    PercentBarChart->createDefaultAxes();
+    PercentBarChart->setAxisX(axis, series);
+    PercentBarChart->legend()->setVisible(true);
+    PercentBarChart->legend()->setAlignment(Qt::AlignBottom);
+
+    QChartView *chartView = new QChartView(PercentBarChart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    PercentBarChart->setTheme(QChart::ChartThemeBlueIcy);
+    QPalette pale = qApp->palette();
+    pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
+    qApp->setPalette(pale);
+
+    return PercentBarChart;
 }
 
 template <class T>
@@ -337,7 +387,7 @@ QChart *LineChart::draw()
 QChart *SplineChart::draw()
 {
     QChart *SplineChart = new QChart();
-    SplineChart->setTitle("This is your Spline chart");
+    SplineChart->setTitle("This is your Spline Chart");
     auto table = getTable();
     auto names = table.getRowLabel();
     for(unsigned int j = 0; j < table.getRowCount(); j++)
@@ -384,7 +434,7 @@ QScatterSeries *ScatterChart::toSeries(unsigned int i)
 QChart *ScatterChart::draw()
 {
     QChart *ScatterChart = new QChart();
-    ScatterChart->setTitle("This is your Scatter chart");
+    ScatterChart->setTitle("This is your Scatter Chart");
     auto table = getTable();
     auto names = table.getRowLabel();
     for(unsigned int j = 0; j < table.getRowCount(); j++)
@@ -443,6 +493,11 @@ Chart *HorizontalBarChart::clone(DataMatrix table)
 Chart *HorizontalStackedBarChart::clone(DataMatrix table)
 {
     return new HorizontalStackedBarChart(table);
+}
+
+Chart *PercentBarChart::clone(DataMatrix table)
+{
+    return new PercentBarChart(table);
 }
 
 Chart *LineChart::clone(DataMatrix table)
