@@ -31,16 +31,8 @@ void MainWindow::setBar()
     //! file
     file = new QMenu("File");
     menuBar->addMenu(file);
-
-    newChart = file->addMenu("New chart"); // f0
-
-    newChart->addAction(new QAction("Pie Chart", newChart));    // nc0
-    newChart->addAction(new QAction("Donut Chart", newChart));  // nc1
-    newChart->addAction(new QAction("Bar Chart", newChart));    // nc2
-    newChart->addAction(new QAction("StackedBar Chart", newChart)); // nc3
-    newChart->addAction(new QAction("Line Chart", newChart));   // nc4
-    newChart->addAction(new QAction("Spline Chart", newChart)); // nc5
-    newChart->addAction(new QAction("Scatter Chart", newChart)); // nc6
+//placeholder per non scalare
+    file->addAction(new QAction("New", file));    // f0
 
     file->addAction(new QAction("Open", file)); // f1
 
@@ -62,7 +54,57 @@ void MainWindow::setBar()
     view = new QMenu("View", menuBar);
     menuBar->addMenu(view);
 
-    view->addSeparator();
+    /*QActionGroup *alignmentGroup = new QActionGroup(this);
+    alignmentGroup->addAction(new QAction("Pie Chart", alignmentGroup));    // nc0
+    alignmentGroup->addAction(new QAction("Donut Chart", alignmentGroup));  // nc1
+    alignmentGroup->addAction(new QAction("Bar Chart", alignmentGroup));    // nc2
+    alignmentGroup->addAction(new QAction("StackedBar Chart", alignmentGroup)); // nc3
+    alignmentGroup->addAction(new QAction("Line Chart", alignmentGroup));   // nc4
+    alignmentGroup->addAction(new QAction("Spline Chart", alignmentGroup)); // nc5
+    alignmentGroup->setExclusive(true);
+    */
+/*
+    view->addAction(new QAction("Pie Chart", view));    // nc0
+    view->addAction(new QAction("Donut Chart", view));  // nc1
+    view->addAction(new QAction("Bar Chart", view));    // nc2
+    view->addAction(new QAction("StackedBar Chart", view)); // nc3
+    view->addAction(new QAction("Line Chart", view));   // nc4
+    view->addAction(new QAction("Spline Chart", view)); // nc5
+    view->addAction(new QAction("Scatter Chart", view)); //nc6
+*/
+
+    QAction *item1 = new QAction("Pie Chart");
+    item1->setCheckable(true);
+    QAction *item2 = new QAction("Donut Chart");
+    item2->setCheckable(true);
+    QAction *item3 = new QAction("Bar Chart");
+    item3->setCheckable(true);
+    QAction *item4 = new QAction("Stackedbar Chart");
+    item4->setCheckable(true);
+    QAction *item5 = new QAction("Line Chart");
+    item5->setCheckable(true);
+    QAction *item6 = new QAction("Spline Chart");
+    item6->setCheckable(true);
+    QAction *item7 = new QAction("Scatter Chart");
+    item7->setCheckable(true);
+
+    view->addAction(item1);
+    view->addAction(item2);
+    view->addAction(item3);
+    view->addAction(item4);
+    view->addAction(item5);
+    view->addAction(item6);
+    view->addAction(item7);
+
+    QActionGroup *myGroup = new QActionGroup(this);
+    myGroup->setExclusive(true);
+    myGroup->addAction(item1);
+    myGroup->addAction(item2);
+    myGroup->addAction(item3);
+    myGroup->addAction(item4);
+    myGroup->addAction(item5);
+    myGroup->addAction(item6);
+    myGroup->addAction(item7);
 
     view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
@@ -123,21 +165,21 @@ void MainWindow::setController(Controller *_controller)
 
     connect(help->actions().at(1), SIGNAL(triggered()), this, SLOT(contacts())); // contacts
 
-    connect(newChart->actions().at(0), &QAction::triggered, [&]()  //new chart
+    connect(view->actions().at(0), &QAction::triggered, [&]()  //new chart
             {
                 auto tabella = controller->getModel()->getTable();
                 chart = new PieChart(tabella);
                 drawChart(chart);
             });
 
-    connect(newChart->actions().at(1), &QAction::triggered, [&]()
+    connect(view->actions().at(1), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 chart = new DonutChart(tabella);
                 drawChart(chart);
             });
 
-    connect(newChart->actions().at(2), &QAction::triggered, [&]()
+    connect(view->actions().at(2), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 chart = new BarChart(tabella);
@@ -145,28 +187,28 @@ void MainWindow::setController(Controller *_controller)
             });
 
 
-    connect(newChart->actions().at(3), &QAction::triggered, [&]()
+    connect(view->actions().at(3), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 chart = new StackedBarChart(tabella);
                 drawChart(chart);
             });
 
-    connect(newChart->actions().at(4), &QAction::triggered, [&]()
+    connect(view->actions().at(4), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 chart = new LineChart(tabella);
                 drawChart(chart);
             });
 
-    connect(newChart->actions().at(5), &QAction::triggered, [&]()
+    connect(view->actions().at(5), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 chart = new SplineChart(tabella);
                 drawChart(chart);
             });
 
-    connect(newChart->actions().at(6), &QAction::triggered, [&]()
+    connect(view->actions().at(6), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 chart = new ScatterChart(tabella);
