@@ -21,6 +21,7 @@
 #include <QtCharts/QSplineSeries>
 #include <QStackedBarSeries>
 #include<QHorizontalBarSeries>
+#include <QHorizontalStackedBarSeries>
 #include <QScatterSeries>
 #include <QPointF>
 #include <QPainter>
@@ -176,6 +177,27 @@ public:
      * @param table reference of a 2d vector
      */
     HorizontalBarChart(DataMatrix table);
+    /**
+     * @brief Draws stacked bar charts
+     *
+     * @param chart
+     * @return QChart
+     */
+    QChart *draw();
+    Chart* clone(DataMatrix table);
+};
+
+class HorizontalStackedBarChart : public Chart
+{
+protected:
+    QHorizontalStackedBarSeries* toSeries();
+public:
+    /**
+     * @brief Construct a new StckedBarChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    HorizontalStackedBarChart(DataMatrix table);
     /**
      * @brief Draws stacked bar charts
      *

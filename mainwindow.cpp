@@ -83,12 +83,14 @@ void MainWindow::setBar()
     item4->setCheckable(true);
     QAction *item5 = new QAction("Horizontalbar Chart");
     item5->setCheckable(true);
-    QAction *item6 = new QAction("Line Chart");
+    QAction *item6 = new QAction("HorizontalStackedbar Chart");
     item6->setCheckable(true);
-    QAction *item7 = new QAction("Spline Chart");
+    QAction *item7 = new QAction("Line Chart");
     item7->setCheckable(true);
-    QAction *item8 = new QAction("Scatter Chart");
+    QAction *item8 = new QAction("Spline Chart");
     item8->setCheckable(true);
+    QAction *item9 = new QAction("Scatter Chart");
+    item9->setCheckable(true);
 
     view->addAction(item1);
     view->addAction(item2);
@@ -97,6 +99,8 @@ void MainWindow::setBar()
     view->addAction(item5);
     view->addAction(item6);
     view->addAction(item7);
+    view->addAction(item8);
+    view->addAction(item9);
 
     QActionGroup *myGroup = new QActionGroup(this);
     myGroup->setExclusive(true);
@@ -107,6 +111,8 @@ void MainWindow::setBar()
     myGroup->addAction(item5);
     myGroup->addAction(item6);
     myGroup->addAction(item7);
+    myGroup->addAction(item8);
+    myGroup->addAction(item9);
 
     view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
@@ -206,18 +212,25 @@ void MainWindow::setController(Controller *_controller)
     connect(view->actions().at(5), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                chart = new LineChart(tabella);
+                chart = new HorizontalStackedBarChart(tabella);
                 drawChart(chart);
             });
 
     connect(view->actions().at(6), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                chart = new SplineChart(tabella);
+                chart = new LineChart(tabella);
                 drawChart(chart);
             });
 
     connect(view->actions().at(7), &QAction::triggered, [&]()
+            {
+                auto tabella = controller->getModel()->getTable();
+                chart = new SplineChart(tabella);
+                drawChart(chart);
+            });
+
+    connect(view->actions().at(8), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 chart = new ScatterChart(tabella);

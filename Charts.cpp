@@ -18,6 +18,8 @@ StackedBarChart::StackedBarChart(DataMatrix _table) : Chart(_table) {}
 
 HorizontalBarChart::HorizontalBarChart(DataMatrix _table) : Chart(_table) {}
 
+HorizontalStackedBarChart::HorizontalStackedBarChart(DataMatrix _table) : Chart(_table) {}
+
 ContinuousChart::ContinuousChart(DataMatrix _table) : Chart(_table) {}
 
 LineChart::LineChart(DataMatrix _table) : ContinuousChart(_table) {}
@@ -160,7 +162,7 @@ QStackedBarSeries *StackedBarChart::toSeries()
 QChart *StackedBarChart::draw()
 {
     QChart *StackedBarChart = new QChart();
-    StackedBarChart->setTitle("This is your StackedBarChart");
+    StackedBarChart->setTitle("This is your StackedBar Chart");
     auto series = StackedBarChart::toSeries();
     StackedBarChart->addSeries(series);
     StackedBarChart->setAnimationOptions(QChart::SeriesAnimations);
@@ -234,6 +236,54 @@ QChart *HorizontalBarChart::draw()
     qApp->setPalette(pale);
 
     return HorizontalBarChart;
+}
+
+QHorizontalStackedBarSeries *HorizontalStackedBarChart::toSeries()
+{
+    QHorizontalStackedBarSeries *series = new QHorizontalStackedBarSeries();
+    auto table = getTable();
+    auto names = table.getRowLabel();
+    for (unsigned int i = 0; i < names->size(); i++)
+    {
+        QBarSet *set = new QBarSet(QString::fromStdString((*names)[i]));
+        for (auto& tmp: (*(table.getData()))[i])
+        {
+            *set << tmp;
+        }
+        series->append(set);
+    }
+    return series;
+}
+
+QChart *HorizontalStackedBarChart::draw()
+{
+    QChart *HorizontalStackedBarChart = new QChart();
+    HorizontalStackedBarChart->setTitle("This is your HorizontalStackedBar Chart");
+    auto series = HorizontalStackedBarChart::toSeries();
+    HorizontalStackedBarChart->addSeries(series);
+    HorizontalStackedBarChart->setAnimationOptions(QChart::SeriesAnimations);
+    auto table = getTable();
+    QStringList categories;
+    for (auto& tmp: *table.getColumnLabel())
+    {
+        categories << QString::fromStdString(tmp);
+    }
+
+    QBarCategoryAxis *axis = new QBarCategoryAxis();
+    axis->append(categories);
+    HorizontalStackedBarChart->createDefaultAxes();
+    HorizontalStackedBarChart->setAxisY(axis, series);
+    HorizontalStackedBarChart->legend()->setVisible(true);
+    HorizontalStackedBarChart->legend()->setAlignment(Qt::AlignBottom);
+
+    QChartView *chartView = new QChartView(HorizontalStackedBarChart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    HorizontalStackedBarChart->setTheme(QChart::ChartThemeBlueIcy);
+    QPalette pale = qApp->palette();
+    pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
+    qApp->setPalette(pale);
+
+    return HorizontalStackedBarChart;
 }
 
 template <class T>
@@ -388,6 +438,11 @@ Chart *StackedBarChart::clone(DataMatrix table)
 Chart *HorizontalBarChart::clone(DataMatrix table)
 {
     return new HorizontalBarChart(table);
+}
+
+Chart *HorizontalStackedBarChart::clone(DataMatrix table)
+{
+    return new HorizontalStackedBarChart(table);
 }
 
 Chart *LineChart::clone(DataMatrix table)
