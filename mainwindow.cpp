@@ -79,20 +79,22 @@ void MainWindow::setBar()
     item2->setCheckable(true);
     QAction *item3 = new QAction("Bar Chart");
     item3->setCheckable(true);
-    QAction *item4 = new QAction("Stackedbar Chart");
+    QAction *item4 = new QAction("Stacked Bar Chart");
     item4->setCheckable(true);
-    QAction *item5 = new QAction("Horizontalbar Chart");
+    QAction *item5 = new QAction("Horizontal Bar Chart");
     item5->setCheckable(true);
-    QAction *item6 = new QAction("HorizontalStackedbar Chart");
+    QAction *item6 = new QAction("Horizontal Stacked Bar Chart");
     item6->setCheckable(true);
     QAction *item7 = new QAction("Percentbar Chart");
     item7->setCheckable(true);
-    QAction *item8 = new QAction("Line Chart");
+    QAction *item8 = new QAction("Horizontal Percent Bar Chart");
     item8->setCheckable(true);
-    QAction *item9 = new QAction("Spline Chart");
+    QAction *item9 = new QAction("Line Chart");
     item9->setCheckable(true);
-    QAction *item10 = new QAction("Scatter Chart");
+    QAction *item10 = new QAction("Spline Chart");
     item10->setCheckable(true);
+    QAction *item11 = new QAction("Scatter Chart");
+    item11->setCheckable(true);
 
     view->addAction(item1);
     view->addAction(item2);
@@ -104,6 +106,7 @@ void MainWindow::setBar()
     view->addAction(item8);
     view->addAction(item9);
     view->addAction(item10);
+    view->addAction(item11);
 
     QActionGroup *myGroup = new QActionGroup(this);
     myGroup->setExclusive(true);
@@ -117,6 +120,7 @@ void MainWindow::setBar()
     myGroup->addAction(item8);
     myGroup->addAction(item9);
     myGroup->addAction(item10);
+    myGroup->addAction(item11);
 
     //view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox da
 
@@ -230,18 +234,25 @@ void MainWindow::setController(Controller *_controller)
     connect(view->actions().at(7), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                chart = new LineChart(tabella);
+                chart = new HorizontalPercentBarChart(tabella);
                 drawChart(chart);
             });
 
     connect(view->actions().at(8), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                chart = new SplineChart(tabella);
+                chart = new LineChart(tabella);
                 drawChart(chart);
             });
 
     connect(view->actions().at(9), &QAction::triggered, [&]()
+            {
+                auto tabella = controller->getModel()->getTable();
+                chart = new SplineChart(tabella);
+                drawChart(chart);
+            });
+
+    connect(view->actions().at(10), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 chart = new ScatterChart(tabella);

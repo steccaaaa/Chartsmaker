@@ -23,6 +23,7 @@
 #include<QHorizontalBarSeries>
 #include <QHorizontalStackedBarSeries>
 #include <QPercentBarSeries>
+#include <QHorizontalPercentBarSeries>
 #include <QScatterSeries>
 #include <QPointF>
 #include <QPainter>
@@ -220,6 +221,27 @@ public:
      * @param table reference of a 2d vector
      */
     PercentBarChart(DataMatrix table);
+    /**
+     * @brief Draws bar charts
+     *
+     * @param chart
+     * @return QChart
+     */
+    QChart *draw();
+    Chart* clone(DataMatrix table);
+};
+
+class HorizontalPercentBarChart : public Chart
+{
+protected:
+    QHorizontalPercentBarSeries* toSeries();
+public:
+    /**
+     * @brief Construct a new BarChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    HorizontalPercentBarChart(DataMatrix table);
     /**
      * @brief Draws bar charts
      *
