@@ -58,12 +58,12 @@ void Controller::saveAsPdf()
                                                 tr("Pdf file"), "",
                                                 tr("Pdf file (*.pdf)"));
     printer.setOutputFileName(path);
-    printer.setPageMargins(0, 0, 0, 0, QPrinter::DevicePixel);
+    printer.setPageMargins(QMarginsF(0,0,0,0));
 
     QPainter painter;
     painter.begin(&printer);
-    double xscale = printer.pageRect().width() / double(chart->width());
-    double yscale = printer.pageRect().height() / double(chart->height());
+    double xscale = printer.pageLayout().fullRectPixels(printer.resolution()).width() / double(chart->width());
+    double yscale = printer.pageLayout().fullRectPixels(printer.resolution()).height() / double(chart->height());
     double scale = qMin(xscale, yscale);
     painter.scale(scale, scale);
 
