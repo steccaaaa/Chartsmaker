@@ -3,8 +3,10 @@
     <file>images/PieChart.png</file>
     <file>images/DonutChart.png</file>
     <file>images/BarChart.png</file>
+    <file>images/StackedBarChart.png</file>
     <file>images/LineChart.png</file>
     <file>images/SplineChart.png</file>
+    <file>images/ScatterChart.png</file>
     <file>images/explphoto.png</file>
     <file>images/icon.png</file>
 </qresource>

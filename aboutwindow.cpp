@@ -24,7 +24,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     QLabel *label4 = new QLabel("○ If you want to create new charts you need to click on FILE->NEW CHART and choose the one you want to display", this);
     layout->addWidget(label4);
     label4->setFont(g);
-    QLabel *label5 = new QLabel("○ The available charts at the moment are Pie Charts, Donut Charts, Bar Charts, Line Charts and Spline Charts.", this);
+    QLabel *label5 = new QLabel("○ The available charts at the moment are Pie Charts, Donut Charts, Bar Charts, StackedBar Chart, Line Chart, Spline Charts and Scatter Chart.", this);
     layout->addWidget(label5);
     label5->setFont(g);
 
@@ -43,15 +43,26 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     QLabel *imageLabel3 = new QLabel();
     imageLabel3->setPixmap(image3);
 
-    QPixmap image4(":/images/LineChart.png");
+    QPixmap image4(":/images/StackedBarChart.png");
     image4 = image4.scaled(250, 250, Qt::KeepAspectRatio);
     QLabel *imageLabel4 = new QLabel();
     imageLabel4->setPixmap(image4);
 
-    QPixmap image5(":/images/SplineChart.png");
+    QPixmap image5(":/images/LineChart.png");
     image5 = image5.scaled(250, 250, Qt::KeepAspectRatio);
     QLabel *imageLabel5 = new QLabel();
     imageLabel5->setPixmap(image5);
+
+    QPixmap image6(":/images/SplineChart.png");
+    image6 = image6.scaled(250, 250, Qt::KeepAspectRatio);
+    QLabel *imageLabel6 = new QLabel();
+    imageLabel6->setPixmap(image6);
+
+    QPixmap image7(":/images/ScatterChart.png");
+    image7 = image7.scaled(250, 250, Qt::KeepAspectRatio);
+    QLabel *imageLabel7 = new QLabel();
+    imageLabel7->setPixmap(image7);
+
 
     QHBoxLayout *layout2 = new QHBoxLayout();
     layout->addLayout(layout2);
@@ -60,6 +71,8 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     layout2->addWidget(imageLabel3);
     layout2->addWidget(imageLabel4);
     layout2->addWidget(imageLabel5);
+    layout2->addWidget(imageLabel6);
+    layout2->addWidget(imageLabel7);
 
     QLabel *label6 = new QLabel("    However, we suggest you to stay tuned for any upgrades!", this);
     layout->addWidget(label6);
@@ -74,11 +87,11 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     layout->addWidget(label9);
     label9->setFont(g);
 
-    QPixmap image6(":/images/explphoto.png");
-    image6 = image6.scaled(350, 350, Qt::KeepAspectRatio);
-    QLabel *imageLabel6 = new QLabel();
-    imageLabel6->setPixmap(image6);
-    layout->addWidget(imageLabel6);
+    QPixmap image8(":/images/explphoto.png");
+    image8 = image8.scaled(350, 350, Qt::KeepAspectRatio);
+    QLabel *imageLabel8 = new QLabel();
+    imageLabel8->setPixmap(image8);
+    layout->addWidget(imageLabel8);
 
     QLabel *label20 = new QLabel("○ It is possible to modify the data directly on the table by clicking, changing the data and pressing enter on your keyboard. The chart will automatically refresh itself.", this);
     layout->addWidget(label20);
