@@ -73,7 +73,7 @@ void Controller::saveAsPdf()
 void Controller::saveAsImage()
 {
     QWidget *widget = mainwindow->getChart();
-    QPixmap pic = QPixmap::grabWidget(widget);
+    QPixmap pic = widget->grab(QRect(QPoint(10,10), QSize( widget->width(), widget->height()) ));
     widget->render(&pic);
     QString path = QFileDialog::getSaveFileName(mainwindow,
                                                 tr("Png image"), "",
