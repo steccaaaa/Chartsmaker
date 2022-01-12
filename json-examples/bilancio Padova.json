@@ -1,0 +1,23 @@
+{
+    "columnLabel": [
+        "Entrate"
+    ],
+    "data": [
+        [155554187],
+        [38101379],
+        [56855946],
+        [121902046],
+        [117557782],
+        [84964440],
+        [11647998]
+    ],
+    "rowLabel": [
+        "Entrate tributarie",
+        "Trasferimenti correnti",
+        "Entrate extratributarie",
+        "Conto capitale",
+        "Anticipazioni",
+        "Entrate per conto terzi",
+        "Altro"
+    ]
+}
