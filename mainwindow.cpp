@@ -31,8 +31,8 @@ void MainWindow::setBar()
     //! file
     file = new QMenu("File");
     menuBar->addMenu(file);
-//placeholder per non scalare
-    file->addAction(new QAction("New", file));    // f0
+    // placeholder per non scalare
+    file->addAction(new QAction("New", file)); // f0
 
     file->addAction(new QAction("Open", file)); // f1
 
@@ -46,32 +46,18 @@ void MainWindow::setBar()
     file->addSeparator();                       // f6
     file->addAction(new QAction("Exit", file)); // f7
 
-    //! edit da fareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-    /*QMenu *edit = new QMenu("Edit", menuBar);
-    menuBar->addMenu(edit);*/
+    //! edit
+    QMenu *edit = new QMenu("Edit", menuBar);
+    menuBar->addMenu(edit);
+
+    edit->addAction(new QAction("Add column before", edit));
+    edit->addAction(new QAction("Add column after", edit));
+    edit->addAction(new QAction("Add row before", edit));
+    edit->addAction(new QAction("Add row after", edit));
 
     //! view
     view = new QMenu("View", menuBar);
     menuBar->addMenu(view);
-
-    /*QActionGroup *alignmentGroup = new QActionGroup(this);
-    alignmentGroup->addAction(new QAction("Pie Chart", alignmentGroup));    // nc0
-    alignmentGroup->addAction(new QAction("Donut Chart", alignmentGroup));  // nc1
-    alignmentGroup->addAction(new QAction("Bar Chart", alignmentGroup));    // nc2
-    alignmentGroup->addAction(new QAction("StackedBar Chart", alignmentGroup)); // nc3
-    alignmentGroup->addAction(new QAction("Line Chart", alignmentGroup));   // nc4
-    alignmentGroup->addAction(new QAction("Spline Chart", alignmentGroup)); // nc5
-    alignmentGroup->setExclusive(true);
-    */
-/*
-    view->addAction(new QAction("Pie Chart", view));    // nc0
-    view->addAction(new QAction("Donut Chart", view));  // nc1
-    view->addAction(new QAction("Bar Chart", view));    // nc2
-    view->addAction(new QAction("StackedBar Chart", view)); // nc3
-    view->addAction(new QAction("Line Chart", view));   // nc4
-    view->addAction(new QAction("Spline Chart", view)); // nc5
-    view->addAction(new QAction("Scatter Chart", view)); //nc6
-*/
 
     QAction *item1 = new QAction("Pie Chart");
     item1->setCheckable(true);
@@ -168,20 +154,24 @@ void MainWindow::setController(Controller *_controller)
 {
     controller = _controller;
 
-    //connessioni a slot
-    connect(file->actions().at(1), SIGNAL(triggered()), controller, SLOT(open())); // open
-    // 2 e' un separator
+    // connessioni a slot
+    // file
+    connect(file->actions().at(1), SIGNAL(triggered()), controller, SLOT(open()));        // open
+                                                                                          // 2 e' un separator
     connect(file->actions().at(3), SIGNAL(triggered()), controller, SLOT(save()));        // save
     connect(file->actions().at(4), SIGNAL(triggered()), controller, SLOT(saveAsImage())); // save as png
     connect(file->actions().at(5), SIGNAL(triggered()), controller, SLOT(saveAsPdf()));   // save as pdf
-    // 6 e' un separator
-    connect(file->actions().at(7), SIGNAL(triggered()), this, SLOT(close())); // exit
+                                                                                          // 6 e' un separator
+    connect(file->actions().at(7), SIGNAL(triggered()), this, SLOT(close()));             // exit
 
-    connect(help->actions().at(0), SIGNAL(triggered()), this, SLOT(about())); // about
+    // edit
 
+    // help
+    connect(help->actions().at(0), SIGNAL(triggered()), this, SLOT(about()));    // about
     connect(help->actions().at(1), SIGNAL(triggered()), this, SLOT(contacts())); // contacts
 
-    connect(view->actions().at(0), &QAction::triggered, [&]()  //new chart
+    // view
+    connect(view->actions().at(0), &QAction::triggered, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
                 chart = new PieChart(tabella);
@@ -201,7 +191,6 @@ void MainWindow::setController(Controller *_controller)
                 chart = new BarChart(tabella);
                 drawChart(chart);
             });
-
 
     connect(view->actions().at(3), &QAction::triggered, [&]()
             {
@@ -258,7 +247,6 @@ void MainWindow::setController(Controller *_controller)
                 chart = new ScatterChart(tabella);
                 drawChart(chart);
             });
-
 
     connect(controller->getModel(), &QAbstractItemModel::dataChanged, [&]()
             {
