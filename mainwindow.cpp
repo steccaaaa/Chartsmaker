@@ -40,6 +40,7 @@ void MainWindow::setBar()
     newChart->addAction(new QAction("StackedBar Chart", newChart)); // nc3
     newChart->addAction(new QAction("Line Chart", newChart));   // nc4
     newChart->addAction(new QAction("Spline Chart", newChart)); // nc5
+    newChart->addAction(new QAction("Scatter Chart", newChart)); // nc6
 
     file->addAction(new QAction("Open", file)); // f1
 
@@ -162,6 +163,13 @@ void MainWindow::setController(Controller *_controller)
             {
                 auto tabella = controller->getModel()->getTable();
                 chart = new SplineChart(tabella);
+                drawChart(chart);
+            });
+
+    connect(newChart->actions().at(6), &QAction::triggered, [&]()
+            {
+                auto tabella = controller->getModel()->getTable();
+                chart = new ScatterChart(tabella);
                 drawChart(chart);
             });
 

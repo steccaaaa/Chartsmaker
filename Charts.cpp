@@ -22,6 +22,8 @@ LineChart::LineChart(DataMatrix _table) : ContinuousChart(_table) {}
 
 SplineChart::SplineChart(DataMatrix _table) : ContinuousChart(_table) {}
 
+ScatterChart::ScatterChart(DataMatrix _table) : Chart(_table) {}
+
 DataMatrix Chart::getTable()
 {
     return table;
@@ -184,6 +186,7 @@ QChart *StackedBarChart::draw()
     return StackedBarChart;
 }
 
+
 template <class T>
 T *ContinuousChart::toSeries(unsigned int i)
 {
@@ -266,6 +269,52 @@ QChart *SplineChart::draw()
     return SplineChart;
 }
 
+QScatterSeries *ScatterChart::toSeries(unsigned int i)
+{
+    auto table = getTable();
+    QScatterSeries *series = new QScatterSeries();
+    for(unsigned int j = 0; j < table.getColumnCount(); j++)
+    {
+        series->append(j, table.getData()->at(i).at(j));
+        series->setMarkerShape(QScatterSeries::MarkerShapeCircle);
+        series->setMarkerSize(15.0);
+    }
+    return series;
+}
+
+QChart *ScatterChart::draw()
+{
+    QChart *ScatterChart = new QChart();
+    ScatterChart->setTitle("This is your Scatter chart");
+    auto table = getTable();
+    auto names = table.getRowLabel();
+    for(unsigned int j = 0; j < table.getRowCount(); j++)
+    {
+        auto series = ScatterChart::toSeries(j);
+        ScatterChart->addSeries(series);
+        ScatterChart->createDefaultAxes();
+        QCategoryAxis *axisX = new QCategoryAxis();
+        QCategoryAxis *axisY = new QCategoryAxis();
+        for(unsigned int i = 0; i < table.getColumnCount(); i++)
+        {
+            axisX->append(QString::fromStdString(table.getColumnLabel()->at(i)), i + 0.5);
+            series->setName(QString::fromStdString((*names)[j]));
+        }
+        ScatterChart->addAxis(axisX, Qt::AlignBottom);
+        ScatterChart->addAxis(axisY, Qt::AlignLeft);
+        series->attachAxis(axisX);
+    }
+        QChartView *chartView = new QChartView(ScatterChart);
+        ScatterChart->legend()->setVisible(true);
+        ScatterChart->legend()->setAlignment(Qt::AlignBottom);
+        chartView->setRenderHint(QPainter::Antialiasing);
+        ScatterChart->setTheme(QChart::ChartThemeBlueIcy);
+        QPalette pale = qApp->palette();
+        pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
+        qApp->setPalette(pale);
+
+        return ScatterChart;
+};
 
 Chart *PieChart::clone(DataMatrix table)
 {
@@ -284,7 +333,7 @@ Chart *BarChart::clone(DataMatrix table)
 
 Chart *StackedBarChart::clone(DataMatrix table)
 {
-    return new BarChart(table);
+    return new StackedBarChart(table);
 }
 
 Chart *LineChart::clone(DataMatrix table)
@@ -295,5 +344,10 @@ Chart *LineChart::clone(DataMatrix table)
 Chart *SplineChart::clone(DataMatrix table)
 {
     return new SplineChart(table);
+}
+
+Chart *ScatterChart::clone(DataMatrix table)
+{
+    return new ScatterChart(table);
 }
 

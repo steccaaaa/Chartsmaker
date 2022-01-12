@@ -20,6 +20,8 @@
 #include <QtCharts/QCategoryAxis>
 #include <QtCharts/QSplineSeries>
 #include <QStackedBarSeries>
+#include<QHorizontalBarSeries>
+#include <QScatterSeries>
 #include <QPointF>
 #include <QPainter>
 #include <QPalette>
@@ -148,13 +150,34 @@ protected:
     QStackedBarSeries* toSeries();
 public:
     /**
-     * @brief Construct a new BarChart object
+     * @brief Construct a new StckedBarChart object
      *
      * @param table reference of a 2d vector
      */
     StackedBarChart(DataMatrix table);
     /**
-     * @brief Draws bar charts
+     * @brief Draws stacked bar charts
+     *
+     * @param chart
+     * @return QChart
+     */
+    QChart *draw();
+    Chart* clone(DataMatrix table);
+};
+
+class HorizontalBarChart : public Chart
+{
+protected:
+    QHorizontalBarSeries* toSeries();
+public:
+    /**
+     * @brief Construct a new HorizontalBarChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    HorizontalBarChart(DataMatrix table);
+    /**
+     * @brief Draws horizontal bar charts
      *
      * @param chart
      * @return QChart
@@ -205,7 +228,27 @@ public:
      */
     SplineChart(DataMatrix table);
     /**
-     * @brief Draws spline charts (similar to line harts but with rounded edges
+     * @brief Draws spline charts
+     *
+     * @param chart
+     * @return QChart
+     */
+    QChart *draw();
+    Chart* clone(DataMatrix table);
+};
+
+class ScatterChart : public Chart
+{
+public:
+     QScatterSeries* toSeries(unsigned int i);
+    /**
+     * @brief Construct a new ScatterChart object
+     *
+     * @param table reference of a 2d vector
+     */
+    ScatterChart(DataMatrix table);
+    /**
+     * @brief Draws line charts
      *
      * @param chart
      * @return QChart
