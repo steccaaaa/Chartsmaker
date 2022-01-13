@@ -37,18 +37,24 @@ void Controller::open(/*std::string path*/)
                                                 tr("Json file (*.json);;All Files (*)"));
     std::cout << "opening " << path.toStdString() << "...\n";
     model->readJson(path.toStdString());
-    //! non è il miglior comportamento che possa avere ma non so come fare altrimenti
     //refresh
     mainwindow->setTableView();
-    //mainwindow->drawChart(/* non so cosa metterci dentro*/);
-    mainwindow->layout()->removeWidget(mainwindow->getChartView());
+    if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
 }
 
 Model *Controller::getModel() { return model; }
 
 void Controller::zoomIn(){};
 void Controller::zoomOut(){};
-void Controller::newChart(){};
+
+void Controller::newChart()
+{
+    QString rowLabel = QInputDialog::getText(mainwindow, "Insert", "Row label:", QLineEdit::Normal);
+    QString columnLabel = QInputDialog::getText(mainwindow, "Insert", "Column label:", QLineEdit::Normal);
+    model->newModel(rowLabel.toStdString(), columnLabel.toStdString());
+    mainwindow->setTableView();
+    if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
+};
 
 void Controller::saveAsPdf()
 {
@@ -99,7 +105,7 @@ void Controller::addColumnB()
     {
         model->insertColumn(mainwindow->getSelectedColumn(), label.toStdString());
         mainwindow->setTableView();
-        mainwindow->drawChart(mainwindow->getChart());
+        if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
     }
 };
 void Controller::addColumnA()
@@ -109,7 +115,7 @@ void Controller::addColumnA()
     {
         model->insertColumn(mainwindow->getSelectedColumn() + 1, label.toStdString());
         mainwindow->setTableView();
-        mainwindow->drawChart(mainwindow->getChart());
+        if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
     }
 };
 
@@ -120,7 +126,7 @@ void Controller::addRowB()
     {
         model->insertRow(mainwindow->getSelectedRow(), label.toStdString());
         mainwindow->setTableView();
-        mainwindow->drawChart(mainwindow->getChart());
+        if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
     }
 }
 
@@ -131,6 +137,20 @@ void Controller::addRowA()
     {
         model->insertRow(mainwindow->getSelectedRow() + 1, label.toStdString());
         mainwindow->setTableView();
-        mainwindow->drawChart(mainwindow->getChart());
+        if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
     }
+}
+
+void Controller::removeColumn()
+{
+    model->removeColumn(mainwindow->getSelectedColumn());
+    mainwindow->setTableView();
+    if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
+}
+
+void Controller::removeRow()
+{
+    model->removeRow(mainwindow->getSelectedRow());
+    mainwindow->setTableView();
+    if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
 }

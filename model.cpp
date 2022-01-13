@@ -22,22 +22,10 @@ void print2(vector<vector<double>> const *vec) //! debug
 
 Model::Model(QObject *parent) : QAbstractTableModel(parent)
 {
-    /*for (unsigned int i = 0; i < table.getRowCount(); i++)
-    {
-        QVector<qreal> *dataVector = new QVector<qreal>(table.getColumnCount());
-        for (int j = 0; j < dataVector->size(); j++)
-            dataVector->replace(j, (j+1)*i);
-        _data.append(dataVector); // appendi alla lista di vettori
-    }*/
-    DataMatrix k;
-    //k.read();
-    std::vector<std::vector<double>> mat{
-        {1, 2, 7},
-        {9, 7, 6},
-        {7, 8, 9}};
-    std::vector<std::string> mats{"a", "b", "c"};
-    std::vector<std::string> matss{"x", "y", "z"};
-    DataMatrix x(mat, mats, matss);
+    std::vector<std::vector<double>> mat{{1}};
+    std::vector<std::string> matr{"a"};
+    std::vector<std::string> matc{"x"};
+    DataMatrix x(mat, matr, matc);
     table = x;
 }
 
@@ -137,6 +125,33 @@ void Model::insertColumn(unsigned int i, std::string label)
     vector<double> v(table.getRowCount(), 0);
     table.addColumn(v, i, label);
 }
+
+void Model::removeRow(unsigned int i) { table.deleteRow(i); }
+
+void Model::removeColumn(unsigned int i) { table.deleteColumn(i); }
+
+void Model::newModel(std::string rowLabel, std::string columnLabel)
+{
+    if(table.getData()){//se e' piena la svuota
+        for (long unsigned int i = 0; i < table.getData()->size(); ++i)
+        {
+            table.getData()[i].clear();
+            table.getData()[i].shrink_to_fit();
+        }
+        table.getData()->clear();
+        table.getData()->shrink_to_fit();
+        table.getRowLabel()->clear();
+        table.getRowLabel()->shrink_to_fit();
+        table.getColumnLabel()->clear();
+        table.getColumnLabel()->shrink_to_fit();
+    }
+    std::vector<std::vector<double>> mat{{0}};
+    std::vector<std::string> matr{rowLabel};
+    std::vector<std::string> matc{columnLabel};
+    DataMatrix x(mat, matr, matc);
+    table = x;
+}
+
 
 /*bool Model::insertRows(int row, int count, const QModelIndex &parent)
 {

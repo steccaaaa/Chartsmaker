@@ -54,6 +54,10 @@ void MainWindow::setBar()
     edit->addAction(new QAction("Add column after", edit));
     edit->addAction(new QAction("Add row before", edit));
     edit->addAction(new QAction("Add row after", edit));
+    edit->addSeparator();
+    edit->addAction(new QAction("Delete column", edit));
+    edit->addAction(new QAction("Delete row", edit));
+
 
     //! view
     view = new QMenu("View", menuBar);
@@ -121,6 +125,10 @@ void MainWindow::setBar()
 
 void MainWindow::drawChart(Chart *chart)
 {
+    if(!chart){
+        std::cerr << "Trying to draw a nullptr chart\n";
+        return;
+    }
     auto qchart = chart->draw();
     if (!chartView)
     {
@@ -134,13 +142,16 @@ void MainWindow::drawChart(Chart *chart)
     layout()->addWidget(chartView);
 }
 
-void MainWindow::setTableView(/*Model *_model*/)
+void MainWindow::setTableView()
 {
     //*tableview
-    layout()->removeWidget(tableView);
-    tableView = new QTableView();
+    if(tableView){
+        layout()->removeWidget(tableView);
+        std::cout << "tableview rimossa\n";
+    }else{
+        tableView = new QTableView();
+    }
     tableView->setModel(controller->getModel());
-    // tableView->setModel(_model);
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
     tableView->setGeometry(0, 30, 300, 300); // per ora sono obbligato a mettere un misura fissa
@@ -156,6 +167,7 @@ void MainWindow::setController(Controller *_controller)
 
     // connessioni a slot
     // file
+    connect(file->actions().at(0), SIGNAL(triggered()), controller, SLOT(newChart()));    // new
     connect(file->actions().at(1), SIGNAL(triggered()), controller, SLOT(open()));        // open
                                                                                           // 2 e' un separator
     connect(file->actions().at(3), SIGNAL(triggered()), controller, SLOT(save()));        // save
@@ -169,6 +181,9 @@ void MainWindow::setController(Controller *_controller)
     connect(edit->actions().at(1), SIGNAL(triggered()), controller, SLOT(addColumnA()));
     connect(edit->actions().at(2), SIGNAL(triggered()), controller, SLOT(addRowB()));
     connect(edit->actions().at(3), SIGNAL(triggered()), controller, SLOT(addRowA()));
+    //4 separator
+    connect(edit->actions().at(5), SIGNAL(triggered()), controller, SLOT(removeColumn()));
+    connect(edit->actions().at(6), SIGNAL(triggered()), controller, SLOT(removeRow()));
 
     // help
     connect(help->actions().at(0), SIGNAL(triggered()), this, SLOT(about()));    // about
