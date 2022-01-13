@@ -75,7 +75,6 @@ Thumbs.db
 build
 *.pro
 *.out
-*.json
 *prova*
 .gitignore
 ChartsMaker
