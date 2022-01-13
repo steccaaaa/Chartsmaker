@@ -54,6 +54,10 @@ void MainWindow::setBar()
     edit->addAction(new QAction("Add column after", edit));
     edit->addAction(new QAction("Add row before", edit));
     edit->addAction(new QAction("Add row after", edit));
+    edit->addSeparator();
+    edit->addAction(new QAction("Delete column", edit));
+    edit->addAction(new QAction("Delete row", edit));
+
 
     //! view
     view = new QMenu("View", menuBar);
@@ -121,6 +125,10 @@ void MainWindow::setBar()
 
 void MainWindow::drawChart(Chart *chart)
 {
+    if(!chart){
+        std::cerr << "Trying to draw a nullptr chart\n";
+        return;
+    }
     auto qchart = chart->draw();
     if (!chartView)
     {
@@ -169,6 +177,9 @@ void MainWindow::setController(Controller *_controller)
     connect(edit->actions().at(1), SIGNAL(triggered()), controller, SLOT(addColumnA()));
     connect(edit->actions().at(2), SIGNAL(triggered()), controller, SLOT(addRowB()));
     connect(edit->actions().at(3), SIGNAL(triggered()), controller, SLOT(addRowA()));
+    //4 separator
+    connect(edit->actions().at(5), SIGNAL(triggered()), controller, SLOT(removeColumn()));
+    connect(edit->actions().at(6), SIGNAL(triggered()), controller, SLOT(removeRow()));
 
     // help
     connect(help->actions().at(0), SIGNAL(triggered()), this, SLOT(about()));    // about

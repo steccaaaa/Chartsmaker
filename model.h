@@ -23,6 +23,8 @@ public:
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
     void insertRow(unsigned int i, std::string label);
     void insertColumn(unsigned int i, std::string label);
+    void removeRow(unsigned int i);
+    void removeColumn(unsigned int i);
 
     //! sta roba mi spaventa intanto lo faccio senza
     /*virtual bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex());

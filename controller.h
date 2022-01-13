@@ -101,6 +101,8 @@ public slots:
 
     void addRowB();
     void addRowA();
+    void removeColumn();
+    void removeRow();
 };
 
 #endif // CONTROLLER_H

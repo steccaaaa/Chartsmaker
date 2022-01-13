@@ -99,7 +99,7 @@ void Controller::addColumnB()
     {
         model->insertColumn(mainwindow->getSelectedColumn(), label.toStdString());
         mainwindow->setTableView();
-        mainwindow->drawChart(mainwindow->getChart());
+        if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
     }
 };
 void Controller::addColumnA()
@@ -109,7 +109,7 @@ void Controller::addColumnA()
     {
         model->insertColumn(mainwindow->getSelectedColumn() + 1, label.toStdString());
         mainwindow->setTableView();
-        mainwindow->drawChart(mainwindow->getChart());
+        if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
     }
 };
 
@@ -120,7 +120,7 @@ void Controller::addRowB()
     {
         model->insertRow(mainwindow->getSelectedRow(), label.toStdString());
         mainwindow->setTableView();
-        mainwindow->drawChart(mainwindow->getChart());
+        if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
     }
 }
 
@@ -131,6 +131,20 @@ void Controller::addRowA()
     {
         model->insertRow(mainwindow->getSelectedRow() + 1, label.toStdString());
         mainwindow->setTableView();
-        mainwindow->drawChart(mainwindow->getChart());
+        if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
     }
+}
+
+void Controller::removeColumn()
+{
+    model->removeColumn(mainwindow->getSelectedColumn());
+    mainwindow->setTableView();
+    if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
+}
+
+void Controller::removeRow()
+{
+    model->removeRow(mainwindow->getSelectedRow());
+    mainwindow->setTableView();
+    if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
 }

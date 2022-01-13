@@ -138,6 +138,11 @@ void Model::insertColumn(unsigned int i, std::string label)
     table.addColumn(v, i, label);
 }
 
+void Model::removeRow(unsigned int i) { table.deleteRow(i); }
+
+void Model::removeColumn(unsigned int i) { table.deleteColumn(i); }
+
+
 /*bool Model::insertRows(int row, int count, const QModelIndex &parent)
 {
 
