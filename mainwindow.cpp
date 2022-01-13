@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
-    resize(1000, 500);
+    resize(1500, 750);
     setWindowIcon(QIcon(":/images/icon.png"));
 
     setBar();
