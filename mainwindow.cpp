@@ -142,13 +142,16 @@ void MainWindow::drawChart(Chart *chart)
     layout()->addWidget(chartView);
 }
 
-void MainWindow::setTableView(/*Model *_model*/)
+void MainWindow::setTableView()
 {
     //*tableview
-    layout()->removeWidget(tableView);
-    tableView = new QTableView();
+    if(tableView){
+        layout()->removeWidget(tableView);
+        std::cout << "tableview rimossa\n";
+    }else{
+        tableView = new QTableView();
+    }
     tableView->setModel(controller->getModel());
-    // tableView->setModel(_model);
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
     tableView->setGeometry(0, 30, 300, 300); // per ora sono obbligato a mettere un misura fissa
@@ -164,6 +167,7 @@ void MainWindow::setController(Controller *_controller)
 
     // connessioni a slot
     // file
+    connect(file->actions().at(0), SIGNAL(triggered()), controller, SLOT(newChart()));    // new
     connect(file->actions().at(1), SIGNAL(triggered()), controller, SLOT(open()));        // open
                                                                                           // 2 e' un separator
     connect(file->actions().at(3), SIGNAL(triggered()), controller, SLOT(save()));        // save
