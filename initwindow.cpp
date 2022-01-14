@@ -6,11 +6,13 @@ InitWindow::InitWindow(Controller *controller, QWidget *parent)
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
     QPushButton *buttonN = new QPushButton("&New", this);
+    buttonN->setStyleSheet("* { background-color: lightblue }");
     QPushButton *buttonO = new QPushButton("&Open", this);
+    buttonO->setStyleSheet("* { background-color: lightblue }");
     layout->addWidget(buttonN);
     layout->addWidget(buttonO);
 
-    resize(400, 500);
+    resize(350, 300);
     setWindowTitle("Start");
 
     //centra la finestra

@@ -11,6 +11,7 @@
 #include <QFont>
 #include <QLabel>
 #include <QHBoxLayout>
+#include <QScrollArea>
 
 
 class aboutwindow : public QWidget

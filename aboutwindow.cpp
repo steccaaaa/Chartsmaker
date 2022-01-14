@@ -18,7 +18,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     QLabel *label2 = new QLabel("ChartMaker allows you to have fun creating the charts you like the most.", this);
     layout->addWidget(label2);
     label2->setFont(g);
-    QLabel *label3 = new QLabel("○ All you need to do is opening a Json file with your elaborated data by clicking on FILE->OPEN and searching in your computer.", this);
+    QLabel *label3 = new QLabel("○ When you open the application you will se a window in which you can choose either to create a new table of data directly on the application or to open a Json file with the data.", this);
     layout->addWidget(label3);
     label3->setFont(g);
     QLabel *label4 = new QLabel("○ If you want to create new charts you need to click VIEW and choose the one you want to display", this);
@@ -28,7 +28,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     layout->addWidget(label5);
     label5->setFont(g);
 
-    QPixmap image(":/images/PieChart.png");
+    /*QPixmap image(":/images/PieChart.png");
     image = image.scaled(270, 270, Qt::KeepAspectRatio);
     QLabel *imageLabel = new QLabel();
     imageLabel->setPixmap(image);
@@ -61,18 +61,18 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     QPixmap image7(":/images/ScatterChart.png");
     image7 = image7.scaled(250, 250, Qt::KeepAspectRatio);
     QLabel *imageLabel7 = new QLabel();
-    imageLabel7->setPixmap(image7);
+    imageLabel7->setPixmap(image7);*/
 
 
     QHBoxLayout *layout2 = new QHBoxLayout();
     layout->addLayout(layout2);
-    layout2->addWidget(imageLabel);
+    /*layout2->addWidget(imageLabel);
     layout2->addWidget(imageLabel2);
     layout2->addWidget(imageLabel3);
     layout2->addWidget(imageLabel4);
     layout2->addWidget(imageLabel5);
     layout2->addWidget(imageLabel6);
-    layout2->addWidget(imageLabel7);
+    layout2->addWidget(imageLabel7);*/
 
     QLabel *label6 = new QLabel("    However, we suggest you to stay tuned for any upgrades!", this);
     layout->addWidget(label6);
@@ -93,8 +93,11 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     imageLabel8->setPixmap(image8);
     layout->addWidget(imageLabel8);
 
-    QLabel *label20 = new QLabel("○ It is possible to modify the data directly on the table by clicking, changing the data and pressing enter on your keyboard. The chart will automatically refresh itself.", this);
+    QLabel *label20 = new QLabel("○ It is possible to modify the data directly on the table by double clicking on the desired cell and changing the data. By pressing enter on your keyboard the chart will automatically refresh itself.", this);
     layout->addWidget(label20);
+    label20->setFont(g);
+    QLabel *label21 = new QLabel("○ To add or delete row and columns on the table you have to select the cell and then go to EDIT. The chart will automatically.", this);
+    layout->addWidget(label21);
     label20->setFont(g);
     QLabel *label10 = new QLabel("○ If you want to save your data you can click FILE->SAVE and by choosing were to save on your computer and choosing a name the program will create a new .json file with your data.", this);
     layout->addWidget(label10);
@@ -118,6 +121,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     QPalette pale = qApp->palette();
     pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
     qApp->setPalette(pale);
+
 }
 
 aboutwindow::~aboutwindow() {}
