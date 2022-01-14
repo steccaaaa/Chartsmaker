@@ -11,7 +11,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
-    QHBoxLayout *mainLayout = new QHBoxLayout(this); // devono essere attributi di classe altrimenti poi scompaiono, vanno solo inizializzate nel costruttore. un po' per tutto
+    QHBoxLayout *mainLayout = new QHBoxLayout(this);
 
     mainLayout->setAlignment(Qt::AlignTop);
     mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -19,10 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     resize(1500, 750);
 
-    //centra la finestra
-   // QScreen *screen = QWidget::screen();
     QRect screenSize = QApplication::desktop()->screenGeometry();
-    //const QRect sr = screen->availableGeometry();
     const QRect wr({}, frameSize().boundedTo(screenSize.size()));
     move(screenSize.center() - wr.center());
 
@@ -119,13 +116,12 @@ void MainWindow::setBar()
     myGroup->addAction(item10);
     myGroup->addAction(item11);
 
-    //view->addAction(new QAction("Logarithmic scale", view)); // vorrei una checkbox da
+    //view->addAction(new QAction("Logarithmic scale", view)); //DA FARE
 
     //! help
     help = new QMenu("Help", menuBar);
     menuBar->addMenu(help);
     help->addAction(new QAction("About", help));
-
     help->addAction(new QAction("Contacts", help));
     this->layout()->setMenuBar(menuBar);
 }
@@ -152,11 +148,9 @@ void MainWindow::drawChart(Chart *chart)
 
 void MainWindow::setTableView()
 {
-    //*tableview
     if (tableView)
     {
         layout()->removeWidget(tableView);
-        std::cout << "tableview rimossa\n";
     }
     else
     {
@@ -165,7 +159,7 @@ void MainWindow::setTableView()
     tableView->setModel(controller->getModel());
     tableView->resizeColumnsToContents();
     tableView->resizeRowsToContents();
-    tableView->setGeometry(0, 30, 300, 300); // per ora sono obbligato a mettere un misura fissa
+    tableView->setGeometry(0, 30, 300, 300);
     tableView->setStyleSheet("QHeaderView::section { background-color:lightblue }");
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -176,29 +170,28 @@ void MainWindow::setController(Controller *_controller)
 {
     controller = _controller;
 
-    // connessioni a slot
     // file
-    connect(file->actions().at(0), SIGNAL(triggered()), controller, SLOT(newChart()));    // new
-    connect(file->actions().at(1), SIGNAL(triggered()), controller, SLOT(open()));        // open
-                                                                                          // 2 e' un separator
-    connect(file->actions().at(3), SIGNAL(triggered()), controller, SLOT(save()));        // save
-    connect(file->actions().at(4), SIGNAL(triggered()), controller, SLOT(saveAsImage())); // save as png
-    connect(file->actions().at(5), SIGNAL(triggered()), controller, SLOT(saveAsPdf()));   // save as pdf
-                                                                                          // 6 e' un separator
-    connect(file->actions().at(7), SIGNAL(triggered()), this, SLOT(close()));             // exit
+    connect(file->actions().at(0), SIGNAL(triggered()), controller, SLOT(newChart()));
+    connect(file->actions().at(1), SIGNAL(triggered()), controller, SLOT(open()));
+
+    connect(file->actions().at(3), SIGNAL(triggered()), controller, SLOT(save()));
+    connect(file->actions().at(4), SIGNAL(triggered()), controller, SLOT(saveAsImage()));
+    connect(file->actions().at(5), SIGNAL(triggered()), controller, SLOT(saveAsPdf()));
+
+    connect(file->actions().at(7), SIGNAL(triggered()), this, SLOT(close()));
 
     // edit
     connect(edit->actions().at(0), SIGNAL(triggered()), controller, SLOT(addColumnB()));
     connect(edit->actions().at(1), SIGNAL(triggered()), controller, SLOT(addColumnA()));
     connect(edit->actions().at(2), SIGNAL(triggered()), controller, SLOT(addRowB()));
     connect(edit->actions().at(3), SIGNAL(triggered()), controller, SLOT(addRowA()));
-    //4 separator
+
     connect(edit->actions().at(5), SIGNAL(triggered()), controller, SLOT(removeColumn()));
     connect(edit->actions().at(6), SIGNAL(triggered()), controller, SLOT(removeRow()));
 
     // help
-    connect(help->actions().at(0), SIGNAL(triggered()), this, SLOT(about()));    // about
-    connect(help->actions().at(1), SIGNAL(triggered()), this, SLOT(contacts())); // contacts
+    connect(help->actions().at(0), SIGNAL(triggered()), this, SLOT(about()));
+    connect(help->actions().at(1), SIGNAL(triggered()), this, SLOT(contacts()));
 
     // view
     connect(view->actions().at(0), &QAction::triggered, [&]()

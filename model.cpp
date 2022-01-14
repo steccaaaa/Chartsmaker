@@ -17,7 +17,7 @@ void print2(vector<vector<double>> const &vec) //! debug
 
 void print2(vector<vector<double>> const *vec) //! debug
 {
-    print2(*vec); // usa l'altro print e magicamente va tutto
+    print2(*vec);
 }
 
 Model::Model(QObject *parent) : QAbstractTableModel(parent)
@@ -31,38 +31,24 @@ Model::Model(QObject *parent) : QAbstractTableModel(parent)
 
 int Model::rowCount(const QModelIndex &parent) const
 {
-    Q_UNUSED(parent) // parent non e' usato -- evita compilazioni inutili
-    //std::cout << "rowcount\n";
+    Q_UNUSED(parent)
     return table.getRowCount();
 }
 
 int Model::columnCount(const QModelIndex &parent) const
 {
-    //std::cout << "colcount\n";
-    Q_UNUSED(parent) // parent non e' usato -- evita compilazioni inutili
+    Q_UNUSED(parent)
     return table.getColumnCount();
 }
 
 QVariant Model::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole)
-    { /*
-        print2(table.getData());
-        QList<QVector<qreal> *> *temp = new QList<QVector<qreal> *>;
-        for (unsigned int i = 0; i < table.getRowCount(); i++)
-        {
-            QVector<qreal> *dataVector = new QVector<qreal>(table.getColumnCount());
-            for (int j = 0; j < dataVector->size(); j++)
-                dataVector->replace(j, (j + 1) * i);
-            temp->append(dataVector); // appendi alla lista di vettori
-        }
-        return (*temp)[index.row()]->at(index.column());*/
-        //std::cout << "data\n";
+    {
         qreal temp = table.getData()->at(index.row()).at(index.column());
-        //std::cout << temp << "\n";
+
         return temp;
     }
-    //std::cout << "qvariant\n";
     return QVariant();
 }
 
@@ -132,7 +118,8 @@ void Model::removeColumn(unsigned int i) { table.deleteColumn(i); }
 
 void Model::newModel(std::string rowLabel, std::string columnLabel)
 {
-    if(table.getData()){//se e' piena la svuota
+    if(table.getData())
+    {
         for (long unsigned int i = 0; i < table.getData()->size(); ++i)
         {
             table.getData()[i].clear();
@@ -153,32 +140,3 @@ void Model::newModel(std::string rowLabel, std::string columnLabel)
 }
 
 
-/*bool Model::insertRows(int row, int count, const QModelIndex &parent)
-{
-
-}
-
-bool Model::insertColumns(int column, int count, const QModelIndex &parent)
-{
-
-}
-
-bool Model::removeRows(int row, int count, const QModelIndex &parent)
-{
-
-}
-
-bool Model::removeColumns(int column, int count, const QModelIndex &parent)
-{
-
-}
-
-bool Model::moveRows(const QModelIndex &sourceParent, int sourceRow, int count, const QModelIndex &destinationParent, int destinationChild)
-{
-
-}
-
-bool Model::moveColumns(const QModelIndex &sourceParent, int sourceColumn, int count, const QModelIndex &destinationParent, int destinationChild)
-{
-
-}*/

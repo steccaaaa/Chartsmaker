@@ -17,7 +17,7 @@ void print(vector<vector<double>> const &vec) //! debug
 
 void print(vector<vector<double>> const *vec) //! debug
 {
-    print(*vec); // usa l'altro print e magicamente va tutto
+    print(*vec);
 }
 
 void print(vector<string> const &label)
@@ -40,7 +40,7 @@ void print(vector<string> const *label)
 DataMatrix::DataMatrix(vector<vector<double>> &_data, vector<string> &_rowLabel, vector<string> &_columnLabel) // Costructor for DataMatrix
 {
     data = new auto(_data);
-    print(data); //! debug
+
     rowLabel = new auto(_rowLabel);
     columnLabel = new auto(_columnLabel);
     print(rowLabel);
@@ -51,26 +51,19 @@ DataMatrix::DataMatrix(const DataMatrix &_table) : data(new std::vector<std::vec
 {
 }
 
-void DataMatrix::addRow(vector<double> &v, unsigned int position, string label) // adds a row in the chosen poition
+void DataMatrix::addRow(vector<double> &v, unsigned int position, string label)
 {
     if (data->size() < position)
     {
         std::cerr << "invalid position to add a row\n";
         return;
     }
-    //*data
-    //print(data); //! debug
-    //std::cout << "adding a row \n";
     data->insert(data->begin() + position, v);
     print(data); //! debug
-
-    //*label
-    //print(rowLabel);
     rowLabel->insert(rowLabel->begin() + position, label);
-    //print(rowLabel);
 }
 
-void DataMatrix::deleteRow(unsigned int position) // deletes the row in the chosen position
+void DataMatrix::deleteRow(unsigned int position)
 {
     if (data[0].size() < position)
     {
@@ -82,48 +75,36 @@ void DataMatrix::deleteRow(unsigned int position) // deletes the row in the chos
     print(data); //!debug
 }
 
-void DataMatrix::addColumn(vector<double> &v, unsigned int position, string label) // adds a column in the chosen position
+void DataMatrix::addColumn(vector<double> &v, unsigned int position, string label)
 {
     if (data[0].size() < position)
     {
         std::cerr << "invalid position to add a column\n";
         return;
     }
-    //* data
-    // non mi piacciono neanche un po' gli iterators
     for (vector<vector<double>>::iterator it = data->begin(); it != data->end(); ++it)
         it->insert(it->begin() + position, v[it - data->begin()]);
 
-    //* label
     columnLabel->insert(columnLabel->begin() + position, label);
-
-    print(data); //! debug
 }
 
-void DataMatrix::deleteColumn(unsigned int position) // deletes the column in the chosen position
+void DataMatrix::deleteColumn(unsigned int position)
 {
     if (data[0].size() < position)
     {
         std::cerr << "invalid position to delete a column\n";
         return;
     }
-
-    //* data
-    // non mi piacciono neanche un po' gli iterators parte 2
     for (vector<vector<double>>::iterator it = data->begin(); it != data->end(); ++it)
         it->erase(it->begin() + position);
 
-    //* labels
     columnLabel->erase(columnLabel->begin() + position);
-
-    print(data); //! debug
 }
 
 //* GETTERS
 
 std::vector<double> *DataMatrix::getColumnData(unsigned int n)
 {
-    //std::vector<double> datavector;
     std::vector<double> *datavector = new std::vector<double>;
     for (unsigned int i = 0; i < data->size(); ++i)
     {
@@ -144,9 +125,10 @@ unsigned int DataMatrix::getRowCount() const { return data->size(); }
 
 unsigned int DataMatrix::getColumnCount() const { return data->at(0).size(); };
 
+
 //* OPERATORS
 
-DataMatrix::~DataMatrix() // deep destrucion of the vector
+DataMatrix::~DataMatrix()
 {
     for (long unsigned int i = 0; i < data->size(); ++i)
     {
@@ -164,35 +146,22 @@ DataMatrix::~DataMatrix() // deep destrucion of the vector
     columnLabel->clear();
     columnLabel->shrink_to_fit();
     delete columnLabel;
-
-    std::cout << "deleted DataMatrix \n"; //!debug
 }
 
 DataMatrix &DataMatrix::operator=(const DataMatrix &table)
 {
-    /*if(data)
-    {
-        delete[] data;
-        delete[] rowLabel;
-        delete[] columnLabel;
-
-        data = table.getData();
-        rowLabel = table.getRowLabel();
-        columnLabel = table.getColumnLabel();
-    } else*/
     data = new auto(*table.getData());
     rowLabel = new auto(*table.getRowLabel());
     columnLabel = new auto(*table.getColumnLabel());
 
-    // return the existing object so we can chain this operator
     return *this;
 }
+
 
 //* PARSE
 
 void DataMatrix::read(std::string path)
 {
-    //apre il file
     QFile file(QString::fromStdString(path));
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QString val = file.readAll();
@@ -209,7 +178,6 @@ void DataMatrix::read(std::string path)
     QJsonArray _column = object.value("columnLabel").toArray();
     QJsonArray _data = object.value("data").toArray();
 
-    //controlli per non distruggere tutto
     if (_data.size() == 0)
     {
         std::cerr << "data can't be empty";
@@ -226,7 +194,6 @@ void DataMatrix::read(std::string path)
         return;
     }
 
-    //nel caso sia valido si cancella tutto quello che c'era prima
     for (long unsigned int i = 0; i < data->size(); ++i)
     {
         data[i].clear();
@@ -236,7 +203,6 @@ void DataMatrix::read(std::string path)
     rowLabel->clear();
     columnLabel->clear();
 
-    //si riempie datamatrix
     for (int i = 0; i < _row.size(); ++i)
         rowLabel->push_back(_row[i].toString().toStdString());
     for (int i = 0; i < _column.size(); ++i)
@@ -248,7 +214,7 @@ void DataMatrix::read(std::string path)
         for (int j = 0; j < _data[i].toArray().size(); ++j)
             data->at(i).push_back(_data[i].toArray()[j].toDouble());
     }
-    //per non sprecare memoria
+
     data->shrink_to_fit();
     rowLabel->shrink_to_fit();
     columnLabel->shrink_to_fit();
@@ -257,7 +223,7 @@ void DataMatrix::read(std::string path)
     print(data);
 }
 
-//TODO: è in ordine alfabetico e la matrice è inguardabile
+
 void DataMatrix::write(std::string path) const
 {
     QFile file(QString::fromStdString(path));
@@ -270,10 +236,8 @@ void DataMatrix::write(std::string path) const
         qDebug() << "File open!";
     }
 
-    // Clear the original content in the file
     file.resize(0);
 
-    // Add a value using QJsonArray and write to the file
     QJsonObject recordObject;
 
     QJsonArray _rowLabel;
@@ -286,12 +250,12 @@ void DataMatrix::write(std::string path) const
 
     QJsonArray _data;
     QJsonArray dataRow;
-    for (unsigned int i = 0; i < data->size(); i++) //questo fa la tabella
+    for (unsigned int i = 0; i < data->size(); i++)
     {
-        for (unsigned int j = 0; j < data->at(i).size(); j++) //questo crea una riga
+        for (unsigned int j = 0; j < data->at(i).size(); j++)
             dataRow.push_back(data->at(i).at(j));
-        _data.push_back(dataRow); //butta la riga nell'array
-        while (dataRow.count())   //resetta la riga perché poi viene riutilizzata
+        _data.push_back(dataRow);
+        while (dataRow.count())
             dataRow.pop_back();
     }
 

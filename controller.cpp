@@ -44,9 +44,6 @@ void Controller::open(/*std::string path*/)
 
 Model *Controller::getModel() { return model; }
 
-void Controller::zoomIn(){};
-void Controller::zoomOut(){};
-
 void Controller::newChart()
 {
     QString rowLabel = QInputDialog::getText(mainwindow, "Insert", "Row label:", QLineEdit::Normal);

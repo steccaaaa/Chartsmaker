@@ -13,33 +13,32 @@
 #include <QVBoxLayout>
 #include <QAbstractItemModel>
 #include <QScreen>
+
 #include "model.h"
 #include "Charts.h"
 
-class Controller; //dichiarazione incompleta di classe per evitare dipendenze circolari
+class Controller;
 
 class MainWindow : public QWidget
 {
     Q_OBJECT
 private:
-    Controller *controller;
-    Model *model;
+    Controller *controller; //pointer to the controller
+    Model *model; //pointer to the model
 
-    //* menu
+    //Menu
     QMenuBar *menuBar;
-
     QMenu *file;
     QMenu *newChart;
     QMenu *view;
     QMenu *edit;
     QMenu *help;
 
-    //* table
+    //* Table
     QTableView *tableView;
 
     //* chart
     QChartView *chartView = nullptr;
-
     Chart *chart = nullptr;
 
 public:
@@ -65,7 +64,7 @@ public:
 public slots:
 
     /**
-    * @brief Opens a new window
+    * @brief Opens a new window with the user manual
     * 
     */
     void about();
@@ -76,7 +75,7 @@ public slots:
     */
     void contacts();
     /**
-    * @brief to draw the different charts
+    * @brief Draws the different charts
     *
     */
     void drawChart(Chart *chart);

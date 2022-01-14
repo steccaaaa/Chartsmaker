@@ -83,6 +83,9 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     QLabel *label8 = new QLabel("    Pay attention: the data must be already elaborated. This means that the program will not for example sum data if they are from the same instance.", this);
     layout->addWidget(label8);
     label8->setFont(g);
+    QLabel *label22 = new QLabel("    We also want to warn you that Pie Charts and Donut Charts will consider only the first column of the data table.", this);
+    layout->addWidget(label22);
+    label22->setFont(g);
     QLabel *label9 = new QLabel("    To clarify, here's an image:", this);
     layout->addWidget(label9);
     label9->setFont(g);
@@ -98,7 +101,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     label20->setFont(g);
     QLabel *label21 = new QLabel("○ To add or delete row and columns on the table you have to select the cell and then go to EDIT. The chart will automatically.", this);
     layout->addWidget(label21);
-    label20->setFont(g);
+    label21->setFont(g);
     QLabel *label10 = new QLabel("○ If you want to save your data you can click FILE->SAVE and by choosing were to save on your computer and choosing a name the program will create a new .json file with your data.", this);
     layout->addWidget(label10);
     label10->setFont(g);
@@ -122,6 +125,7 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
     qApp->setPalette(pale);
 
+    //resize(2000, 1800);
 }
 
 aboutwindow::~aboutwindow() {}
