@@ -6,9 +6,7 @@ InitWindow::InitWindow(Controller *controller, QWidget *parent)
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
     QPushButton *buttonN = new QPushButton("&New", this);
-    buttonN->setStyleSheet("* { background-color: lightblue }");
     QPushButton *buttonO = new QPushButton("&Open", this);
-    buttonO->setStyleSheet("* { background-color: lightblue }");
     layout->addWidget(buttonN);
     layout->addWidget(buttonO);
 
@@ -25,6 +23,24 @@ InitWindow::InitWindow(Controller *controller, QWidget *parent)
     connect(buttonO, SIGNAL(clicked()), controller, SLOT(open()));
 
     setWindowModality(Qt::ApplicationModal);
+
+    buttonN->setStyleSheet(QString::fromUtf8("QPushButton{background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+    "stop: 0 lightblue, stop: 1 lightblue);"
+    "border-style: solid;"
+    "border-color: lightblue;"
+    "border-width: 2px;"
+    "border-radius: 10px;}"));
+
+    buttonO->setStyleSheet(QString::fromUtf8("QPushButton{background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+    "stop: 0 lightblue, stop: 1 lightblue);"
+    "border-style: solid;"
+    "border-color: lightblue;"
+    "border-width: 2px;"
+    "border-radius: 10px;}"));
+
+    QPalette pale = qApp->palette();
+    pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
+    qApp->setPalette(pale);
 
     show();
 }
