@@ -1,9 +1,4 @@
 #include "aboutwindow.h"
-#include <QLabel>
-#include <QVBoxLayout>
-#include <QPixmap>
-#include <QFont>
-#include <QLabel>
 
 aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
 {
@@ -124,8 +119,6 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     QPalette pale = qApp->palette();
     pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));
     qApp->setPalette(pale);
-
-    //resize(2000, 1800);
 }
 
 aboutwindow::~aboutwindow() {}

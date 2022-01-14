@@ -1,8 +1,6 @@
 #include "Charts.h"
-#include "DataMatrix.h"
-#include <QChart>
 
-Chart::Chart(DataMatrix _table) //constructor for Charts objects
+Chart::Chart(DataMatrix _table)
 {
     table = _table;
 }
@@ -44,7 +42,7 @@ QPieSeries *RoundChart::toSeries()
     QPieSeries *series = new QPieSeries();
     auto table = getTable();
     auto names = table.getRowLabel();
-    auto values = table.getColumnData(0); //andrà fatto in modo che dia un warning che prende solo la prima colonna come dati!!!!!!!!!!!!!!1
+    auto values = table.getColumnData(0);
     for (unsigned int i = 0; i < names->size(); i++)
     {
         series->append(new QPieSlice(QString::fromStdString((*names)[i]), (*values)[i]));

@@ -13,6 +13,8 @@
 #include <QHBoxLayout>
 #include <QScrollArea>
 
+
+
 class aboutwindow : public QWidget
 {
     Q_OBJECT

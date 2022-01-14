@@ -1,6 +1,7 @@
-#include "model.h"
-#include <QVariant>
 #include <iostream>
+
+#include "model.h"
+
 using std::vector;
 
 void print2(vector<vector<double>> const &vec) //! debug
@@ -68,20 +69,19 @@ void Model::writeJson(std::string path)
 }
 
 QVariant Model::headerData(int section, Qt::Orientation orientation, int role) const
-{
-    if (role == Qt::DisplayRole)
     {
-        if (Qt::Orientation::Vertical == orientation)
+        if (role == Qt::DisplayRole)
         {
-            if (table.getRowCount() > section)
-                return QString::fromStdString(table.getRowLabel()->at(section));
+            if (Qt::Orientation::Vertical == orientation)
+            {
+                if (((int)table.getRowCount()) > section)
+                    return QString::fromStdString(table.getRowLabel()->at(section));
+            }
+            else{
+                if (((int)table.getColumnCount()) > section)
+                    return QString::fromStdString(table.getColumnLabel()->at(section));
+            }
         }
-        else
-        {
-            if (table.getColumnCount() > section)
-                return QString::fromStdString(table.getColumnLabel()->at(section));
-        }
-    }
     return QVariant();
 }
 

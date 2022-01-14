@@ -274,7 +274,8 @@ void MainWindow::setController(Controller *_controller)
     connect(controller->getModel(), &QAbstractItemModel::dataChanged, [&]()
             {
                 auto tabella = controller->getModel()->getTable();
-                drawChart(chart->clone(tabella));
+                if(chartView)
+                    drawChart(chart->clone(tabella));
             });
 }
 

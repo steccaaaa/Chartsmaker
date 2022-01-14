@@ -17,14 +17,14 @@
 #include "model.h"
 #include "Charts.h"
 
-class Controller;
+class Controller; //dichiarazione incompleta di classe per evitare dipendenze circolari
 
 class MainWindow : public QWidget
 {
     Q_OBJECT
 private:
-    Controller *controller; //pointer to the controller
-    Model *model; //pointer to the model
+    Controller *controller;
+    Model *model;
 
     //Menu
     QMenuBar *menuBar;

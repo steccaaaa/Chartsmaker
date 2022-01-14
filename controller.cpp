@@ -1,5 +1,4 @@
 #include "controller.h"
-#include <iostream>
 
 Controller::Controller(QObject *parent)
     : QObject{parent}
@@ -18,13 +17,6 @@ Controller::Controller(QObject *parent)
 
     mw.show();
     */
-    //new Model.......
-    //new View.....
-    /*costruttore controller:
-1) chiede a utente il file da aprire
-2) chiama la classe per convertire il JSON in DataMatrix
-3) ora che ho la datamatrix, creo Model(Datamatrix)
-4) ora che ho il model, creo la View(Model)*/
 }
 
 void Controller::setModel(Model *_model) { model = _model; }
@@ -35,7 +27,6 @@ void Controller::open(/*std::string path*/)
     QString path = QFileDialog::getOpenFileName(mainwindow,
                                                 tr("Open json graph file"), "",
                                                 tr("Json file (*.json);;All Files (*)"));
-    std::cout << "opening " << path.toStdString() << "...\n";
     model->readJson(path.toStdString());
     //refresh
     mainwindow->setTableView();
@@ -43,6 +34,7 @@ void Controller::open(/*std::string path*/)
 }
 
 Model *Controller::getModel() { return model; }
+
 
 void Controller::newChart()
 {
@@ -89,7 +81,6 @@ void Controller::save()
     QString path = QFileDialog::getSaveFileName(mainwindow,
                                                 tr("Json graph file"), "",
                                                 tr("Json file (*.json);;All Files (*)"));
-    std::cout << "saving " << path.toStdString() << "...\n";
     model->writeJson(path.toStdString());
 };
 

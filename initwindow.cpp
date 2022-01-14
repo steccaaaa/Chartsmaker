@@ -15,7 +15,6 @@ InitWindow::InitWindow(Controller *controller, QWidget *parent)
     resize(350, 300);
     setWindowTitle("Start");
 
-    //centra la finestra
     QRect screenSize = QApplication::desktop()->screenGeometry();
     const QRect wr({}, frameSize().boundedTo(screenSize.size()));
     move(screenSize.center() - wr.center());

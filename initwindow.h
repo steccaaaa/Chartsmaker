@@ -7,7 +7,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
-class Controller; //dichiarazione incompleta di classe per evitare dipendenze circolari
+class Controller;
 
 class InitWindow : public QWidget
 {
