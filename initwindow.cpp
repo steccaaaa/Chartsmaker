@@ -24,6 +24,8 @@ InitWindow::InitWindow(Controller *controller, QWidget *parent)
     connect(buttonO, SIGNAL(clicked()), this, SLOT(close()));
     connect(buttonO, SIGNAL(clicked()), controller, SLOT(open()));
 
+    setWindowModality(Qt::ApplicationModal);
+
     show();
 }
 
