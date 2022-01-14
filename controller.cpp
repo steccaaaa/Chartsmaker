@@ -154,3 +154,14 @@ void Controller::removeRow()
     mainwindow->setTableView();
     if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
 }
+
+void Controller::init()
+{
+    //! la table view e il chart va messa ora dopo che il controller è stato settato se no il model non lo ha
+    //* tableview
+    mainwindow->setTableView();
+    mainwindow->show();
+
+    InitWindow *initWindow = new InitWindow(this);
+    //initWindow->setController(this);
+}

@@ -18,6 +18,13 @@ MainWindow::MainWindow(QWidget *parent)
     mainLayout->setSpacing(0);
 
     resize(1500, 750);
+
+    //centra la finestra
+    QScreen *screen = QWidget::screen();
+    const QRect sr = screen->availableGeometry();
+    const QRect wr({}, frameSize().boundedTo(sr.size()));
+    move(sr.center() - wr.center());
+
     setWindowIcon(QIcon(":/images/icon.png"));
 
     setBar();
@@ -57,7 +64,6 @@ void MainWindow::setBar()
     edit->addSeparator();
     edit->addAction(new QAction("Delete column", edit));
     edit->addAction(new QAction("Delete row", edit));
-
 
     //! view
     view = new QMenu("View", menuBar);
@@ -125,7 +131,8 @@ void MainWindow::setBar()
 
 void MainWindow::drawChart(Chart *chart)
 {
-    if(!chart){
+    if (!chart)
+    {
         std::cerr << "Trying to draw a nullptr chart\n";
         return;
     }
@@ -145,10 +152,13 @@ void MainWindow::drawChart(Chart *chart)
 void MainWindow::setTableView()
 {
     //*tableview
-    if(tableView){
+    if (tableView)
+    {
         layout()->removeWidget(tableView);
         std::cout << "tableview rimossa\n";
-    }else{
+    }
+    else
+    {
         tableView = new QTableView();
     }
     tableView->setModel(controller->getModel());
@@ -272,10 +282,6 @@ void MainWindow::setController(Controller *_controller)
                 auto tabella = controller->getModel()->getTable();
                 drawChart(chart->clone(tabella));
             });
-
-    //! la table view e il chart va messa ora dopo che il controller è stato settato se no il model non lo ha
-    //* tableview
-    setTableView();
 }
 
 unsigned int MainWindow::getSelectedColumn() { return tableView->selectionModel()->currentIndex().column(); }

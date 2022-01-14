@@ -13,6 +13,7 @@ CONFIG += c++11
 
 SOURCES += \
     controller.cpp \
+    initwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     DataMatrix.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 
 HEADERS += \
     controller.h \
+    initwindow.h \
     mainwindow.h \
     DataMatrix.h \
     Charts.h \

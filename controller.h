@@ -10,6 +10,7 @@
 #include <QWidget>
 #include "mainwindow.h"
 #include "model.h"
+#include "initwindow.h"
 
 class Controller : public QObject
 {
@@ -43,6 +44,8 @@ public:
     */
 
     Model *getModel();
+
+    void init();
 
 public slots:
     void open(/*std::string path*/);
