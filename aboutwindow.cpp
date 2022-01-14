@@ -23,51 +23,9 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     layout->addWidget(label5);
     label5->setFont(g);
 
-    /*QPixmap image(":/images/PieChart.png");
-    image = image.scaled(270, 270, Qt::KeepAspectRatio);
-    QLabel *imageLabel = new QLabel();
-    imageLabel->setPixmap(image);
-
-    QPixmap image2(":/images/DonutChart.png");
-    image2 = image2.scaled(270, 270, Qt::KeepAspectRatio);
-    QLabel *imageLabel2 = new QLabel();
-    imageLabel2->setPixmap(image2);
-
-    QPixmap image3(":/images/BarChart.png");
-    image3 = image3.scaled(270, 270, Qt::KeepAspectRatio);
-    QLabel *imageLabel3 = new QLabel();
-    imageLabel3->setPixmap(image3);
-
-    QPixmap image4(":/images/StackedBarChart.png");
-    image4 = image4.scaled(250, 250, Qt::KeepAspectRatio);
-    QLabel *imageLabel4 = new QLabel();
-    imageLabel4->setPixmap(image4);
-
-    QPixmap image5(":/images/LineChart.png");
-    image5 = image5.scaled(250, 250, Qt::KeepAspectRatio);
-    QLabel *imageLabel5 = new QLabel();
-    imageLabel5->setPixmap(image5);
-
-    QPixmap image6(":/images/SplineChart.png");
-    image6 = image6.scaled(250, 250, Qt::KeepAspectRatio);
-    QLabel *imageLabel6 = new QLabel();
-    imageLabel6->setPixmap(image6);
-
-    QPixmap image7(":/images/ScatterChart.png");
-    image7 = image7.scaled(250, 250, Qt::KeepAspectRatio);
-    QLabel *imageLabel7 = new QLabel();
-    imageLabel7->setPixmap(image7);*/
-
 
     QHBoxLayout *layout2 = new QHBoxLayout();
     layout->addLayout(layout2);
-    /*layout2->addWidget(imageLabel);
-    layout2->addWidget(imageLabel2);
-    layout2->addWidget(imageLabel3);
-    layout2->addWidget(imageLabel4);
-    layout2->addWidget(imageLabel5);
-    layout2->addWidget(imageLabel6);
-    layout2->addWidget(imageLabel7);*/
 
     QLabel *label6 = new QLabel("    However, we suggest you to stay tuned for any upgrades!", this);
     layout->addWidget(label6);

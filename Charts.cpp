@@ -56,7 +56,7 @@ QChart *PieChart::draw()
     RoundChart->setTitle("This is your Pie Chart");
 
     auto series = RoundChart::toSeries();
-    QPieSlice *slice = series->slices().at(1);
+    QPieSlice *slice = series->slices().at(0);
     RoundChart->addSeries(series);
     RoundChart->legend()->setVisible(true);
     RoundChart->legend()->setAlignment(Qt::AlignBottom);
@@ -79,7 +79,7 @@ QChart *DonutChart::draw()
     QChart *RoundChart = new QChart();
     RoundChart->setTitle("This is your Donut Chart");
     auto series = RoundChart::toSeries();
-    QPieSlice *slice = series->slices().at(1);
+    QPieSlice *slice = series->slices().at(0);
     RoundChart->addSeries(series);
     RoundChart->legend()->setVisible(true);
     RoundChart->legend()->setAlignment(Qt::AlignBottom);
