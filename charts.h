@@ -24,7 +24,7 @@
 #include <QPainter>
 #include <QPalette>
 
-#include "DataMatrix.h"
+#include "datamatrix.h"
 
 using namespace QtCharts;
 

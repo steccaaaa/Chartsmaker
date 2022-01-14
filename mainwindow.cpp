@@ -1,10 +1,5 @@
 ﻿#include "mainwindow.h"
-#include "DataMatrix.h"
-#include "model.h"
 #include "controller.h" //! non spostare
-#include "aboutwindow.h"
-#include "contactswindow.h"
-#include "Charts.h"
 
 #include <iostream> //! debug
 
@@ -199,6 +194,10 @@ void MainWindow::setController(Controller *_controller)
                 auto tabella = controller->getModel()->getTable();
                 chart = new PieChart(tabella);
                 drawChart(chart);
+                QMessageBox msgBox;
+                msgBox.setText("Pie Charts only consider the first column of the dataset.");
+                msgBox.exec();
+                msgBox.setIcon(QMessageBox::Warning);
             });
 
     connect(view->actions().at(1), &QAction::triggered, [&]()
@@ -206,6 +205,10 @@ void MainWindow::setController(Controller *_controller)
                 auto tabella = controller->getModel()->getTable();
                 chart = new DonutChart(tabella);
                 drawChart(chart);
+                QMessageBox msgBox;
+                msgBox.setText("Donut Charts only consider the first column of the dataset");
+                msgBox.exec();
+                msgBox.setIcon(QMessageBox::Warning);
             });
 
     connect(view->actions().at(2), &QAction::triggered, [&]()

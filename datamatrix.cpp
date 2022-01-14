@@ -1,4 +1,4 @@
-#include "DataMatrix.h"
+#include "datamatrix.h"
 
 using std::string;
 using std::vector;

@@ -1,4 +1,4 @@
-#include "Charts.h"
+#include "charts.h"
 
 Chart::Chart(DataMatrix _table)
 {

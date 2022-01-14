@@ -13,9 +13,14 @@
 #include <QVBoxLayout>
 #include <QAbstractItemModel>
 #include <QScreen>
+#include <QMessageBox>
 
 #include "model.h"
-#include "Charts.h"
+#include "charts.h"
+#include "datamatrix.h"
+#include "aboutwindow.h"
+#include "contactswindow.h"
+#include "charts.h"
 
 class Controller; //dichiarazione incompleta di classe per evitare dipendenze circolari
 

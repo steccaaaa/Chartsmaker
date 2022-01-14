@@ -23,7 +23,6 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     layout->addWidget(label5);
     label5->setFont(g);
 
-
     QHBoxLayout *layout2 = new QHBoxLayout();
     layout->addLayout(layout2);
 

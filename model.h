@@ -6,7 +6,7 @@
 #include <QModelIndex>
 #include <QVariant>
 
-#include "DataMatrix.h"
+#include "datamatrix.h"
 
 class Model : public QAbstractTableModel
 {
