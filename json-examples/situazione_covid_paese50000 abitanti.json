@@ -1,0 +1,42 @@
+{
+    "data": [
+        [1203, 1804, 2002, 1345, 997, 451, 342, 561, 715, 806, 1405, 1956],
+        [60, 74, 85, 80, 73, 30, 23, 13, 20, 27, 29, 18],
+        [180, 270, 300, 201, 149, 67, 51, 84, 107, 120, 210, 293],
+        [20, 21, 23, 25, 17, 15, 14, 12, 11, 13, 8, 3],
+        [6, 6, 8, 7, 2, 3, 3, 4, 2, 0, 3, 1]
+    ],
+    
+    
+    "rowLabel": [
+        "Positivi",
+        "Ospedalizzati",        
+        "Asintomatici",
+        "Terapia intensiva",
+        "Decessi"   
+    ],
+    
+    "columnLabel": [
+        "Gennaio",
+        "Febbraio",
+        "Marzo",
+        "Aprile",
+        "Maggio",
+        "Giugno",
+        "Luglio",
+        "Agosto",
+        "Settembre",
+        "Ottobre",
+        "Novembre",
+        "Dicembre"
+    ]
+}
+
+
+
+
+
+
+
+
+

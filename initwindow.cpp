@@ -14,10 +14,9 @@ InitWindow::InitWindow(Controller *controller, QWidget *parent)
     setWindowTitle("Start");
 
     //centra la finestra
-    QScreen *screen = QWidget::screen();
-    const QRect sr = screen->availableGeometry();
-    const QRect wr({}, frameSize().boundedTo(sr.size()));
-    move(sr.center() - wr.center());
+    QRect screenSize = QApplication::desktop()->screenGeometry();
+    const QRect wr({}, frameSize().boundedTo(screenSize.size()));
+    move(screenSize.center() - wr.center());
 
     connect(buttonN, SIGNAL(clicked()), this, SLOT(close()));
     connect(buttonN, SIGNAL(clicked()), controller, SLOT(newChart()));

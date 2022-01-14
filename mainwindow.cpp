@@ -20,10 +20,11 @@ MainWindow::MainWindow(QWidget *parent)
     resize(1500, 750);
 
     //centra la finestra
-    QScreen *screen = QWidget::screen();
-    const QRect sr = screen->availableGeometry();
-    const QRect wr({}, frameSize().boundedTo(sr.size()));
-    move(sr.center() - wr.center());
+   // QScreen *screen = QWidget::screen();
+    QRect screenSize = QApplication::desktop()->screenGeometry();
+    //const QRect sr = screen->availableGeometry();
+    const QRect wr({}, frameSize().boundedTo(screenSize.size()));
+    move(screenSize.center() - wr.center());
 
     setWindowIcon(QIcon(":/images/icon.png"));
 
