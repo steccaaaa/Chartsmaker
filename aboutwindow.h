@@ -13,14 +13,11 @@
 #include <QHBoxLayout>
 #include <QScrollArea>
 
-
-
 class aboutwindow : public QWidget
 {
     Q_OBJECT
 public:
     explicit aboutwindow(QWidget *parent = nullptr);
-    ~aboutwindow();
 
 protected:
     void closeEvent(QCloseEvent *event);

@@ -10,7 +10,7 @@ InitWindow::InitWindow(Controller *controller, QWidget *parent)
     layout->addWidget(buttonN);
     layout->addWidget(buttonO);
 
-    resize(350, 300);
+    resize(350, 250);
     setWindowTitle("Start");
 
     QRect screenSize = QApplication::desktop()->screenGeometry();
@@ -27,16 +27,18 @@ InitWindow::InitWindow(Controller *controller, QWidget *parent)
     buttonN->setStyleSheet(QString::fromUtf8("QPushButton{background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
     "stop: 0 lightblue, stop: 1 lightblue);"
     "border-style: solid;"
+    "padding: 35px;"
     "border-color: lightblue;"
     "border-width: 2px;"
-    "border-radius: 10px;}"));
+    "border-radius: 20px;}"));
 
     buttonO->setStyleSheet(QString::fromUtf8("QPushButton{background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
     "stop: 0 lightblue, stop: 1 lightblue);"
     "border-style: solid;"
+    "padding: 35px;"
     "border-color: lightblue;"
     "border-width: 2px;"
-    "border-radius: 10px;}"));
+    "border-radius: 20px;}"));
 
     QPalette pale = qApp->palette();
     pale.setColor(QPalette::Window, QRgb(0xFFFFFFF));

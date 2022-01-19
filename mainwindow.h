@@ -51,20 +51,20 @@ public:
     void setController(Controller *_controller);
     void setTableView(/*Model *_model*/);
     void setBar();
-    unsigned int getSelectedRow();
-    unsigned int getSelectedColumn();
+    unsigned int getSelectedRow() const;
+    unsigned int getSelectedColumn() const;
 
     /**
     * @brief Getter for chartView
     *
     */
-    QWidget *getChartView();
+    QWidget *getChartView() const;
 
     /**
     * @brief Getter for chart
     *
     */
-    Chart *getChart();
+    Chart *getChart() const;
 
 public slots:
 
@@ -72,13 +72,14 @@ public slots:
     * @brief Opens a new window with the user manual
     * 
     */
-    void about();
+    void about() const;
 
     /**
     * @brief Opens a new window with the contacts of the developers
     * 
     */
-    void contacts();
+    void contacts() const;
+
     /**
     * @brief Draws the different charts
     *

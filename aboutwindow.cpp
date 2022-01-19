@@ -78,8 +78,6 @@ aboutwindow::aboutwindow(QWidget *parent) : QWidget(parent)
     qApp->setPalette(pale);
 }
 
-aboutwindow::~aboutwindow() {}
-
 void aboutwindow::closeEvent(QCloseEvent *event)
 {
     emit closing();

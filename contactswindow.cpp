@@ -47,8 +47,6 @@ contactswindow::contactswindow(QWidget *parent) : QWidget(parent)
     qApp->setPalette(pale);
 }
 
-contactswindow::~contactswindow() {}
-
 void contactswindow::closeEvent(QCloseEvent *event)
 {
     emit closing();

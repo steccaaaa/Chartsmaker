@@ -111,8 +111,6 @@ void MainWindow::setBar()
     myGroup->addAction(item10);
     myGroup->addAction(item11);
 
-    //view->addAction(new QAction("Logarithmic scale", view)); //DA FARE
-
     //! help
     help = new QMenu("Help", menuBar);
     menuBar->addMenu(help);
@@ -282,25 +280,24 @@ void MainWindow::setController(Controller *_controller)
             });
 }
 
-unsigned int MainWindow::getSelectedColumn() { return tableView->selectionModel()->currentIndex().column(); }
+unsigned int MainWindow::getSelectedColumn() const{ return tableView->selectionModel()->currentIndex().column(); }
 
-unsigned int MainWindow::getSelectedRow() { return tableView->selectionModel()->currentIndex().row(); }
+unsigned int MainWindow::getSelectedRow() const { return tableView->selectionModel()->currentIndex().row(); }
 
-void MainWindow::about()
+void MainWindow::about() const
 {
-    std::cout << tableView->selectionModel()->currentIndex().row();
     aboutwindow *m_aboutwindow = new aboutwindow();
     m_aboutwindow->setWindowTitle("About");
     m_aboutwindow->show();
 }
 
-void MainWindow::contacts()
+void MainWindow::contacts() const
 {
     contactswindow *m_contactswindow = new contactswindow();
     m_contactswindow->setWindowTitle("Contacts");
     m_contactswindow->show();
 }
 
-QWidget *MainWindow::getChartView() { return chartView; }
+QWidget *MainWindow::getChartView() const { return chartView; }
 
-Chart *MainWindow::getChart() { return chart; }
+Chart *MainWindow::getChart() const { return chart; }

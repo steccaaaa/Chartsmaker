@@ -4,23 +4,6 @@
 
 using std::vector;
 
-void print2(vector<vector<double>> const &vec) //! debug
-{
-    for (long unsigned int i = 0; i < vec.size(); i++)
-    {
-        for (long unsigned int j = 0; j < vec[i].size(); j++)
-        {
-            std::cout << vec[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-}
-
-void print2(vector<vector<double>> const *vec) //! debug
-{
-    print2(*vec);
-}
-
 Model::Model(QObject *parent) : QAbstractTableModel(parent)
 {
     std::vector<std::vector<double>> mat{{1}};
@@ -53,7 +36,7 @@ QVariant Model::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-DataMatrix Model::getTable()
+DataMatrix Model::getTable() const
 {
     return table;
 }

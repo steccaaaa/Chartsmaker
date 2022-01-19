@@ -32,12 +32,12 @@ SplineChart::SplineChart(DataMatrix _table) : ContinuousChart(_table) {}
 
 ScatterChart::ScatterChart(DataMatrix _table) : Chart(_table) {}
 
-DataMatrix Chart::getTable()
+DataMatrix Chart::getTable() const
 {
     return table;
 }
 
-QPieSeries *RoundChart::toSeries()
+QPieSeries *RoundChart::toSeries() const
 {
     QPieSeries *series = new QPieSeries();
     auto table = getTable();
@@ -50,7 +50,7 @@ QPieSeries *RoundChart::toSeries()
     return series;
 }
 
-QChart *PieChart::draw()
+QChart *PieChart::draw() const
 {
     QChart *RoundChart = new QChart();
     RoundChart->setTitle("This is your Pie Chart");
@@ -74,7 +74,7 @@ QChart *PieChart::draw()
     return RoundChart;
 }
 
-QChart *DonutChart::draw()
+QChart *DonutChart::draw() const
 {
     QChart *RoundChart = new QChart();
     RoundChart->setTitle("This is your Donut Chart");
@@ -99,7 +99,7 @@ QChart *DonutChart::draw()
 }
 
 template <class T, class T2>
-T *BarredChart::toSeries()
+T *BarredChart::toSeries() const
 {
     T *series = new T();
     auto table = getTable();
@@ -116,7 +116,7 @@ T *BarredChart::toSeries()
     return series;
 }
 
-QChart *BarChart::draw()
+QChart *BarChart::draw() const
 {
     QChart *BarChart = new QChart();
     BarChart->setTitle("This is your Bar Chart");
@@ -147,7 +147,7 @@ QChart *BarChart::draw()
     return BarChart;
 }
 
-QChart *StackedBarChart::draw()
+QChart *StackedBarChart::draw() const
 {
     QChart *StackedBarChart = new QChart();
     StackedBarChart->setTitle("This is your Stacked Bar Chart");
@@ -178,7 +178,7 @@ QChart *StackedBarChart::draw()
     return StackedBarChart;
 }
 
-QChart *HorizontalBarChart::draw()
+QChart *HorizontalBarChart::draw() const
 {
     QChart *HorizontalBarChart = new QChart();
     HorizontalBarChart->setTitle("This is your Horizontal Bar Chart");
@@ -209,7 +209,7 @@ QChart *HorizontalBarChart::draw()
     return HorizontalBarChart;
 }
 
-QChart *HorizontalStackedBarChart::draw()
+QChart *HorizontalStackedBarChart::draw() const
 {
     QChart *HorizontalStackedBarChart = new QChart();
     HorizontalStackedBarChart->setTitle("This is your Horizontal Stacked Bar Chart");
@@ -240,7 +240,7 @@ QChart *HorizontalStackedBarChart::draw()
     return HorizontalStackedBarChart;
 }
 
-QChart *PercentBarChart::draw()
+QChart *PercentBarChart::draw() const
 {
     QChart *PercentBarChart = new QChart();
     PercentBarChart->setTitle("This is your Percent Bar Chart");
@@ -271,7 +271,7 @@ QChart *PercentBarChart::draw()
     return PercentBarChart;
 }
 
-QChart *HorizontalPercentBarChart::draw()
+QChart *HorizontalPercentBarChart::draw() const
 {
     QChart *HorizontalPercentBarChart = new QChart();
     HorizontalPercentBarChart->setTitle("This is your Horizontal Percent Bar Chart");
@@ -304,7 +304,7 @@ QChart *HorizontalPercentBarChart::draw()
 
 
 template <class T>
-T *ContinuousChart::toSeries(unsigned int i)
+T *ContinuousChart::toSeries(unsigned int i) const
 {
     auto table = getTable();
     T *series = new T();
@@ -315,7 +315,7 @@ T *ContinuousChart::toSeries(unsigned int i)
     return series;
 }
 
-QChart *LineChart::draw()
+QChart *LineChart::draw() const
 {
     QChart *LineChart = new QChart();
     LineChart->setTitle("This is your Line chart");
@@ -351,7 +351,7 @@ QChart *LineChart::draw()
     return LineChart;
 }
 
-QChart *SplineChart::draw()
+QChart *SplineChart::draw() const
 {
     QChart *SplineChart = new QChart();
     SplineChart->setTitle("This is your Spline Chart");
@@ -385,7 +385,7 @@ QChart *SplineChart::draw()
     return SplineChart;
 }
 
-QScatterSeries *ScatterChart::toSeries(unsigned int i)
+QScatterSeries *ScatterChart::toSeries(unsigned int i) const
 {
     auto table = getTable();
     QScatterSeries *series = new QScatterSeries();
@@ -398,7 +398,7 @@ QScatterSeries *ScatterChart::toSeries(unsigned int i)
     return series;
 }
 
-QChart *ScatterChart::draw()
+QChart *ScatterChart::draw() const
 {
     QChart *ScatterChart = new QChart();
     ScatterChart->setTitle("This is your Scatter Chart");
@@ -432,57 +432,57 @@ QChart *ScatterChart::draw()
         return ScatterChart;
 };
 
-Chart *PieChart::clone(DataMatrix table)
+Chart *PieChart::clone(DataMatrix table) const
 {
     return new PieChart(table);
 }
 
-Chart *DonutChart::clone(DataMatrix table)
+Chart *DonutChart::clone(DataMatrix table) const
 {
     return new DonutChart(table);
 }
 
-Chart *BarChart::clone(DataMatrix table)
+Chart *BarChart::clone(DataMatrix table) const
 {
     return new BarChart(table);
 }
 
-Chart *StackedBarChart::clone(DataMatrix table)
+Chart *StackedBarChart::clone(DataMatrix table) const
 {
     return new StackedBarChart(table);
 }
 
-Chart *HorizontalBarChart::clone(DataMatrix table)
+Chart *HorizontalBarChart::clone(DataMatrix table) const
 {
     return new HorizontalBarChart(table);
 }
 
-Chart *HorizontalStackedBarChart::clone(DataMatrix table)
+Chart *HorizontalStackedBarChart::clone(DataMatrix table) const
 {
     return new HorizontalStackedBarChart(table);
 }
 
-Chart *PercentBarChart::clone(DataMatrix table)
+Chart *PercentBarChart::clone(DataMatrix table) const
 {
     return new PercentBarChart(table);
 }
 
-Chart *HorizontalPercentBarChart::clone(DataMatrix table)
+Chart *HorizontalPercentBarChart::clone(DataMatrix table) const
 {
     return new HorizontalPercentBarChart(table);
 }
 
-Chart *LineChart::clone(DataMatrix table)
+Chart *LineChart::clone(DataMatrix table) const
 {
     return new LineChart(table);
 }
 
-Chart *SplineChart::clone(DataMatrix table)
+Chart *SplineChart::clone(DataMatrix table) const
 {
     return new SplineChart(table);
 }
 
-Chart *ScatterChart::clone(DataMatrix table)
+Chart *ScatterChart::clone(DataMatrix table) const
 {
     return new ScatterChart(table);
 }

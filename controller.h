@@ -24,14 +24,14 @@ public:
     explicit Controller(QObject *parent = nullptr);
 
     /**
-     * @brief Set the Model object
+     * @brief Sets the Model object
      * 
      * @param _model 
      */
     void setModel(Model *_model);
 
     /**
-     * @brief Set the Main Window object
+     * @brief Sets the Main Window object
      * 
      * @param _mainwindow 
      */
@@ -44,43 +44,40 @@ public:
     * @param Path string of the path
     */
 
-    Model *getModel();
+    Model *getModel() const;
 
     void init();
 
 public slots:
-
-    void open(/*std::string path*/);
+    /**
+    * @brief Opens a file from the device
+    *
+    */
+    void open(/*std::string path*/) const;
 
     /**
     * @brief Creates and shows a new chart on the window
     * 
     */
-    void newChart();
+    void newChart() const;
 
     /**
     * @brief Saves the data inside the table in a new .json file
     * 
     */
-    void save();
+    void save() const;
 
     /**
      * @brief Saves a screenshot of the chart in a .pdf file
      * 
      */
-    void saveAsPdf();
+    void saveAsPdf() const;
 
     /**
      * @brief Saves a screenshot of the file in .png format
      * 
      */
-    void saveAsImage();
-
-    /**
-    * @brief Closes the window
-    * 
-    */
-    void exit();
+    void saveAsImage() const;
 
     /**
     * @brief Adds a column before the column of the selected cell

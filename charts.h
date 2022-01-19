@@ -15,7 +15,7 @@
 #include <QtCharts/QCategoryAxis>
 #include <QtCharts/QSplineSeries>
 #include <QStackedBarSeries>
-#include<QHorizontalBarSeries>
+#include <QHorizontalBarSeries>
 #include <QHorizontalStackedBarSeries>
 #include <QPercentBarSeries>
 #include <QHorizontalPercentBarSeries>
@@ -46,27 +46,29 @@ public:
      *
      * @return Returns the data in the table
      */
-    DataMatrix getData();
+    DataMatrix getData() const;
+
     /**
      * @brief   Getter function for the data table
      *
      * @return Returns the entire table
      */
-    DataMatrix getTable();
+    DataMatrix getTable() const;
 
     /**
      * @brief Virtual function to draw the different charts
      *
      * @return Returns a new chart with the characteristics chosen by the user
      */
-    virtual QChart *draw() = 0;
+    virtual QChart* draw() const = 0;
+
     /**
      * @brief Virtual function that clones the already existing chart
      *
      * @param Table reference of a 2D vector
      * @return The cloned chart
      */
-    virtual Chart* clone(DataMatrix table) = 0;
+    virtual Chart* clone(DataMatrix table) const = 0;
 
 };
 
@@ -78,7 +80,8 @@ protected:
      *
      * @return The series for the chart
      */
-    QPieSeries* toSeries();
+    QPieSeries* toSeries() const;
+
 public:
     /**
      * @brief Constructor of Round Chart objects (parent class to rounded shaped objects)
@@ -97,16 +100,18 @@ public:
      * @param Table reference of a 2D vector
      */
     PieChart(DataMatrix table);
+
     /**
      * @brief Draws pie charts 
      *
      * @return A Pie Chart
      */
-    QChart *draw();
+    QChart* draw() const;
+
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table);
+    Chart* clone(DataMatrix table) const;
 };
 
 class DonutChart : public RoundChart
@@ -118,16 +123,18 @@ public:
      * @param table reference of a 2d vector
      */
     DonutChart(DataMatrix table);
+
     /**
      * @brief Draws Donut Charts
      *
      * @return A Donut Chart
      */
-    QChart *draw();
+    QChart* draw() const;
+
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table);
+    Chart* clone(DataMatrix table) const;
 };
 
 class BarredChart : public Chart
@@ -138,7 +145,8 @@ protected:
      *
      * @return The series for the chart
      */
-    template <class T, class T2> T* toSeries();
+    template <class T, class T2> T* toSeries() const;
+
 public:
     /**
      * @brief Constructor of Barred Chart objects (parent class for the charts that need bars)
@@ -157,16 +165,18 @@ public:
      * @param Table reference of a 2D vector
      */
     BarChart(DataMatrix table);
+
     /**
      * @brief Draws Bar Charts
      *
      * @return A Bar Chart
      */
-    QChart *draw();
+    QChart* draw() const;
+
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table);
+    Chart* clone(DataMatrix table) const;
 };
 
 class StackedBarChart : public BarredChart
@@ -178,16 +188,18 @@ public:
      * @param Table reference of a 2D vector
      */
     StackedBarChart(DataMatrix table);
+
     /**
      * @brief Draws Stacked Bar Charts
      *
      * @return A Stacked Bar Chart
      */
-    QChart *draw();
+    QChart* draw() const;
+
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table);
+    Chart* clone(DataMatrix table) const;
 };
 
 class HorizontalBarChart : public BarredChart
@@ -199,16 +211,18 @@ public:
      * @param Table reference of a 2D vector
      */
     HorizontalBarChart(DataMatrix table);
+
     /**
      * @brief Draws Stacked Bar Charts
      *
      * @return A Stacked Bar Chart
      */
-    QChart *draw();
+    QChart* draw() const;
+
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table);
+    Chart* clone(DataMatrix table) const;
 };
 
 class HorizontalStackedBarChart : public BarredChart
@@ -220,16 +234,18 @@ public:
      * @param Table reference of a 2D vector
      */
     HorizontalStackedBarChart(DataMatrix table);
+
     /**
      * @brief Draws Horizontal Stacked Bar Charts
      *
      * @return An Horizontal Stacked Bar Chart
      */
-    QChart *draw();
+    QChart* draw() const;
+
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table);
+    Chart* clone(DataMatrix table) const;
 };
 
 class PercentBarChart : public BarredChart
@@ -241,16 +257,18 @@ public:
      * @param Table reference of a 2D vector
      */
     PercentBarChart(DataMatrix table);
+
     /**
      * @brief Draws Percent Bar Charts
      *
      * @return A Percent Bar Chart
      */
-    QChart *draw();
+    QChart* draw() const;
+
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table);
+    Chart* clone(DataMatrix table) const;
 };
 
 class HorizontalPercentBarChart : public BarredChart
@@ -262,16 +280,18 @@ public:
      * @param Table reference of a 2D vector
      */
     HorizontalPercentBarChart(DataMatrix table);
+
     /**
      * @brief Draws Horizontal Percent Bar Charts
      *
      * @return A Horizontal Percent Bar Chart
      */
-    QChart *draw();
+    QChart* draw() const;
+
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table);
+    Chart* clone(DataMatrix table) const;
 };
 
 class ContinuousChart : public Chart
@@ -283,7 +303,8 @@ protected:
      * @param Index
      * @return The series for the chart
      */
-    template <class T> T* toSeries(unsigned int i);
+    template <class T> T* toSeries(unsigned int i) const;
+
 public:
     /**
      * @brief Constructor of Continuous Chart object
@@ -302,16 +323,18 @@ public:
      * @param Table reference of a 2D vector
      */
     LineChart(DataMatrix table);
+
     /**
      * @brief Draws Line Charts
      *
      * @return A Line Chart
      */
-    QChart *draw();
+    QChart* draw() const;
+
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table);
+    Chart* clone(DataMatrix table) const;
 };
 
 class SplineChart : public ContinuousChart
@@ -323,16 +346,18 @@ public:
      * @param Table reference of a 2D vector
      */
     SplineChart(DataMatrix table);
+
     /**
      * @brief Draws Line Charts
      *
      * @return A Line Chart
      */
-    QChart *draw();
+    QChart* draw() const;
+
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table);
+    Chart* clone(DataMatrix table) const;
 };
 
 class ScatterChart : public Chart
@@ -343,7 +368,8 @@ protected:
      *
      * @return The series for the chart
      */
-    QScatterSeries* toSeries(unsigned int i);
+    QScatterSeries* toSeries(unsigned int i) const;
+
 public:
     /**
      * @brief Constructor of Scatter Chart objects
@@ -351,16 +377,18 @@ public:
      * @param Table reference of a 2D vector
      */
     ScatterChart(DataMatrix table);
+
     /**
      * @brief Draws Scatter Charts
      *
      * @return A Scatter Chart
      */
-    QChart *draw();
+    QChart* draw() const;
+
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table);
+    Chart* clone(DataMatrix table) const;
 };
 
 #endif

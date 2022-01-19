@@ -1,42 +1,23 @@
 #include "controller.h"
 
-Controller::Controller(QObject *parent)
-    : QObject{parent}
-{
-    /*
-    Model m;
-    MainWindow mw(&m);
-
-    setModel(&m);
-    setMainWindow(&mw);
-    mw.setController(&(*this));
-
-    mw.refreshTableView();
-
-    mw.resize(1000, 500);
-
-    mw.show();
-    */
-}
+Controller::Controller(QObject *parent) : QObject{parent} {}
 
 void Controller::setModel(Model *_model) { model = _model; }
 void Controller::setMainWindow(MainWindow *_mainwindow) { mainwindow = _mainwindow; }
 
-void Controller::open(/*std::string path*/)
+void Controller::open(/*std::string path*/) const
 {
     QString path = QFileDialog::getOpenFileName(mainwindow,
                                                 tr("Open json graph file"), "",
                                                 tr("Json file (*.json);;All Files (*)"));
     model->readJson(path.toStdString());
-    //refresh
     mainwindow->setTableView();
     if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
 }
 
-Model *Controller::getModel() { return model; }
+Model *Controller::getModel() const { return model; }
 
-
-void Controller::newChart()
+void Controller::newChart() const
 {
     QString rowLabel = QInputDialog::getText(mainwindow, "Insert", "Row label:", QLineEdit::Normal);
     QString columnLabel = QInputDialog::getText(mainwindow, "Insert", "Column label:", QLineEdit::Normal);
@@ -45,7 +26,7 @@ void Controller::newChart()
     if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
 };
 
-void Controller::saveAsPdf()
+void Controller::saveAsPdf() const
 {
     auto chart = mainwindow->getChartView();
     QPrinter printer(QPrinter::HighResolution);
@@ -65,7 +46,7 @@ void Controller::saveAsPdf()
     chart->render(&painter);
 }
 
-void Controller::saveAsImage()
+void Controller::saveAsImage() const
 {
     QWidget *widget = mainwindow->getChartView();
     QPixmap pic = widget->grab(QRect(QPoint(10, 10), QSize(widget->width(), widget->height())));
@@ -76,15 +57,13 @@ void Controller::saveAsImage()
     pic.save(path);
 }
 
-void Controller::save()
+void Controller::save() const
 {
     QString path = QFileDialog::getSaveFileName(mainwindow,
                                                 tr("Json graph file"), "",
                                                 tr("Json file (*.json);;All Files (*)"));
     model->writeJson(path.toStdString());
 };
-
-void Controller::exit(){};
 
 void Controller::addColumnB()
 {
@@ -96,6 +75,7 @@ void Controller::addColumnB()
         if(mainwindow->getChart()){ mainwindow->drawChart(mainwindow->getChart()); }
     }
 };
+
 void Controller::addColumnA()
 {
     QString label = QInputDialog::getText(mainwindow, "Insert", "Column label:", QLineEdit::Normal);
@@ -150,6 +130,6 @@ void Controller::init()
     mainwindow->setTableView();
     mainwindow->show();
 
-    InitWindow *initWindow = new InitWindow(this);
+    new InitWindow(this);
     //initWindow->setController(this);
 }

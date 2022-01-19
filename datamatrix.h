@@ -12,7 +12,6 @@
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QJsonArray>
-#include <QDebug>
 
 class DataMatrix
 {
@@ -31,7 +30,7 @@ public:
      * @param RowLabel reference of a string vector
      * @param ColumnLabel reference of a string vector
      */
-    DataMatrix(std::vector<std::vector<double>> &data, std::vector<std::string> &rowLabel, std::vector<std::string> &columnLabel);
+    DataMatrix(const std::vector<std::vector<double>> &data, const std::vector<std::string> &rowLabel, const std::vector<std::string> &columnLabel);
 
     /**
      * @brief Copy constructor of Data Matrix objects
@@ -60,7 +59,7 @@ public:
      * @param n index in which to insert the row
      * @param label label of the new row
      */
-    void addRow(std::vector<double> &a, unsigned int n = 0, std::string label = "");
+    void addRow(const std::vector<double> &a, unsigned int n = 0, const std::string &label = "");
 
     /**
      * @brief Adds a column in n position
@@ -69,7 +68,7 @@ public:
      * @param n index in which to insert the column
      * @param label label of the new column
      */
-    void addColumn(std::vector<double> &a, unsigned int n = 0, std::string label = "");
+    void addColumn(const std::vector<double> &a, unsigned int n = 0, const std::string &label = "");
 
     /**
      * @brief Deletes the row at n index
@@ -90,14 +89,14 @@ public:
      *
      * @return std::vector<std::vector<double>> vector of data
      */
-    std::vector<double> *getColumnData(unsigned int n);
+    std::vector<double> *getColumnData(unsigned int n) const;
 
     /**
      * @brief Getter for the data at n position
      *
      * @return std::vector<std::vector<double>> vector of data
      */
-    std::vector<double> *getRowData(unsigned int n);
+    std::vector<double> *getRowData(unsigned int n) const;
 
     /**
      * @brief Getter for the Row Label object

@@ -14,7 +14,6 @@ class contactswindow : public QWidget
     Q_OBJECT
 public:
     explicit contactswindow(QWidget *parent = nullptr);
-    ~contactswindow();
 
 protected:
     void closeEvent(QCloseEvent *event);
