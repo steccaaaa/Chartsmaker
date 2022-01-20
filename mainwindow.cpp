@@ -141,7 +141,7 @@ void MainWindow::drawChart(Chart *chart)
 
 void MainWindow::setTableView()
 {
-    if (tableView)
+    if (tableView != nullptr)
     {
         layout()->removeWidget(tableView);
     }
@@ -192,10 +192,13 @@ void MainWindow::setController(Controller *_controller)
                 auto tabella = controller->getModel()->getTable();
                 chart = new PieChart(tabella);
                 drawChart(chart);
-                QMessageBox msgBox;
-                msgBox.setText("Pie Charts only consider the first column of the dataset.");
-                msgBox.exec();
-                msgBox.setIcon(QMessageBox::Warning);
+                if(tabella.getColumnCount() > 1)
+                {
+                    QMessageBox msgBox;
+                    msgBox.setText("Pie Charts only consider the first column of the dataset.");
+                    msgBox.exec();
+                    msgBox.setIcon(QMessageBox::Warning);
+                }
             });
 
     connect(view->actions().at(1), &QAction::triggered, [&]()
@@ -203,10 +206,13 @@ void MainWindow::setController(Controller *_controller)
                 auto tabella = controller->getModel()->getTable();
                 chart = new DonutChart(tabella);
                 drawChart(chart);
-                QMessageBox msgBox;
-                msgBox.setText("Donut Charts only consider the first column of the dataset");
-                msgBox.exec();
-                msgBox.setIcon(QMessageBox::Warning);
+                if(tabella.getColumnCount() > 1)
+                {
+                    QMessageBox msgBox;
+                    msgBox.setText("Donut Charts only consider the first column of the dataset");
+                    msgBox.exec();
+                    msgBox.setIcon(QMessageBox::Warning);
+                }
             });
 
     connect(view->actions().at(2), &QAction::triggered, [&]()

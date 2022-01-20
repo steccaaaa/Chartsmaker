@@ -40,7 +40,7 @@ private:
     QMenu *help;
 
     //* Table
-    QTableView *tableView;
+    QTableView *tableView = nullptr;
 
     //* chart
     QChartView *chartView = nullptr;
