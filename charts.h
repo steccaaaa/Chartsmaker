@@ -68,7 +68,7 @@ public:
      * @param Table reference of a 2D vector
      * @return The cloned chart
      */
-    virtual Chart* clone(DataMatrix table) const = 0;
+    virtual Chart* clone(const DataMatrix &table) const = 0;
 
 };
 
@@ -111,7 +111,7 @@ public:
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table) const;
+    Chart* clone(const DataMatrix &table) const;
 };
 
 class DonutChart : public RoundChart
@@ -134,7 +134,7 @@ public:
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table) const;
+    Chart* clone(const DataMatrix &table) const;
 };
 
 class BarredChart : public Chart
@@ -176,7 +176,7 @@ public:
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table) const;
+    Chart* clone(const DataMatrix &table) const;
 };
 
 class StackedBarChart : public BarredChart
@@ -199,7 +199,7 @@ public:
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table) const;
+    Chart* clone(const DataMatrix &table) const;
 };
 
 class HorizontalBarChart : public BarredChart
@@ -222,7 +222,7 @@ public:
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table) const;
+    Chart* clone(const DataMatrix &table) const;
 };
 
 class HorizontalStackedBarChart : public BarredChart
@@ -245,7 +245,7 @@ public:
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table) const;
+    Chart* clone(const DataMatrix &table) const;
 };
 
 class PercentBarChart : public BarredChart
@@ -268,7 +268,7 @@ public:
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table) const;
+    Chart* clone(const DataMatrix &table) const;
 };
 
 class HorizontalPercentBarChart : public BarredChart
@@ -291,7 +291,7 @@ public:
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table) const;
+    Chart* clone(const DataMatrix &table) const;
 };
 
 class ContinuousChart : public Chart
@@ -334,7 +334,7 @@ public:
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table) const;
+    Chart* clone(const DataMatrix &table) const;
 };
 
 class SplineChart : public ContinuousChart
@@ -357,7 +357,7 @@ public:
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table) const;
+    Chart* clone(const DataMatrix &table) const;
 };
 
 class ScatterChart : public Chart
@@ -388,7 +388,7 @@ public:
     /**
      * @brief From the virtual function in class Charts
      */
-    Chart* clone(DataMatrix table) const;
+    Chart* clone(const DataMatrix &table) const;
 };
 
 #endif

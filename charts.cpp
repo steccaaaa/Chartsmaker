@@ -432,57 +432,57 @@ QChart *ScatterChart::draw() const
         return ScatterChart;
 };
 
-Chart *PieChart::clone(DataMatrix table) const
+Chart *PieChart::clone(const DataMatrix &table) const
 {
     return new PieChart(table);
 }
 
-Chart *DonutChart::clone(DataMatrix table) const
+Chart *DonutChart::clone(const DataMatrix &table) const
 {
     return new DonutChart(table);
 }
 
-Chart *BarChart::clone(DataMatrix table) const
+Chart *BarChart::clone(const DataMatrix &table) const
 {
     return new BarChart(table);
 }
 
-Chart *StackedBarChart::clone(DataMatrix table) const
+Chart *StackedBarChart::clone(const DataMatrix &table) const
 {
     return new StackedBarChart(table);
 }
 
-Chart *HorizontalBarChart::clone(DataMatrix table) const
+Chart *HorizontalBarChart::clone(const DataMatrix &table) const
 {
     return new HorizontalBarChart(table);
 }
 
-Chart *HorizontalStackedBarChart::clone(DataMatrix table) const
+Chart *HorizontalStackedBarChart::clone(const DataMatrix &table) const
 {
     return new HorizontalStackedBarChart(table);
 }
 
-Chart *PercentBarChart::clone(DataMatrix table) const
+Chart *PercentBarChart::clone(const DataMatrix &table) const
 {
     return new PercentBarChart(table);
 }
 
-Chart *HorizontalPercentBarChart::clone(DataMatrix table) const
+Chart *HorizontalPercentBarChart::clone(const DataMatrix &table) const
 {
     return new HorizontalPercentBarChart(table);
 }
 
-Chart *LineChart::clone(DataMatrix table) const
+Chart *LineChart::clone(const DataMatrix &table) const
 {
     return new LineChart(table);
 }
 
-Chart *SplineChart::clone(DataMatrix table) const
+Chart *SplineChart::clone(const DataMatrix &table) const
 {
     return new SplineChart(table);
 }
 
-Chart *ScatterChart::clone(DataMatrix table) const
+Chart *ScatterChart::clone(const DataMatrix &table) const
 {
     return new ScatterChart(table);
 }
