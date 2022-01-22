@@ -29,7 +29,7 @@ void MainWindow::setBar()
     menuBar = new QMenuBar();
 
     //! file
-    file = new QMenu("File");
+    file = new QMenu("&File");
     menuBar->addMenu(file);
     // placeholder per non scalare
     file->addAction(new QAction("New", file)); // f0
@@ -47,7 +47,7 @@ void MainWindow::setBar()
     file->addAction(new QAction("Exit", file)); // f7
 
     //! edit
-    edit = new QMenu("Edit", menuBar);
+    edit = new QMenu("&Edit", menuBar);
     menuBar->addMenu(edit);
 
     edit->addAction(new QAction("Add column before", edit));
@@ -59,7 +59,7 @@ void MainWindow::setBar()
     edit->addAction(new QAction("Delete row", edit));
 
     //! view
-    view = new QMenu("View", menuBar);
+    view = new QMenu("&View", menuBar);
     menuBar->addMenu(view);
 
     QAction *item1 = new QAction("Pie Chart");
@@ -112,7 +112,7 @@ void MainWindow::setBar()
     myGroup->addAction(item11);
 
     //! help
-    help = new QMenu("Help", menuBar);
+    help = new QMenu("&Help", menuBar);
     menuBar->addMenu(help);
     help->addAction(new QAction("About", help));
     help->addAction(new QAction("Contacts", help));
