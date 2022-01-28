@@ -53,7 +53,7 @@ public slots:
     * @brief Opens a file from the device
     *
     */
-    void open(/*std::string path*/) const;
+    void open() const;
 
     /**
     * @brief Creates and shows a new chart on the window

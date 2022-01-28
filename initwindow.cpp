@@ -1,5 +1,5 @@
 #include "initwindow.h"
-#include "controller.h" //! non toccare
+#include "controller.h"
 
 InitWindow::InitWindow(Controller *controller, QWidget *parent)
     : QWidget{parent}
@@ -46,8 +46,6 @@ InitWindow::InitWindow(Controller *controller, QWidget *parent)
 
     show();
 }
-
-//void InitWindow::setController(Controller *_controller) { controller = _controller; }
 
 void InitWindow::closeEvent(QCloseEvent *event)
 {

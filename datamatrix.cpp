@@ -3,7 +3,7 @@
 using std::string;
 using std::vector;
 
-DataMatrix::DataMatrix(const vector<vector<double>> &_data, const vector<string> &_rowLabel, const vector<string> &_columnLabel) // Costructor for DataMatrix
+DataMatrix::DataMatrix(const vector<vector<double>> &_data, const vector<string> &_rowLabel, const vector<string> &_columnLabel)
 {
     data = new auto(_data);
 

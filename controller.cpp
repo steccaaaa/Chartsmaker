@@ -5,7 +5,7 @@ Controller::Controller(QObject *parent) : QObject{parent} {}
 void Controller::setModel(Model *_model) { model = _model; }
 void Controller::setMainWindow(MainWindow *_mainwindow) { mainwindow = _mainwindow; }
 
-void Controller::open(/*std::string path*/) const
+void Controller::open() const
 {
     QString path = QFileDialog::getOpenFileName(mainwindow,
                                                 tr("Open json graph file"), "",
@@ -125,11 +125,8 @@ void Controller::removeRow()
 
 void Controller::init()
 {
-    //! la table view e il chart va messa ora dopo che il controller è stato settato se no il model non lo ha
-    //* tableview
     mainwindow->setTableView();
     mainwindow->show();
 
     new InitWindow(this);
-    //initWindow->setController(this);
 }

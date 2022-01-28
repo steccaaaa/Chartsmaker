@@ -12,12 +12,8 @@ class Controller;
 class InitWindow : public QWidget
 {
     Q_OBJECT
-private:
-    //Controller *controller;
-
 public:
     explicit InitWindow(Controller *controller, QWidget *parent = nullptr);
-    //void setController(Controller *_controller);
 
 protected:
     void closeEvent(QCloseEvent *event);
